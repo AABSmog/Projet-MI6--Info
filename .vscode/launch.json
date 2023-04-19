@@ -11,7 +11,7 @@
       "stopAtEntry": false,
       "externalConsole": true,
       "cwd": "c:/Users/elkar/OneDrive/Bureau/Projet-MI6--Info",
-      "program": "c:/Users/dell/Desktop/Projet-MI6--Info/build/Debug/outDebug",
+      "program": "c:/Users/dell/Desktop/Projet-MI6--Info/",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
