@@ -2,7 +2,8 @@
 void Creation_client(char nom[50],char prenom[50]){
     FILE *fp;
     fp = fopen("ID.txt","r+");
+}
 
-    
-
+int main() {
+    return 0;
 }
