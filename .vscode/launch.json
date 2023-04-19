@@ -1,6 +1,8 @@
 {
   "version": "0.2.0",
   "configurations": [
+
+
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
@@ -9,7 +11,7 @@
       "stopAtEntry": false,
       "externalConsole": true,
       "cwd": "c:/Users/elkar/OneDrive/Bureau/Projet-MI6--Info",
-      "program": "c:/Users/elkar/OneDrive/Bureau/Projet-MI6--Info/build/Debug/outDebug",
+      "program": "c:/Users/dell/Desktop/Projet-MI6--Info/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
