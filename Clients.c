@@ -1,11 +1,13 @@
 #include <stdio.h>
 void Creation_client(char nom[50],char prenom[50]){
-    FILE *fp;
-    fp = fopen("ID.txt","r+");
-    fprintf(fp ,"%c %c",nom, prenom);
+    FILE * fp;
+    fp = fopen("ID.txt","w+");
+    fprintf(fp ,"%s %s",nom, prenom);
+    fclose(fp);
+    
 }
 
 int main() {
-    return 0;
     Creation_client("Bomboclaat ","Haagrah");
+    return 0;
 }

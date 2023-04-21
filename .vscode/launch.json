@@ -4,7 +4,7 @@
             "name": "C/C++: gcc Générer et déboguer le fichier actif",
             "type": "cppdbg",
             "request": "launch",
-            "program": "Clients.exe",
+            "program": "C://Users/dell/Desktop/Projet-MI6--Info/Clients.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
