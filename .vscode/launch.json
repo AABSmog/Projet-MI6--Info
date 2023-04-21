@@ -4,7 +4,7 @@
             "name": "C/C++: gcc Générer et déboguer le fichier actif",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "program": "Clients.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
