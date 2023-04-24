@@ -35,7 +35,7 @@ int checkItem(FILE *fileptr)
     int ligne_trouvee = 0;
     while (fgets(ligne, sizeof(ligne), fptr))
     {
-      if (strstr(ligne, nom))
+      if (strcasecmp(ligne, nom))
       {
         printf("Le produit \"%s\" a été trouvé en stock.\n", nom);
         printf("%s", ligne);
