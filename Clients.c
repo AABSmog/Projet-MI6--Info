@@ -15,10 +15,10 @@ void Creation_client(char nom[50],char prenom[50]){
     printf("%s",ListeID[a]);
     char p1[10] = ListeID[a];
     int lenr = 10 - strlen(p1);
-    while(lenr !=
+    while(lenr !=0){
     fprintf(fp ,"%s %s",nom, prenom);
     fclose(fp);
-    
+    } 
 }
 
 bool lire_si_id(char str[10]){
