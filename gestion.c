@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include<string.h>
 int checkItem(FILE *fileptr)
 {
   int access;
@@ -34,7 +35,8 @@ int checkItem(FILE *fileptr)
     int ligne_trouvee = 0;
     while (fgets(ligne, sizeof(ligne), fptr))
     {
-      if (strstr(ligne, nom)){
+      if (strstr(ligne, nom))
+      {
         printf("Le produit \"%s\" a été trouvé en stock.\n", nom);
         printf("%s", ligne);
         ligne_trouvee = 1;
