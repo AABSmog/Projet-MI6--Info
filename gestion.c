@@ -51,9 +51,26 @@ int checkItem(FILE *fileptr)
     return 0;
   }
 }
-int main()
-{
+int main(){
   FILE *fptr;
+  int identifiant;
+  int i=3;
+  printf("Veuillez saisir votre identifiant.\n");
+  scanf("%d",&identifiant);
+  while(i!=0){
+    if(identifiant!=123321 && identifiant!=987789){
+    printf("Identifiant non reconnue.\n");
+    printf("Il vous reste %d tentatives.Veuilliez resaisir votre identifiant.\n",i);
+    scanf("%d",&identifiant);
+    i--;
+  }
+  else if(identifiant==123321||identifiant==987789){
   checkItem(fptr);
   return 0;
+  }
+  }
+  if(i==0){
+    printf("Les identifiants saisis ne sont pas enregistrés dans notre système.");
+    return 0;
+  }
 }

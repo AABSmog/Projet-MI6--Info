@@ -33,7 +33,7 @@ void Creation_client(char nom[50],char prenom[50]){
     printf("%s",id);
     fprintf(fp ,"%s %s",nom, prenom);
     fclose(fp);
-    
+    } 
 }
 
 bool lire_si_id(char str[10]){
