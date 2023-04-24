@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 void Creation_client(char nom[50],char prenom[50]){
     srand(time(NULL));
@@ -12,7 +13,9 @@ void Creation_client(char nom[50],char prenom[50]){
     char id1[10];
     int a = rand() % 10617;
     printf("%s",ListeID[a]);
-    printf(ListeID[a]);
+    char p1[10] = ListeID[a];
+    int lenr = 10 - strlen(p1);
+    while(lenr !=
     fprintf(fp ,"%s %s",nom, prenom);
     fclose(fp);
     
