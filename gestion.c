@@ -22,7 +22,9 @@ int checkItem(FILE *fileptr)
   }
   FILE *fptr;
   char filename[] = "produit.txt";
-  int ligne[100];
+  char ligne[100];
+  ligne[0]=0;
+  int i=0;
   fptr = fopen(filename, "r");
   if (fptr == NULL)
   {
@@ -31,20 +33,18 @@ int checkItem(FILE *fileptr)
   }
   if (access == 1)
   {
-    int num_ligne = 1;
-    int ligne_trouvee = 0;
     while (fgets(ligne, sizeof(ligne), fptr))
     {
-      if (strcasecmp(ligne, nom))
+      if (strcasecmp(nom,ligne))
       {
         printf("Le produit \"%s\" a été trouvé en stock.\n", nom);
         printf("%s", ligne);
-        ligne_trouvee = 1;
         break;
       }
       else
       {
-        num_ligne++;
+        ligne[i]=ligne[i+1];
+        i++;
       }
     }
     fclose(fptr);
