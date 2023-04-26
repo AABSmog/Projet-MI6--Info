@@ -39,28 +39,40 @@ void numinfile(char *fichier,int num)
     exit(2);
   }
   char ligne[MAX];
+  int num_ligne = 0;
   int trouve=0;
   while (fgets(ligne,sizeof(ligne),fp))
   {
-        char produit[MAX];
-        int ref;
-        int quantite;
-        float prix;
-        int taille;
-        sscanf(ligne, "%s %d %d %f %d",produit, &ref,&quantite,&prix,&taille);
-    if (ref == num) {
-            printf("Le produit de reference '%d' a ete trouve en stock \n",num);
-            printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n",produit,ref,quantite,prix,taille);
-            trouve= 1;
+    num_ligne++;
+    char *ptr_ligne = ligne;
+    while (*ptr_ligne){
+    {
+      if (isdigit(*ptr_ligne))
+      {
+        int n=strtol(ptr_ligne,&ptr_ligne,10);
+        if (n ==num)
+        {
+          printf("Le produit de reference '%d' a été trouvé en stock \n",num);
+          printf("Voici ses informations : \n");
+          printf("%s", ligne);
           break;
         }
       }
+      else
+      {
+        ptr_ligne++;
+      }
+      if (trouve==1) {
+            break;
+        }
+    }
+    }
     if(trouve==0){
       printf("Le produit de reference %d n'a pas ete trouve en stock \n",num);
     }
   fclose(fp);
-  }
-
+}
+}
 void wordinfile(char *fichier,char *mot)
 {
   FILE *fp = fopen(fichier, "r");
