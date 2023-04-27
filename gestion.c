@@ -5,6 +5,7 @@
 #define MAX 1000
 void augmenterstock(char *fichier, int reference, int quant)
 {
+  
   FILE *fp = fopen(fichier, "r");
   FILE *tempo = fopen("tempo.txt", "w");
   if (fp == NULL || tempo == NULL)
