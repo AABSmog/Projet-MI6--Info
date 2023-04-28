@@ -162,7 +162,7 @@ void wordinfile(char *fichier, char *mot)
       {
         ptr_ligne++;
         ptr_mot++;
-        if (*ptr_mot == '\0' && *ptr_ligne==' ')
+        if (*ptr_mot == '\0' && *ptr_ligne == ' ')
         {
           printf("Le produit '%s' a ete trouve en stock \n", mot);
           printf("Voici ses informations : \n");
@@ -190,7 +190,6 @@ void wordinfile(char *fichier, char *mot)
 }
 int main()
 {
-  FILE *fptr;
   int identifiant;
   int i = 3;
   int a;
@@ -244,7 +243,7 @@ int main()
         augmenterstock("produit.txt", reference, quant);
         return 0;
       }
-      else if (a==4)
+      else if (a == 4)
       {
         ajouterproduit("produit.txt");
         return 0;
