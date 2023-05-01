@@ -5,6 +5,28 @@
 #include <time.h>
 #include <string.h>
 
+bool lire_si_id(char str[18]){
+    FILE * fp;
+    bool A = true;
+    char ligne[10000];
+    fp = fopen("ID.txt","w+");
+    char CurrentChar;
+    int currentline;
+    char x[1024];
+     while (fgets(ligne, 10000, fp) != NULL) {
+        if (strstr(ligne, str) != NULL) {
+            fclose(fp);
+            A = true;
+            return A ;
+    }else{
+    printf("Le mot n'est pas présent dans le fichier.");
+    fclose(fp);
+    A = false;
+    return A;
+     }
+    }
+}
+
 void Creation_client(char nom[50],char prenom[50]){
     srand(time(0)*3186);
     FILE * fp;
@@ -16,8 +38,7 @@ void Creation_client(char nom[50],char prenom[50]){
     char al[9]; 
     char bl[9];
     printf("%d",sizeof(ListeID[a]));
-    printf("%s",al);
-    printf("%s",bl);
+    while(lire_si_id(id) != false){
     for(int i = 0;i < sizeof(al);i++){
         al[i] = ListeID[a][i];
     }
@@ -30,24 +51,14 @@ void Creation_client(char nom[50],char prenom[50]){
     for(int i = 0;i < sizeof(bl);i++){
         id[strlen(al)+i] = bl[i];;
     }
+    }
     printf("%s",id);
     fprintf(fp ,"%s %s",nom, prenom);
     fclose(fp);
     } 
-bool lire_si_id(char str[10]){
-    FILE * fp;
-    char strl[10];
-    fp = fopen("ID.txt","w+");
-    char CurrentChar;
-    int currentline;
-    char x[1024];
-    /* assumes no word exceeds length of 1023 */
-    while (fscanf(fp, " %1023s", x) == 1) {
-        puts(x);
-    }
-}
 
-int main() {
+
+int main(){
     Creation_client("Bomboclaat","Haagrah");
     return 0;
 }
