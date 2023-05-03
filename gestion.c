@@ -3,15 +3,41 @@
 #include <string.h>
 #include <ctype.h>
 #define MAX 1000
+void ajouterproduit(char *fichier)
+{
+  FILE *fp = fopen(fichier, "a");
+  if (fp == NULL)
+  {
+    printf("Erreur en ouvrant le fichier %s \n", fichier);
+    exit(1);
+  }
+  char produit[MAX];
+  int ref;
+  int quantite;
+  float prix;
+  int taille;
+  printf("Saisir le nom du produit :\n");
+  scanf("%s", produit);
+  printf("Saisir la reference du produit :\n");
+  scanf("%d", &ref);
+  printf("Saisir la quantite en stock :\n");
+  scanf("%d", &quantite);
+  printf("Saisir le prix du produit :\n");
+  scanf("%f", &prix);
+  printf("Saisir la taille du produit :\n");
+  scanf("%d", &taille);
+  fprintf(fp, "\n%s %d %d %f %d", produit, ref, quantite, prix, taille);
+  fclose(fp);
+  printf("Le produit a ete ajoute avec succes.\n");
+}
 void augmenterstock(char *fichier, int reference, int quant)
 {
-  
   FILE *fp = fopen(fichier, "r");
   FILE *tempo = fopen("tempo.txt", "w");
   if (fp == NULL || tempo == NULL)
   {
     printf("Erreur en ouvrant le fichier %s \n", fichier);
-    exit(1);
+    exit(2);
   }
   char ligne[MAX];
   int trouve = 0;
@@ -49,7 +75,7 @@ void afficherstockepuise(char *fichier)
   if (fp == NULL)
   {
     printf("Erreur en ouvrant le fichier %s \n", fichier);
-    exit(1);
+    exit(3);
   }
   char ligne[MAX];
   int stockEpuise = 0;
@@ -80,7 +106,7 @@ void numinfile(char *fichier, int num)
   if (fp == NULL)
   {
     printf("Erreur en ouvrant le fichier %s \n", fichier);
-    exit(2);
+    exit(4);
   }
   char ligne[MAX];
   int trouve = 0;
@@ -95,6 +121,7 @@ void numinfile(char *fichier, int num)
     if (ref == num)
     {
       printf("Le produit de reference '%d' a ete trouve en stock \n", num);
+      printf("Voici ses informations : \n");
       printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", produit, ref, quantite, prix, taille);
       trouve = 1;
       break;
@@ -113,11 +140,16 @@ void wordinfile(char *fichier, char *mot)
   if (fp == NULL)
   {
     printf("Erreur en ouvrant le fichier %s \n", fichier);
-    exit(3);
+    exit(5);
   }
   char ligne[MAX];
   int num_ligne = 0;
   int trouve = 0;
+  char produit[MAX];
+  int ref;
+  int quantite;
+  float prix;
+  int taille;
   while (fgets(ligne, MAX, fp) != NULL)
   {
     num_ligne++;
@@ -125,15 +157,16 @@ void wordinfile(char *fichier, char *mot)
     char *ptr_mot = mot;
     while (*ptr_ligne != 0)
     {
+      sscanf(ligne, "%s %d %d %f %d", produit, &ref, &quantite, &prix, &taille);
       if (tolower(*ptr_ligne) == tolower(*ptr_mot))
       {
         ptr_ligne++;
         ptr_mot++;
-        if (*ptr_mot == '\0')
+        if (*ptr_mot == '\0' && *ptr_ligne == ' ')
         {
           printf("Le produit '%s' a ete trouve en stock \n", mot);
           printf("Voici ses informations : \n");
-          printf("%s", ligne);
+          printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", produit, ref, quantite, prix, taille);
           trouve = 1;
           break;
         }
@@ -155,34 +188,13 @@ void wordinfile(char *fichier, char *mot)
   }
   fclose(fp);
 }
-
-int checkItem(FILE *fileptr)
-{
-  int access;
-  char nom[100];
-  int ref;
-  printf("Voulez vous trouver un produit en utilisant son nom ou sa reference. \n");
-  printf("Ecrire 1 si vous voulez utiliser le nom ou 2 si vous voulez utiliser la reference. \n");
-  scanf(" %d", &access);
-  if (access == 1)
-  {
-    printf("Saisir le nom de votre produit \n");
-    scanf("%s", nom);
-    wordinfile("produit.txt", nom);
-  }
-  else if (access == 2)
-  {
-    printf("Saisir la reference de votre produit \n");
-    scanf("%d", &ref);
-    numinfile("produit.txt", ref);
-  }
-}
 int main()
 {
-  FILE *fptr;
   int identifiant;
   int i = 3;
   int a;
+  char nom[MAX];
+  int ref;
   printf("Veuillez saisir votre identifiant.\n");
   scanf("%d", &identifiant);
   while (i != 0)
@@ -198,15 +210,27 @@ int main()
     {
       afficherstockepuise("produit.txt");
       printf("Voulez vous :\n");
-      printf("1.Cherchez un produit ?\n");
-      printf("2.Augmenter le stock d'un produit ?\n");
+      printf("1.Cherchez un produit en utilisant son nom ?\n");
+      printf("2.Cherchez un produit en utilisant sa reference ?\n");
+      printf("3.Augmenter le stock d'un produit ?\n");
+      printf("4.Ajouter un produit au stock ?\n");
+      printf("5.Quitter le programme de gestion ? \n");
       scanf("%d", &a);
       if (a == 1)
       {
-        checkItem(fptr);
+        printf("Saisir le nom de votre produit \n");
+        scanf("%s", nom);
+        wordinfile("produit.txt", nom);
         return 0;
       }
       else if (a == 2)
+      {
+        printf("Saisir la reference de votre produit \n");
+        scanf("%d", &ref);
+        numinfile("produit.txt", ref);
+        return 0;
+      }
+      else if (a == 3)
       {
         int reference;
         int quant;
@@ -217,6 +241,21 @@ int main()
         scanf("%d", &quant);
         printf("\n");
         augmenterstock("produit.txt", reference, quant);
+        return 0;
+      }
+      else if (a == 4)
+      {
+        ajouterproduit("produit.txt");
+        return 0;
+      }
+      else if (a == 5)
+      {
+        return 0;
+      }
+      else
+      {
+        printf("Erreur: veuillez choisir un nombre entre 1 et 4. \n");
+        return 0;
       }
     }
     if (i == 0)
@@ -225,4 +264,5 @@ int main()
       return 0;
     }
   }
+  return 0;
 }
