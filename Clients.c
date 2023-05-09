@@ -73,7 +73,6 @@ void ligne_corr_id(char mot[18]){
     fclose(fp);
 }
 
-
 int main(){
     Creation_client("Assane","Bousso");
     ligne_corr_id("deexpier");
