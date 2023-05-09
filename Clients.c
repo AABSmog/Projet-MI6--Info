@@ -98,6 +98,14 @@ void Supp_client_par_id(char id[18]){
     fclose(fb);
 }
 
+void changement_dernier(int pc, char id[18]){
+    FILE * fp;
+    fp = fopen("ID.txt","r")
+    int spc = 0;
+    while (spc < 5){
+
+    }
+}
 
 int main(){
     creation_client("Assane","Bousso");
