@@ -55,9 +55,27 @@ void Creation_client(char nom[50],char prenom[50]){
     fclose(fp);
 }
 
+void ligne_corr_id(char mot[18]){
+    char line[1000];
+    int line_number = 0;
+    FILE * fp;
+    strtok(mot, "\n");
+    fp = fopen("ID.txt","r");
+    if (fp == NULL) {
+        printf("Fichier Non-existant\n" );
+    }
+    while (fgets(line, sizeof(line), fp)) {
+        line_number++;
+        if (strstr(line, mot) != NULL) {
+            printf("Line %d: %s", line_number, line);
+        }
+    }
+    fclose(fp);
+}
+
 
 int main(){
     Creation_client("Assane","Bousso");
     return 0;
-    
+    ligne_corr_id("deexpier");
 }
