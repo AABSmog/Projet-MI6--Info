@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#define MAX 1000
+#define fichier "ID.txt"
 
 // Structure pour stocker les informations d'un produit
 typedef struct {
@@ -337,58 +339,64 @@ void afficher_produits(Produit produits[], int nb_produits) {
         printf("+-----+------------------+---------+---------------+\n");
     }
 }
-Client* connecter_client(char id[18]) {
+    connecter_client() {
     int id_client;
     int index_client = -1;
 
     printf("Veuillez entrer votre ID client: ");
     scanf("%d", &id_client);
-
-    // Rechercher le client avec l'ID correspondant
-    for (int i = 0; i < nb_clients; i++) {
-        if (clients[i].id == id_client) {
-            index_client = i;
-            break;
+    FILE *fp = fopen(fichier , "r");
+    if (fp == NULL)
+  {
+    printf("Erreur en ouvrant le fichier %s \n", fichier);
+    exit(5);
+  }
+  char ligne[MAX];
+  int num_ligne = 0;
+  int trouve = 0;
+  char produit[MAX];
+  int ref;
+  int quantite;
+  float prix;
+  int taille;
+  while (fgets(ligne, MAX, fp) != NULL)
+  {
+    num_ligne++;
+    char *ptr_ligne = ligne;
+    char *ptr_mot = id_client;
+    while (*ptr_ligne != 0)
+    {
+      sscanf(ligne, "%s %d %d %f %d", produit, &ref, &quantite, &prix, &taille);
+      if (tolower(*ptr_ligne) == tolower(*ptr_mot))
+      {
+        ptr_ligne++;
+        ptr_mot++;
+        if (*ptr_mot == '\0' && *ptr_ligne == ' ')
+        {
+          printf("Le produit '%s' a ete trouve en stock \n", id_client);
+          printf("Voici ses informations : \n");
+          printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", produit, ref, quantite, prix, taille);
+          trouve = 1;
+          break;
         }
+      }
+      else
+      {
+        ptr_ligne++;
+        ptr_mot = id_client;
+      }
     }
-
-    if (index_client == -1) {
-        printf("Aucun client trouvé avec cet ID.\n");
-        return NULL;
+    if (trouve == 1)
+    {
+      break;
     }
-
-    printf("Client connecté avec succès!\n");
-
-    // Afficher les trois derniers achats du client
-    afficher_derniers_achats(&clients[index_client], produits, nb_produits);
-
-    // Afficher les produits disponibles
-    printf("\nProduits disponibles :\n");
-    afficher_produits(produits, nb_produits);
-
-    int choix_produit;
-    int continuer_achat = 1;
-
-    while (continuer_achat) {
-        printf("\nEntrez l'ID du produit que vous souhaitez acheter (0 pour quitter) : ");
-        scanf("%d", &choix_produit);
-
-        if (choix_produit == 0) {
-            continuer_achat = 0;
-        } else {
-            Produit* produit = rechercher_produit_par_id(choix_produit);
-            if (produit != NULL) {
-                acheter_produit(produit, &clients[index_client]);
-                printf("Vous avez acheté : %s\n", produit->nom);
-                printf("Total des dépenses : %.2f\n", clients[index_client].depenses_totales);
-            } else {
-                printf("Produit introuvable. Veuillez essayer à nouveau.\n");
-            }
-        }
-    }
-
-    // Retourner un pointeur vers le client connecté
-    return &clients[index_client];
+  }
+  if (trouve == 0)
+  {
+    printf("Ce produit n'est pas en stock \n");
+  }
+  fclose(fp);
+}
 }
 
 // Trouver un ID libre pour un nouveau client
