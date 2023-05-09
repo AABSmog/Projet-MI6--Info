@@ -67,7 +67,7 @@ void ligne_corr_id(char mot[18]){
     while (fgets(line, sizeof(line), fp)) {
         line_number++;
         if (strstr(line, mot) != NULL) {
-            printf("Line %d: %s", line_number, line);
+            printf("Ligne %d: %s", line_number, line);
         }
     }
     fclose(fp);
