@@ -397,8 +397,6 @@ void afficher_produits(Produit produits[], int nb_produits) {
   }
   fclose(fp);
 }
-}
-
 // Trouver un ID libre pour un nouveau client
 int trouver_id_libre(Client clients[], int nb_clients) {
     int id_candidat = 1;

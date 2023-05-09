@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#define MAX 1000
+#include"gestion.h"
 void ajouterproduit(char *fichier)
 {
   FILE *fp = fopen(fichier, "a");
@@ -188,7 +184,7 @@ void wordinfile(char *fichier, char *mot)
   }
   fclose(fp);
 }
-int main()
+int gestion(int n)
 {
   int identifiant;
   int i = 3;
