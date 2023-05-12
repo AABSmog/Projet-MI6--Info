@@ -26,7 +26,7 @@ void ajouterproduit(char *fichier)
   fclose(fp);
   printf("Le produit a ete ajoute avec succes.\n");
 }
-void augmenterstock(char *fichier, int reference, int quant)
+void modifierstock(char *fichier, int reference, int quant)
 {
   FILE *fp = fopen(fichier, "r");
   FILE *tempo = fopen("tempo.txt", "w");
@@ -209,7 +209,7 @@ int gestion(int n)
       printf("Voulez vous :\n");
       printf("1.Cherchez un produit en utilisant son nom ?\n");
       printf("2.Cherchez un produit en utilisant sa reference ?\n");
-      printf("3.Augmenter le stock d'un produit ?\n");
+      printf("3.Modifier le stock d'un produit ?\n");
       printf("4.Ajouter un produit au stock ?\n");
       printf("5.Quitter le programme de gestion ? \n");
       scanf("%d", &a);
@@ -229,16 +229,37 @@ int gestion(int n)
       }
       else if (a == 3)
       {
-        int reference;
-        int quant;
+        int reference=0;
+        int quant=0;
+        int n=0;
+        printf("Voulez vous: \n");
+        printf("1.Augmenter le stock ? \n");
+        printf("2.Reduire le stock ? \n");
+        scanf("%d",&n);
+        if(n==1){
         printf("Veuillez saisir la reference du produit que vous voulez augmenter en stock: ");
         scanf("%d", &reference);
         printf("\n");
         printf("Veuilliez saisir la quantite a ajouter en stock: ");
         scanf("%d", &quant);
         printf("\n");
-        augmenterstock("produit.txt", reference, quant);
+        modifierstock("produit.txt", reference, quant);
         return 0;
+        }
+        else if(n==2){
+          printf("Veuillez saisir la reference du produit que vous voulez reduire en stock en stock: ");
+        scanf("%d", &reference);
+        printf("\n");
+        printf("Veuilliez saisir la quantite a reduire en stock: ");
+        scanf("%d", &quant);
+        printf("\n");
+        modifierstock("produit.txt", reference,-quant);
+        return 0;
+        }
+        else{
+          printf("Erreur: veuillez saisir soi 1 soi 2. \n");
+          return 0;
+        }
       }
       else if (a == 4)
       {

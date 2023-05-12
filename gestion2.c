@@ -201,10 +201,10 @@ int main()
   {
     if (identifiant != 123321 && identifiant != 987789)
     {
+      i--;
       printf("Identifiant non reconnue.\n");
       printf("Il vous reste %d tentatives.Veuilliez resaisir votre identifiant.\n", i);
       scanf("%d", &identifiant);
-      i--;
     }
     else if (identifiant == 123321 || identifiant == 987789)
     {
