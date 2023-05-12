@@ -9,3 +9,4 @@ void afficherstockepuise(char *fichier);
 void numinfile(char *fichier, int num);
 void wordinfile(char *fichier, char *mot);
 int gestion(int n);
+void afficherstockfaible(char *fichier);
