@@ -184,6 +184,52 @@ void wordinfile(char *fichier, char *mot)
   }
   fclose(fp);
 }
+void afficherstockfaible(char *fichier)
+{
+  FILE *fp = fopen(fichier, "r");
+  if (fp == NULL)
+  {
+    printf("Erreur en ouvrant le fichier %s \n", fichier);
+    exit(6);
+  }
+  char ligne[MAX];
+  char produits[5][MAX];
+  int quantites[5];
+  for (int i = 0; i < 5; i++)
+  {
+    quantites[i] = MAX;
+  }
+  while (fgets(ligne, sizeof(ligne), fp))
+  {
+    char produit[MAX];
+    int ref;
+    int quantite;
+    float prix;
+    int taille;
+    sscanf(ligne, "%s %d %d %f %d", produit, &ref, &quantite, &prix, &taille);
+    if (quantite > 0 && quantite < quantites[5 - 1])
+    {
+      int i = 4;
+      while (i > 0 && quantite < quantites[i - 1])
+      {
+        quantites[i] = quantites[i - 1];
+        strcpy(produits[i], produits[i - 1]);
+        i--;
+      }
+      quantites[i] = quantite;
+      strcpy(produits[i], ligne);
+    }
+  }
+  printf("Les produits avec le stock le plus faible :\n");
+  for (int i = 0; i < 5; i++)
+  {
+    if (quantites[i] != MAX)
+    {
+      printf("%s", produits[i]);
+    }
+  }
+  fclose(fp);
+}
 int gestion(int n)
 {
   int identifiant;
@@ -205,7 +251,8 @@ int gestion(int n)
     else if (identifiant == 123321 || identifiant == 987789)
     {
       afficherstockepuise("produit.txt");
-      printf("MODE GESTION : \n");
+      afficherstockfaible("produit.txt");
+      printf("MODE GESTION :\n");
       printf("Voulez vous :\n");
       printf("1.Cherchez un produit en utilisant son nom ?\n");
       printf("2.Cherchez un produit en utilisant sa reference ?\n");

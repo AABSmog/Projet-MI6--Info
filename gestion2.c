@@ -188,6 +188,52 @@ void wordinfile(char *fichier, char *mot)
   }
   fclose(fp);
 }
+void afficherstockfaible(char *fichier)
+{
+  FILE *fp = fopen(fichier, "r");
+  if (fp == NULL)
+  {
+    printf("Erreur en ouvrant le fichier %s \n", fichier);
+    exit(6);
+  }
+  char ligne[MAX];
+  char produits[5][MAX];
+  int quantites[5];
+  for (int i = 0; i < 5; i++)
+  {
+    quantites[i] = MAX;
+  }
+  while (fgets(ligne, sizeof(ligne), fp))
+  {
+    char produit[MAX];
+    int ref;
+    int quantite;
+    float prix;
+    int taille;
+    sscanf(ligne, "%s %d %d %f %d", produit, &ref, &quantite, &prix, &taille);
+    if (quantite > 0 && quantite < quantites[5 - 1])
+    {
+      int i = 4;
+      while (i > 0 && quantite < quantites[i - 1])
+      {
+        quantites[i] = quantites[i - 1];
+        strcpy(produits[i], produits[i - 1]);
+        i--;
+      }
+      quantites[i] = quantite;
+      strcpy(produits[i], ligne);
+    }
+  }
+  printf("Les produits avec le stock le plus faible :\n");
+  for (int i = 0; i < 5; i++)
+  {
+    if (quantites[i] != MAX)
+    {
+      printf("%s", produits[i]);
+    }
+  }
+  fclose(fp);
+}
 int main()
 {
   int identifiant;
@@ -209,6 +255,7 @@ int main()
     else if (identifiant == 123321 || identifiant == 987789)
     {
       afficherstockepuise("produit.txt");
+      afficherstockfaible("produit.txt");
       printf("MODE GESTION : \n");
       printf("Voulez vous :\n");
       printf("1.Cherchez un produit en utilisant son nom ?\n");
@@ -235,32 +282,35 @@ int main()
       {
         int reference;
         int quant;
-         int n=0;
+        int n = 0;
         printf("Voulez vous: \n");
         printf("1.Augmenter le stock ? \n");
         printf("2.Reduire le stock ? \n");
-        scanf("%d",&n);
-        if(n==1){
-        printf("Veuillez saisir la reference du produit que vous voulez augmenter en stock: ");
-        scanf("%d", &reference);
-        printf("\n");
-        printf("Veuilliez saisir la quantite a ajouter en stock: ");
-        scanf("%d", &quant);
-        printf("\n");
-        modifierstock("produit.txt", reference, quant);
-        return 0;
+        scanf("%d", &n);
+        if (n == 1)
+        {
+          printf("Veuillez saisir la reference du produit que vous voulez augmenter en stock: ");
+          scanf("%d", &reference);
+          printf("\n");
+          printf("Veuilliez saisir la quantite a ajouter en stock: ");
+          scanf("%d", &quant);
+          printf("\n");
+          modifierstock("produit.txt", reference, quant);
+          return 0;
         }
-        else if(n==2){
+        else if (n == 2)
+        {
           printf("Veuillez saisir la reference du produit que vous voulez reduire en stock en stock: ");
-        scanf("%d", &reference);
-        printf("\n");
-        printf("Veuilliez saisir la quantite a reduire en stock: ");
-        scanf("%d", &quant);
-        printf("\n");
-        modifierstock("produit.txt", reference,-quant);
-        return 0;
+          scanf("%d", &reference);
+          printf("\n");
+          printf("Veuilliez saisir la quantite a reduire en stock: ");
+          scanf("%d", &quant);
+          printf("\n");
+          modifierstock("produit.txt", reference, -quant);
+          return 0;
         }
-        else{
+        else
+        {
           printf("Erreur: veuillez saisir soi 1 soi 2. \n");
           return 0;
         }
