@@ -1,47 +1,46 @@
+#define EOL #
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
 
-// Structure pour stocker les informations d'un produit
+#define MAX_ID_LENGTH 18
+#define MAX_NAME_LENGTH 50
+#define NUM_IDS 10617
+#define MAX 1000
+#define NB_DERNIERS_ACHATS 3
+
+
 typedef struct {
-    int id;
-    char nom[50];
+    char nom[MAX];
+    int ref;
+    int quantite;
     float prix;
-    int quantite_stock;
+    int taille;
 } Produit;
 
-// Structure pour stocker les informations d'un achat
 typedef struct {
-    int id_produit;
+    int ref;
     int quantite;
+    float prix_total;
 } Achat;
 
-// Structure pour stocker les informations d'un client
 typedef struct {
-    int id;
-    char nom[50];
-    char email[50];
-    Achat achats[100]; // Un tableau pour stocker les achats d'un client (ajustez la taille si nécessaire)
-    int nb_achats; // Le nombre d'achats effectués par le client
+    Achat achats[3];
+    int nb_achats;
+} Historique;
+
+typedef struct {
+    char id_client[MAX];
+    Achat achats[NB_DERNIERS_ACHATS];
 } Client;
 
-void lire_clients(Client clients[], int *nb_clients);
-void ecrire_clients(Client clients[], int nb_clients);
-void lire_produits(Produit produits[], int *nb_produits);
-void ecrire_produits(Produit produits[], int nb_produits);
-void load_clients(Client clients[], int *nb_clients);
-void load_produits(Produit produits[], int *nb_produits);
-void afficher_derniers_achats(Client *client, Produit produits[], int nb_produits);
-Produit* rechercher_produit_par_nom(const char *nom_recherche, Produit produits[], int nb_produits);
-void acheter_produit(Produit *produit, Client *client);
-float calculer_prix_total_achats(Client *client, Produit produits[], int nb_produits);
-void supprimer_client(Client clients[], int *nb_clients, int id_client);
-void afficher_produits(Produit produits[], int nb_produits);
-Client* connecter_client(Client clients[], int nb_clients, Produit produits[], int nb_produits);
-int trouver_id_libre(Client clients[], int nb_clients);
-Client* creer_compte(Client clients[], int *nb_clients);
-void save_produits(Produit produits[], int nb_produits);
-void save_clients(Client clients[], int nb_clients);
-int get_next_product_id();
-void creer_produit(const char *nom, float prix, int quantite_stock);
+void create_user(char firstName[MAX_NAME_LENGTH], char lastName[MAX_NAME_LENGTH]);
+void connect_by_id(char id[MAX_ID_LENGTH]);
+void ajouter_achat(char *fichier, char *id_client, char *nom_produit, int ref_produit, int quantite);
+void afficher_historique_achat(char *fichier, char *id_client);
+void espace_client(char identifiant[]);
+void acheter_produit(char *fichier, char *nom_produit, char *ref_produit, int quantite, char *id);
+void ecrire_historique(Client *client);
+void afficher_dernieres_lignes(char* nom_fichier, int n);
