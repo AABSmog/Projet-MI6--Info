@@ -40,3 +40,4 @@ void create_user(char firstName[MAX_NAME_LENGTH], char lastName[MAX_NAME_LENGTH]
 void connect_by_id(char id[MAX_ID_LENGTH]);
 void espace_client(char identifiant[]);
 void acheter_produit(char *fichier, char *nom_produit, char *ref_produit, int quantite, char *id);
+int achat(int n);
