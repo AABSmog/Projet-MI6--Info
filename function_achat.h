@@ -38,9 +38,5 @@ typedef struct {
 
 void create_user(char firstName[MAX_NAME_LENGTH], char lastName[MAX_NAME_LENGTH]);
 void connect_by_id(char id[MAX_ID_LENGTH]);
-void ajouter_achat(char *fichier, char *id_client, char *nom_produit, int ref_produit, int quantite);
-void afficher_historique_achat(char *fichier, char *id_client);
 void espace_client(char identifiant[]);
 void acheter_produit(char *fichier, char *nom_produit, char *ref_produit, int quantite, char *id);
-void ecrire_historique(Client *client);
-void afficher_dernieres_lignes(char* nom_fichier, int n);
