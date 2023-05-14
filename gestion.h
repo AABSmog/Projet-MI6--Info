@@ -6,7 +6,7 @@
 void ajouterproduit(char* fichier);
 void modifierstock(char *fichier, int reference, int quant);
 void afficherstockepuise(char *fichier);
-void numinfile(char *fichier, int num);
-void wordinfile(char *fichier, char *mot);
-int gestion(int n);
+void chercherrefproduit(char *fichier, int num);
+void cherchernomproduit(char *fichier, char *mot);
 void afficherstockfaible(char *fichier);
+int gestion(int n);
