@@ -50,9 +50,14 @@ void creation_client(char nom[50],char prenom[50]){
     for(int i = 0;i < sizeof(bl);i++){
         id[strlen(al)+i] = bl[i];
     }
-    int p1 = 0,p2 = 0,p3 = 0;
+    int produits[3][4];
+    for (int i=0 ;i<sizeof(produits);i++){
+        for (int j=0 ;i<sizeof(produits);j++){
+        produits[i][j%4] = 0;
+    }
+    }
     printf("%s",id);
-    fprintf(fp ,"%s %s %s %d %d %d \n",id, nom, prenom,p1,p2,p3);
+    fprintf(fp ,"%s %s %s %d \n",id, nom, prenom, produits);
     fclose(fp);
 }
 
@@ -99,12 +104,31 @@ void Supp_client_par_id(char id[18]){
 }
 
 void changement_dernier(int pc, char id[18]){
-    FILE * fp;
-    fp = fopen("ID.txt","r")
+    FILE * fm;
+    FILE * fo;
+    char nom[20],prenom[20];
+    int produits[3][4];
+    char line[1000];
+    char lineb[1000];
+    char printp[90];
+    int ln = 0;
     int spc = 0;
-    while (spc < 5){
-
+    snprintf(printp,sizeof(printp),"%d",pc);
+    fm = fopen("ID.txt","r");
+    fo = fopen("Temp2.txt","w+");
+    while(fgets(line,sizeof(line),fm)){
+        ln++;
+        if(ln == ligne_corr_id(id)){
+            fputs(line, fo);
+        }
     }
+    fscanf(fo,"%s %s %s %d \n", &id , &nom, &prenom, &produits);
+
+
+
+    
+            
+
 }
 
 int main(){
