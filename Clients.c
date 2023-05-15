@@ -52,8 +52,8 @@ void creation_client(char nom[50],char prenom[50]){
     }
     int produits[3][4];
     for (int i=0 ;i<sizeof(produits);i++){
-        for (int j=0 ;i<sizeof(produits);j++){
-        produits[i][j%4] = 0;
+        for (int j=0 ;j<4;j++){
+        produits[i][j] = 0;
     }
     }
     printf("%s",id);
