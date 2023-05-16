@@ -77,7 +77,7 @@ int ligne_corr_id(char mot[18]){
     fclose(fp);
 }
 
-void Supp_client_par_id(char id[18]){
+void supp_client_par_id(char id[18]){
     FILE * fp;
     FILE * fb;
     char line[1000];

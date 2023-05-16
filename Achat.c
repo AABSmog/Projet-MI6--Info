@@ -80,7 +80,7 @@ void acheter(int ref, int quantite, char id[]){
   while(fgets(line, sizeof(line), file)!= NULL){
     sscanf(line,"%s %d %d %f", name, &reference, &stock, &prix);
     if(reference==ref){
-       modifierstock("produit.txt", ref,-quantite);
+       modifierstock1("produit.txt", ref,-quantite);
        depense= depense + prix*quantite;
       printf("vous venez de depenser: %f\n",depense);
     }
