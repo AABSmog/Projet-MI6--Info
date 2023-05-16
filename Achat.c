@@ -1,9 +1,6 @@
-#include <stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<errno.h>
+#include"achat.h"
 
-void modifierstock(char *fichier, int reference, int quant)
+void modifierstock1(char *fichier, int reference, int quant)
 {
   //ouvrir le fichier principal en mode lecture
   FILE *fp = fopen(fichier, "r");
@@ -18,17 +15,15 @@ void modifierstock(char *fichier, int reference, int quant)
 }
 void afficher_stock(char * fichier){
   FILE *file;
-  int reference, quantite,taille, taille;
+  int reference, quantite,taille;
   float prix;
   char nom[100];
   char line[100];
   file=fopen("produit.txt", "r");
-  while( fscanf(file, "%s %d %d %f", nom, &reference, &quantite, &prix)==4){     
-    printf("Nom:%s Reference:%d quantité:%d prix:%f\n", nom, reference, quantite, prix);
-    if(scanf(file, "%s %d %d %f", nom, &reference, &quantite, &prix)!=4){
-      break;
+  sscanf(line, "%s %d %d %f %d", nom, &reference, &quantite, &prix, &taille);
+  while( fscanf(file, "%s %d %d %f %d", nom, &reference, &quantite, &prix, &taille)==5){     
+    printf("Nom:%s Reference:%d quantité:%d prix:%f taille:%d\n", nom, reference, quantite, prix, taille);
     }
-  }
   fclose(file);
 }
 void acheter(int ref, int quantite, char id[]){
@@ -41,7 +36,7 @@ void acheter(int ref, int quantite, char id[]){
   while(fgets(line, sizeof(line), file)!= NULL){
     sscanf(line,"%s %d %d %f", name, &reference, &stock, &prix);
     if(reference==ref){
-       modifierstock("produit.txt", ref, -quantite);
+       modifierstock1("produit.txt", ref, -quantite);
        depense= depense + prix*quantite;
       printf("vous venez de depenser: %f\n",depense);
     }
@@ -120,8 +115,7 @@ void espace_achat(char id[]){
 }
 
 int achat(int n) {
-   char id[10]="allanska";
-  
+  char id[10]="allanska";
   printf("Hello World\n");
   connect_by_id(id);
   return 0;

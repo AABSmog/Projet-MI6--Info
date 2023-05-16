@@ -1,9 +1,5 @@
 #define EOL #
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
+#include "Clients.h"
 
 bool lire_si_id(char str[18]){
     FILE * fp;

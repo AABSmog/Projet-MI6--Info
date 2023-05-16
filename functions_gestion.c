@@ -46,7 +46,7 @@ void ajouterproduit(char *fichier)
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
     printf("Erreur en ouvrant le fichier %s \n", fichier);
-    exit(1);
+    exit(2);
   }
   // définir le produit
   Produit prod;
@@ -66,8 +66,7 @@ void ajouterproduit(char *fichier)
   printf("%d ", q);
   if (q > MAX_STOCK)
   {
-    printf("Le produit n'a pas ete ajoute au stock \nVous ne pouvez pas depasser la limite du stock\n");
-    return 0;
+    printf("Le produit n'a pas ete ajoute au stock \nVous ne disposez plus de place dans votre stock\n");
   }
   else if (q >= 0 && q <= MAX_STOCK)
   {
@@ -89,7 +88,7 @@ void modifierstock(char *fichier, int reference, int quant)
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
     printf("Erreur en ouvrant le fichier %s \n", fichier);
-    exit(2);
+    exit(3);
   }
   int trouve;
   trouve = 0;
@@ -102,9 +101,24 @@ void modifierstock(char *fichier, int reference, int quant)
     sscanf(ligne, "%s %d %d %f %d", prod.produit, &prod.ref, &prod.quantite, &prod.prix, &prod.taille);
     if (reference == prod.ref) // voir si la réference du produit est la même que celle recherchée
     {
-      // modifier la quantité du produit
-      prod.quantite = quant + prod.quantite;
-      trouve = 1;
+      int q = 0;
+      q = gererstock(fichier) + (quant * prod.taille);
+      if (q >= 0 && q <= MAX_STOCK)
+      {
+        // modifier la quantité du produit
+        prod.quantite = quant + prod.quantite;
+        trouve = 1;
+      }
+      else if (q > MAX_STOCK)
+      {
+        printf("Vous ne disposez plus de place dans votre stock pour ajouter cette quantite\n");
+        trouve = 3;
+      }
+      else if (q < 0)
+      {
+        printf("Vous ne pouvez pas réduire votre stock de cette quantite \n");
+        trouve = 3;
+      }
     }
     // ajouter chaque ligne dans le fichier temporaraire
     fprintf(tempor, "%s %d %d %f %d \n", prod.produit, prod.ref, prod.quantite, prod.prix, prod.taille);
@@ -137,7 +151,7 @@ void afficherstockepuise(char *fichier)
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
     printf("Erreur en ouvrant le fichier %s \n", fichier);
-    exit(3);
+    exit(4);
   }
   char ligne[MAX];
   int stockepuise;
@@ -171,7 +185,7 @@ void chercherrefproduit(char *fichier, int num)
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
     printf("Erreur en ouvrant le fichier %s \n", fp);
-    exit(4);
+    exit(5);
   }
   int trouve;
   trouve = 0;
@@ -205,7 +219,7 @@ void cherchernomproduit(char *fichier, char *mot)
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
     printf("Erreur en ouvrant le fichier %s \n", fp);
-    exit(5);
+    exit(6);
   }
   int trouve;
   trouve = 0;
@@ -261,7 +275,7 @@ void afficherstockfaible(char *fichier)
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
     printf("Erreur en ouvrant le fichier %s \n", fichier);
-    exit(6);
+    exit(7);
   }
   char produits[5][MAX];
   char ligne[MAX];
