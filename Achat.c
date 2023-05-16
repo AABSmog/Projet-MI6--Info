@@ -120,7 +120,7 @@ void espace_achat(char id[]){
   fclose(file);
 }
 
-int main() {
+int achat(int n) {
    char id[10]="allanska";
   
   printf("Hello World\n");
