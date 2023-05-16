@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<errno.h>
-#include<Clients.h>
+#include"Clients.h"
 #define MAX 1000
 
 void modifierstock1(char *fichier, int reference, int quant)
