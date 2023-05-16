@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #define MAX 1000
+#define MAX_STOCK 200
 void ajouterproduit(char* fichier);
 void modifierstock(char *fichier, int reference, int quant);
 void afficherstockepuise(char *fichier);

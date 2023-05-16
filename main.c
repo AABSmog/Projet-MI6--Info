@@ -2,7 +2,7 @@
 #include"function_achat.h"
 int main(){
     int n;
-    printf("Bienvenue dans votre magasin XYZ.\n");
+    printf("Bienvenue dans votre magasin de canettes XYZ.\n");
     printf("Voulez vous:\n");
     printf("1.Acceder au mode de gestion ?\n");
     printf("2.Acceder au mode d'achat ?\n");

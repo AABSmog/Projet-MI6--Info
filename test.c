@@ -59,7 +59,7 @@ void find_word_in_file(const char* filename, const char* word) {
     FILE* fp = fopen(filename, "r");
     if (fp == NULL) {
         fprintf(stderr, "Error opening file %s\n", filename);
-        exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE)
     }
 
     char line[MAX_LINE_LENGTH];
