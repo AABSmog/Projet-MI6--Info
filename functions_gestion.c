@@ -7,6 +7,7 @@ void afficherstockepuise();
 void chercherrefproduit();
 void cherchernomproduit();
 void afficherstockfaible();
+int gererstock();
 //définir une structure de produits 
 typedef struct{
 char produit[MAX];
@@ -15,6 +16,23 @@ int ref;
   float prix;
   int taille;
 }Produit;
+// une fonction pour ajouter des produits au stock
+int gererstock(char *fichier){
+  FILE *fp=fopen(fichier,"r");
+  if(fp==NULL){
+    printf("Erreur en ouvrant le fichier %s \n",fichier);
+    exit(1);
+  }
+  char ligne[MAX];
+  int q;
+  q=0;
+  while(fgets(ligne,sizeof(ligne),fp)){
+    Produit prod;
+    sscanf(ligne, "%s %d %d %f %d", prod.produit, &prod.ref, &prod.quantite, &prod.prix, &prod.taille);
+    q=q+(prod.quantite*prod.taille);
+  }
+  return q;
+}
 // une fonction pour ajouter des produits au stock
 void ajouterproduit(char *fichier)
 {
@@ -39,8 +57,17 @@ void ajouterproduit(char *fichier)
   scanf("%f", &prod.prix);
   printf("Veuillez saisir la taille du produit :\n");
   scanf("%d", &prod.taille);
+  int q;
+  q=gererstock(fichier)+prod.taille*prod.quantite;
+  printf("%d ",q);
+  if(q>MAX_STOCK){
+    printf("Le produit n'a pas ete ajoute au stock \nVous ne pouvez pas depasser la limite du stock\n");
+    return 0;
+  }
+  else if(q>=0 && q<=MAX_STOCK){
   // ajouter au fichier le nouveau produit
   fprintf(fp, "\n%s %d %d %f %d", prod.produit, prod.ref, prod.quantite, prod.prix, prod.taille);
+  }
   //fermer le fichier
   fclose(fp);
   printf("Ce produit a ete ajoute avec succes.\n");

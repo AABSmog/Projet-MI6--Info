@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #define MAX 1000
+#define MAX_STOCK 200
 //définir les fonctions qu'on va utiliser
 void ajouterproduit();
 void modifierstock();
@@ -11,6 +12,7 @@ void afficherstockepuise();
 void chercherrefproduit();
 void cherchernomproduit();
 void afficherstockfaible();
+int gererstock();
 //définir une structure de produits 
 typedef struct{
 char produit[MAX];
@@ -19,6 +21,22 @@ int ref;
   float prix;
   int taille;
 }Produit;
+int gererstock(char *fichier){
+  FILE *fp=fopen(fichier,"r");
+  if(fp==NULL){
+    printf("Erreur en ouvrant le fichier %s \n",fichier);
+    exit(1);
+  }
+  char ligne[MAX];
+  int q;
+  q=0;
+  while(fgets(ligne,sizeof(ligne),fp)){
+    Produit prod;
+    sscanf(ligne, "%s %d %d %f %d", prod.produit, &prod.ref, &prod.quantite, &prod.prix, &prod.taille);
+    q=q+(prod.quantite*prod.taille);
+  }
+  return q;
+}
 // une fonction pour ajouter des produits au stock
 void ajouterproduit(char *fichier)
 {
@@ -43,8 +61,17 @@ void ajouterproduit(char *fichier)
   scanf("%f", &prod.prix);
   printf("Veuillez saisir la taille du produit :\n");
   scanf("%d", &prod.taille);
+  int q;
+  q=gererstock(fichier)+prod.taille*prod.quantite;
+  printf("%d ",q);
+  if(q>MAX_STOCK){
+    printf("Le produit n'a pas ete ajoute au stock \nVous ne pouvez pas depasser la limite du stock\n");
+    return 0;
+  }
+  else if(q>=0 && q<=MAX_STOCK){
   // ajouter au fichier le nouveau produit
   fprintf(fp, "\n%s %d %d %f %d", prod.produit, prod.ref, prod.quantite, prod.prix, prod.taille);
+  }
   //fermer le fichier
   fclose(fp);
   printf("Ce produit a ete ajoute avec succes.\n");
@@ -52,7 +79,7 @@ void ajouterproduit(char *fichier)
 // une fonction pour modifier le stock d'un produit(soi l'augmenter ou le réduire)
 void modifierstock(char *fichier, int reference, int quant)
 {
-  //créer un fichier temporaire en mode lecture
+  //créer un fichier temporaire en mode écriture
   FILE *tempor = fopen("temporaire.txt", "w");
   //ouvrir le fichier principal en mode lecture
   FILE *fp = fopen(fichier, "r");
@@ -181,8 +208,6 @@ void cherchernomproduit(char *fichier, char *mot)
   int trouve;
   trouve=0;
   char ligne[MAX];
-  int num_ligne;
-  num_ligne=1;
   Produit prod;
   while (fgets(ligne, MAX, fp) != NULL)
   {
@@ -208,8 +233,6 @@ void cherchernomproduit(char *fichier, char *mot)
       }
       else
       {
-        //avancer d'une ligne
-        num_ligne++;
         //avancer au prochain caractére de la ligne
         ptr_ligne++;
         //reinitialiser le pointeur du nom de produit
@@ -300,6 +323,7 @@ int main()
       printf("MODE GESTION : \n");
       afficherstockepuise("produit.txt");
       afficherstockfaible("produit.txt");
+      gererstock("produit.txt");
       printf("Voulez vous :\n");
       printf("1.Cherchez un produit en utilisant son nom ?\n");
       printf("2.Cherchez un produit en utilisant sa reference ?\n");
