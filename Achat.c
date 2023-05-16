@@ -161,14 +161,14 @@ void espace_achat(char id[]){
 int achat(int n) {
    int choice;
   char nom[50], prenom[50], id[100];
-  printf("Mode achat:\n");
-  printf("Vous voulez:\n");
-  printf("1.Creer un compte.\n");
-  printf("2.Vous connecter.\n");
-  printf("3.Suprimer votre compte.\n\n");
-  printf("Votre choix:");
-  scanf("%d", &choice);
   do{
+    printf("Mode achat:\n");
+    printf("Vous voulez:\n");
+    printf("1.Creer un compte.\n");
+    printf("2.Vous connecter.\n");
+    printf("3.Suprimer votre compte.\n\n");
+    printf("Votre choix:");
+    scanf("%d", &choice);
     if(choice==1){
        printf("Quel est votre nom? si vous en avez 2 reliez les par un underscore:\n");
        scanf("%s", nom);
