@@ -58,16 +58,14 @@ void modifierstock1(char *fichier, int reference, int quant)
 }
 void afficher_stock(char * fichier){
   FILE *file;
-  int reference, quantite,taille, taille;
+  int reference, quantite, taille;
   float prix;
   char nom[100];
   char line[100];
-  file=fopen("produit.txt", "r");
-  while( fscanf(file, "%s %d %d %f", nom, &reference, &quantite, &prix)==4){     
-    printf("Nom:%s Reference:%d quantité:%d prix:%f\n", nom, reference, quantite, prix);
-    if(scanf(file, "%s %d %d %f", nom, &reference, &quantite, &prix)!=4){
-      break;
-    }
+  file=fopen(fichier, "r");
+  sscanf(line,"%s %d %d %f %d ",nom, &reference, &quantite, &prix,&taille);
+  while( fscanf(file, "%s %d %d %f %d", nom, &reference, &quantite, &prix, &taille)==5){  
+    printf("Nom:%s Reference:%d quantité:%d prix:%f taille : %d \n",nom, reference, quantite, prix,taille);
   }
   fclose(file);
 }
