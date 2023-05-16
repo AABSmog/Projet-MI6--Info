@@ -51,7 +51,7 @@ void creation_client(char nom[50],char prenom[50]){
     sprintf(filename, "clients_historique/%s.txt", id);
     fh = fopen(filename,"w");
     fprintf(fh,"0\n0\n0\n");
-    printf("%s",id);
+    printf(" votre identifiant est :%s.\n Retenez le bien!",id);
     fprintf(fp ,"%s %s %s\n",id, nom, prenom);
     fclose(fp);
     fclose(fh);
