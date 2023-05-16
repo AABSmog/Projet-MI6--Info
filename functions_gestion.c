@@ -224,8 +224,6 @@ void cherchernomproduit(char *fichier, char *mot)
   int trouve;
   trouve = 0;
   char ligne[MAX];
-  int num_ligne;
-  num_ligne = 1;
   Produit prod;
   while (fgets(ligne, MAX, fp) != NULL)
   {
@@ -251,8 +249,6 @@ void cherchernomproduit(char *fichier, char *mot)
       }
       else
       {
-        // avancer d'une ligne
-        num_ligne++;
         // avancer au prochain caractére de la ligne
         ptr_ligne++;
         // reinitialiser le pointeur du nom de produit
