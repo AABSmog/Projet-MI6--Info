@@ -1,29 +1,74 @@
-#include"achat.h"
+#include <stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<errno.h>
+#define MAX 1000
 
 void modifierstock1(char *fichier, int reference, int quant)
 {
-  //ouvrir le fichier principal en mode lecture
-  FILE *fp = fopen(fichier, "r");
-  //créer un fichier temporaire en mode lecture
+
+  char prod[50];
+  int ref, quantite, taille;
+  float prix;
+  // créer un fichier temporaire en mode lecture
   FILE *tempor = fopen("temporaire.txt", "w");
-  if (fp == NULL || tempor == NULL)//tester si le fichier s'ouvre correctement ou pas
+  // ouvrir le fichier principal en mode lecture
+  FILE *fp = fopen(fichier, "r");
+  if (tempor == NULL || fp == NULL) // tester si le fichier s'ouvre correctement ou pas
   {
-     //si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
+    // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
     printf("Erreur en ouvrant le fichier %s \n", fichier);
     exit(2);
   }
+  int trouve;
+  trouve = 0;
+  char ligne[MAX];
+  // lire le fichier ligne par ligne
+  while (fgets(ligne, sizeof(ligne), fp))
+  {
+    // lire les informations du produit dans le fichier
+    sscanf(ligne, "%s %d %d %f %d", prod,  &ref, &quantite, &prix, &taille);
+    if (reference == ref) // voir si la réference du produit est la même que celle recherchée
+    {
+      // modifier la quantité du produit
+      quantite = quant + quantite;
+      trouve = 1;
+    }
+    // ajouter chaque ligne dans le fichier temporaraire
+    fprintf(tempor, "%s %d %d %f %d \n", prod, ref, quantite, prix, taille);
+  }
+  if (trouve == 1)
+  // si le produit a été trouvé et modifié, ce message sera affiché
+  {
+    printf("Le stock de ce produit a ete bien modifie. \n");
+  }
+  else if (trouve == 0)
+  // si le produit n'a pas été trouvé et modifié, ce message sera affiché
+  {
+    printf("Ce produit n'est pas en stock. \n");
+  }
+  // fermer le fichier principal
+  fclose(fp);
+  // fermer le fichier temporaire
+  fclose(tempor);
+  // supprimer le fichier principal
+  remove(fichier);
+  // renommer le fichier temporaire avec le nom du fichier principal
+  rename("temporaire.txt", fichier);
 }
 void afficher_stock(char * fichier){
   FILE *file;
-  int reference, quantite,taille;
+  int reference, quantite,taille, taille;
   float prix;
   char nom[100];
   char line[100];
   file=fopen("produit.txt", "r");
-  sscanf(line, "%s %d %d %f %d", nom, &reference, &quantite, &prix, &taille);
-  while( fscanf(file, "%s %d %d %f %d", nom, &reference, &quantite, &prix, &taille)==5){     
-    printf("Nom:%s Reference:%d quantité:%d prix:%f taille:%d\n", nom, reference, quantite, prix, taille);
+  while( fscanf(file, "%s %d %d %f", nom, &reference, &quantite, &prix)==4){     
+    printf("Nom:%s Reference:%d quantité:%d prix:%f\n", nom, reference, quantite, prix);
+    if(scanf(file, "%s %d %d %f", nom, &reference, &quantite, &prix)!=4){
+      break;
     }
+  }
   fclose(file);
 }
 void acheter(int ref, int quantite, char id[]){
@@ -36,7 +81,7 @@ void acheter(int ref, int quantite, char id[]){
   while(fgets(line, sizeof(line), file)!= NULL){
     sscanf(line,"%s %d %d %f", name, &reference, &stock, &prix);
     if(reference==ref){
-       modifierstock1("produit.txt", ref, -quantite);
+       modifierstock("produit.txt", ref, -quantite);
        depense= depense + prix*quantite;
       printf("vous venez de depenser: %f\n",depense);
     }
@@ -55,9 +100,7 @@ void acheter(int ref, int quantite, char id[]){
   fclose(file);
  
 }
-
-
-void espace_achat(char id[18]){
+void espace_achat(char id[]){
   int choice, ref, quant;
   char nom[50], prenom[50];
   do{
@@ -117,8 +160,36 @@ void espace_achat(char id[18]){
 }
 
 int achat(int n) {
-  char id[10]="allanska";
-  printf("Hello World\n");
-  connect_by_id(id);
+   int choice;
+  char nom[50], prenom[50], id[100];
+  printf("Mode achat:\n");
+  printf("Vous voulez:\n");
+  printf("1.Creer un compte.\n");
+  printf("2.Vous connecter.\n");
+  printf("3.Suprimer votre compte.\n\n");
+  printf("Votre choix:");
+  scanf("%d", &choice);
+  do{
+    if(choice==1){
+       printf("Quel est votre nom? si vous en avez 2 reliez les par un underscore:\n");
+       scanf("%s", nom);
+       printf("Entrez votre prenom:\n");
+       scanf("%s", prenom);
+      // creation_client(nom, prenom); ASSANE!
+     }
+     else if(choice==2){
+       printf("Entrez votre ID:\n");
+       scanf("%s", id);
+       connect_by_id(id);
+     }
+      else if(choice==3){
+       printf("Entrez vos ID:\n");
+       scanf("%s", id);
+       //Supp_client_par_id(id); ASSANE!
+     }
+      else{
+       printf("Erreur veuillez rentrer un nombre entre 1;2 et 3.\n");
+     }
+  }while(choice!=3);
   return 0;
 }
