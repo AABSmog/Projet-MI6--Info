@@ -108,15 +108,14 @@ void Supp_client_par_id(char id[18]){
 void changement_dernier(int pc, char id[18]){
     FILE * fm;
     FILE * fo;
-    int ln = 0;
-    char a[5], b[5], c[5], line[5], filename[30], add[5];
+    int ln = 0, inst = 0, dst = 0;
+    char a[10], b[10], c[10], line[5], filename[30], add[5];
     sprintf(filename, "clients_historique/%s.txt", id);
-    fm = fopen(filename,"w+");
+    fm = fopen(filename,"r+");
     fo = fopen("clients_historique/temph.txt","w+");
-    fscanf(fm,"%s%s%s", &a , &b ,&c);
-    printf(a);
+    fscanf(fm,"%s\n%s\n%s", a, b, c);
     sprintf(add, "%d", pc);
-    fprintf(fo,"%s%s%s", b , c , add);
+    fprintf(fo,"%s\n%s\n%s ", &b , &c , add);
     freopen(filename,"w+",fm);
     freopen("clients_historique/temph.txt","r",fo);
     while(fgets(line,sizeof(line),fo)){
@@ -125,10 +124,4 @@ void changement_dernier(int pc, char id[18]){
     }
 }
 
-int main(){
-    creation_client("Assane","Bousso");
-    ligne_corr_id("deexpier");
-    Supp_client_par_id("missilefortunes");
-    changement_dernier(1012,"mangeoire");
-    return 0;
-}
+
