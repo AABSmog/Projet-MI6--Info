@@ -124,10 +124,4 @@ void changement_dernier(int pc, char id[18]){
     }
 }
 
-int main(){
-    creation_client("Assane","Bousso");
-    ligne_corr_id("deexpier");
-    Supp_client_par_id("missilefortunes");
-    changement_dernier(1021,"appelaitportrait");
-    return 0;
-}
+
