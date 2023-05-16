@@ -57,16 +57,31 @@ void ajouterproduit(char *fichier)
   scanf("%d", &prod.ref);
   printf("Veuillez saisir la quantite en stock :\n");
   scanf("%d", &prod.quantite);
+  while(prod.quantite<0){
+    printf("Veuilliez resaisir la quantite en stock \n");
+    scanf("%d",&prod.quantite);
+  }
   printf("Veuillez saisir le prix du produit :\n");
   scanf("%f", &prod.prix);
+  while(prod.prix<0){
+    printf("Veuilliez resaisir le prix du produit \n");
+    scanf("%d",&prod.quantite);
+  }
   printf("Veuillez saisir la taille du produit :\n");
   scanf("%d", &prod.taille);
+  while(prod.taille!=1 ||prod.taille!=2 ||prod.taille!=3){
+    printf("Veuilliez resaisir la taille de votre produit \n");
+    scanf("%d",&prod.taille);
+  }
   int q;
   q = gererstock(fichier) + prod.taille * prod.quantite;
   printf("%d ", q);
   if (q > MAX_STOCK)
   {
     printf("Le produit n'a pas ete ajoute au stock \nVous ne disposez plus de place dans votre stock\n");
+  }
+  else if(q<0){
+    printf("Le produit n'a pas ete ajoute au stock \nVous ne pouvez pas avoir un stock négatif\n");
   }
   else if (q >= 0 && q <= MAX_STOCK)
   {
