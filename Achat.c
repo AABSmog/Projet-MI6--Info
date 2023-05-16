@@ -55,7 +55,9 @@ void acheter(int ref, int quantite, char id[]){
   fclose(file);
  
 }
-void espace_achat(char id[]){
+
+
+void espace_achat(char id[18]){
   int choice, ref, quant;
   char nom[50], prenom[50];
   do{
