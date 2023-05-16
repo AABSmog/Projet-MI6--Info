@@ -57,6 +57,28 @@ void acheter(int ref, int quantite, char id[]){
 }
 
 
+char nom_produit_id(int idp[5]){
+  char line[1000];
+    int line_number = 0;
+    FILE * fp;
+    strtok(idp, "\n");
+    fp = fopen("produit.txt","r");
+    if (fp == NULL) {
+        printf("Fichier Non-existant\n" );
+    }
+    while (fgets(line, sizeof(line), fp)) {
+        line_number++;
+        if (strstr(line, mot) != NULL) {
+            return(line_number);
+            fclose(fp);
+            exit(0);
+        }
+    }
+    fclose(fp);
+}
+
+}
+
 void espace_achat(char id[18]){
   int choice, ref, quant;
   char nom[50], prenom[50];

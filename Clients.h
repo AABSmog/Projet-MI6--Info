@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
 #define MAX 1000
 void Creation_client(char nom[50],char prenom[50]);
 int ligne_corr_id(char mot[18]);
