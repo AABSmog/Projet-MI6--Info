@@ -18,16 +18,14 @@ void modifierstock(char *fichier, int reference, int quant)
 }
 void afficher_stock(){
   FILE *file;
-  int reference, quantite;
+  int reference, quantite,taille;
   float prix;
   char nom[100];
   char line[100];
   file=fopen("produit.txt", "r");
-  while( fscanf(file, "%s %d %d %f", nom, &reference, &quantite, &prix)==4){     
-    printf("Nom:%s Reference:%d quantité:%d prix:%f\n", nom, reference, quantite, prix);
-    if(scanf(file, "%s %d %d %f", nom, &reference, &quantite, &prix)!=4){
-      break;
-    }
+  sscanf(file,"%s %d %d %f %d ",nom,&reference,&quantite,&prix,&taille);
+  while( fgets(line,sizeof(line),file)){     
+    printf("Nom:%s Reference:%d quantité:%d prix:%f taille: %d\n", nom, reference, quantite, prix, taille);
   }
   fclose(file);
 }
@@ -60,9 +58,6 @@ void acheter(int ref, int quantite, char id[]){
   fclose(file);
  
 }
-
-
-
 void espace_achat(char id[]){
   int choice, ref, quant;
   char nom[50], prenom[50];
