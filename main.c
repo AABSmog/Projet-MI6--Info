@@ -1,5 +1,4 @@
 #include"gestion.h"
-#include"function_achat.h"
 int main(){
     int n;
     printf("Bienvenue dans votre magasin de canettes XYZ.\n");
@@ -12,7 +11,7 @@ int main(){
         gestion(n);
     }
     else if(n==2){
-        achat(n);
+        return 0;
     }
     else if(n==3){
         return 0;
