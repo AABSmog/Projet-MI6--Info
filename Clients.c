@@ -120,4 +120,8 @@ void changement_dernier(int pc, char id[18]){
     }
 }
 
+void afficher_histo(char id[18]){
+    FILE * fc;
+    
 
+}
