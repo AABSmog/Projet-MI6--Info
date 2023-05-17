@@ -4,10 +4,11 @@
 #include <ctype.h>
 #define MAX 1000
 #define MAX_STOCK 200
-void ajouterproduit(char* fichier);
-void modifierstock(char *fichier, int reference, int quant);
-void afficherstockepuise(char *fichier);
-void chercherrefproduit(char *fichier, int num);
-void cherchernomproduit(char *fichier, char *mot);
-void afficherstockfaible(char *fichier);
-int gestion(int n);
+int managestock(char* file);
+void addproduct(char* file);
+void modifystock(char *file, int ref, int quant);
+void outofstock(char *file);
+void searchrefproduct(char *file, int number);
+void searchnameproduct(char *file, char *word);
+void lowstock(char *file);
+int management(int n);

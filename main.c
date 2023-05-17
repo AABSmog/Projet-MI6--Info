@@ -10,7 +10,7 @@ int main(){
     printf("3.Quitter le programme ?\n");
     scanf("%d",&n);
     if(n==1){
-        gestion(n);
+        management(n);
     }
     else if(n==2){
         achat(n);
