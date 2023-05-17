@@ -84,21 +84,12 @@ void acheter(int ref, int quantite, char id[]){
        depense= depense + prix*quantite;
       printf("vous venez de depenser: %f\n",depense);
     }
-  else{
-    printf("identifiant introuvable\n");
-  }   
+  
   }
-  /*sprintf(nom_fichier, "historique_%s.txt", id);
-    file2=fopen(nom_fichier, "a");
-  if(file==NULL){
-    printf("erreur.\n");
-    exit(2);
-  }
-    fprintf(file2,"%s %d %d %f", name, ref, quantite, prix);
-    fclose(file2);*/
+    printf("identifiant introuvable\n");   
   fclose(file);
- 
 }
+
 void espace_achat(char id[]){
   int choice, ref, quant;
   char nom[50], prenom[50];
