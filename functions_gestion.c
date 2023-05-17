@@ -99,10 +99,10 @@ void addproduct(char *file)
 // une fonction pour modifier le stock d'un produit(soi l'augmenter ou le réduire)
 void modifystock(char *file, int ref, int quant)
 {
-  // créer un fichier temporaire en mode lecture
-  FILE *tempor = fopen("temporary.txt", "w");
   // ouvrir le fichier principal en mode lecture
   FILE *fp = fopen(file, "r");
+  // créer un fichier temporaire en mode lecture
+  FILE *tempor = fopen("temporary.txt", "w");
   if (tempor == NULL || fp == NULL) // tester si le fichier s'ouvre correctement ou pas
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
@@ -260,7 +260,7 @@ void searchnameproduct(char *file, char *word)
         ptr_line++;
         if (*ptr_word == '\0' && *ptr_line == ' ') // si c'est la fin du nom de produit et le caractére suivant dans la ligne est un espace
         {
-          printf("The product '%s' was found in stock \nHere are its informations : \n", prod.name);
+          printf("The product '%s' was found in stock \nHere are its informations : \n", word);
           printf("Name: %s Reference: %d Stock: %d Price: %f Size: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
           found = 1;
           break;
