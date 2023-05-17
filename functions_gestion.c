@@ -149,7 +149,7 @@ void modifystock(char *file, int ref, int quant)
   // supprimer le fichier principal
   remove(file);
   // renommer le fichier temporaire avec le nom du fichier principal
-  rename("produit.txt",file);
+  rename("temporary.txt",file);
   if (found == 1)
   // si le produit a été trouvé et modifié, ce message sera affiché
   {
