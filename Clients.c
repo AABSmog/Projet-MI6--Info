@@ -1,5 +1,6 @@
 #define EOL #
 #include "Clients.h"
+#include "gestion.h"
 
 bool lire_si_id(char str[18]){
     FILE * fp;
@@ -120,8 +121,23 @@ void changement_dernier(int pc, char id[18]){
     }
 }
 
+char nomdeproduit(char id[18]){
+    
+
+}
+
 void afficher_histo(char id[18]){
     FILE * fc;
+    FILE * fp;
+    char a[10], b[10], c[10], line[5], filename[30], anom[600],bnom[600],cnom[600];
+    sprintf(filename, "clients_historique/%s.txt", id);
+    fc = fopen(filename,"r+");
+    fp = fopen("produit.txt","r+");
+    fscanf(fc,"%s\n%s\n%s", a, b, c);
+    cherchernomproduit(fp,a);
+    
+
+
     
 
 }
