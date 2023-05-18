@@ -1,4 +1,4 @@
-Cocacola 1001 10 1.200000 1 
+Cocacola 1001 8 1.200000 1 
 Cristalline 1002 8 0.990000 2 
 Tropico 1003 14 1.200000 1 
 Oasis 1004 5 1.200000 1 
