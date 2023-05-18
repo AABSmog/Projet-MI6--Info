@@ -31,7 +31,7 @@ void modifierstock1(char *fichier, int reference, int quant)
     sscanf(ligne, "%s %d %d %f %d", prod,  &ref, &quantite, &prix, &taille);
     if (reference == ref) // voir si la réference du produit est la même que celle recherchée
     {
-      // modifier la quantité du produit
+      // modifier la quantite du produit
       quantite = quant + quantite;
       trouve = 1;
     }
@@ -66,7 +66,7 @@ void afficher_stock(char * fichier){
   file=fopen(fichier, "r");
   sscanf(line,"%s %d %d %f %d ",nom, &reference, &quantite, &prix,&taille);
   while( fscanf(file, "%s %d %d %f %d", nom, &reference, &quantite, &prix, &taille)==5){  
-    printf("Nom:%s Reference:%d quantité:%d prix:%f taille : %d \n",nom, reference, quantite, prix,taille);
+    printf("Nom:%s Reference:%d quantite:%d prix:%f taille : %d \n",nom, reference, quantite, prix,taille);
   }
   fclose(file);
 }
@@ -83,21 +83,11 @@ void acheter(int ref, int quantite, char id[]){
        modifierstock1("produit.txt", ref,-quantite);
        depense= depense + prix*quantite;
       printf("vous venez de depenser: %f\n",depense);
+      break;
     }
-  else{
-    printf("identifiant introuvable\n");
-  }   
   }
-  /*sprintf(nom_fichier, "historique_%s.txt", id);
-    file2=fopen(nom_fichier, "a");
-  if(file==NULL){
-    printf("erreur.\n");
-    exit(2);
-  }
-    fprintf(file2,"%s %d %d %f", name, ref, quantite, prix);
-    fclose(file2);*/
+    printf("identifiant introuvable\n");   
   fclose(file);
- 
 }
 void espace_achat(char id[]){
   int choice, ref, quant;
@@ -108,7 +98,7 @@ void espace_achat(char id[]){
   printf("1.Afficher les produits disponibles.\n");
   printf("2.Acheter un article.\n");
   printf("3.Acceder à l'historique d'achat.\n");
-  printf("4.Quitter.\n");
+  printf("4.Quitter et ayez la possibilite de supprimer votre.\n");
   printf("Votre choix:");
   scanf("%d", &choice);
    if(choice==1){    
@@ -117,7 +107,7 @@ void espace_achat(char id[]){
     else if(choice==2){
       printf("Donnez la référence du produit que vous souhaitez acheter:");
       scanf("%d", &ref);
-      printf("\nDonnez la quantité que vus souhaitez acheter de ce produit:");
+      printf("\nDonnez la quantite que vus souhaitez acheter de ce produit:");
       scanf("%d", &quant);
       acheter(ref, quant, id);
     }
@@ -126,7 +116,7 @@ void espace_achat(char id[]){
     }
     else if(choice==4){
       printf("A la prochaine!\n");
-      break;
+      espace_achat(id);
     }
     else{
       printf("Erreur veuillez rentrer un nombre entre 1; 2; 3 et 4.\n");
@@ -166,7 +156,8 @@ int achat(int n) {
     printf("Vous voulez:\n");
     printf("1.Creer un compte.\n");
     printf("2.Vous connecter.\n");
-    printf("3.Suprimer votre compte.\n\n");
+    printf("3.Suprimer votre compte.\n");
+    printf("4.Quitter le mode achat et retour au choix du mode.\n\n");
     printf("Votre choix:");
     scanf("%d", &choice);
     if(choice==1){
@@ -186,9 +177,12 @@ int achat(int n) {
        scanf("%s", id);
        supp_client_par_id(id);
      }
-      else{
-       printf("Erreur veuillez rentrer un nombre entre 1;2 et 3.\n");
+     else if(choice==4){
+        break;
      }
-  }while(choice!=3);
+      else{
+       printf("Erreur veuillez rentrer un nombre entre 1; 2; 3 et 4.\n");
+     }
+  }while(choice!=4);
   return 0;
 }
