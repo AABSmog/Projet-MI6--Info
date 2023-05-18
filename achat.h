@@ -8,3 +8,4 @@ void acheter(int ref, int quantite, char id[]);
 void espace_achat(char id[]);
 void connect_by_id(char *id);
 int achat(int n);
+int menu_principal();
