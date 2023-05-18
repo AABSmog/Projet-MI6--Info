@@ -134,7 +134,7 @@ void afficher_histo(char id[18]){
     fc = fopen(filename,"r+");
     fp = fopen("produit.txt","r+");
     fscanf(fc,"%s\n%s\n%s", a, b, c);
-    cherchernomproduit(fp,a);
+    cherchernomroduit(fp,a);
     
 
 
