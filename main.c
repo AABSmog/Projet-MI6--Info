@@ -1,6 +1,7 @@
 #include"gestion.h"
 #include"achat.h"
 #include"Clients.h"
+
 int main(){
     int n;
     printf("Bienvenue dans votre magasin de canettes XYZ.\n");
