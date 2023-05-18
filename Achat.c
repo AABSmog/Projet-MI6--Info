@@ -85,10 +85,14 @@ void acheter(int ref, int quantite, char id[]){
       printf("vous venez de depenser: %f\n",depense);
       break;
     }
+  else{
+    printf("identifiant introuvable\n");
+  }   
   }
     printf("identifiant introuvable\n");   
   fclose(file);
 }
+
 void espace_achat(char id[]){
   int choice, ref, quant;
   char nom[50], prenom[50];
