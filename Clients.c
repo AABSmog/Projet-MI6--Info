@@ -1,17 +1,16 @@
 #define EOL #
 #include "Clients.h"
-#include "gestion.h"
 
-bool lire_si_id(char str[18]){
+bool read_if_id(char str[18]){
     FILE * fp;
     bool A = true;
-    char ligne[10000];
+    char line[10000];
     fp = fopen("ID.txt","a+");
     char CurrentChar;
     int currentline;
     char x[1024];
-     while (fgets(ligne, 10000, fp) != NULL) {
-        if (strstr(ligne, str) != NULL) {
+     while (fgets(line, 10000, fp) != NULL) {
+        if (strstr(line, str) != NULL) {
             fclose(fp);
             A = true;
             return A ;
@@ -24,7 +23,7 @@ bool lire_si_id(char str[18]){
     }
 }
 
-void client_creation(char nom[50],char prenom[50]){
+void client_creation(char name[50],char surname[50]){
     srand(time(0)*64138);
     FILE * fp;
     FILE * fh;
@@ -52,23 +51,23 @@ void client_creation(char nom[50],char prenom[50]){
     fh = fopen(filename,"w");
     fprintf(fh,"0\n0\n0\n");
     printf(" votre identifiant est :%s.\n Retenez le bien!\n",id);
-    fprintf(fp ,"%s %s %s\n",id, nom, prenom);
+    fprintf(fp ,"%s %s %s\n",id, name, surname);
     fclose(fp);
     fclose(fh);
 }
 
-int line_id(char mot[18]){
+int line_id(char id[18]){
     char line[1000];
     int line_number = 0;
     FILE * fp;
-    strtok(mot, "\n");
+    strtok(id, "\n");
     fp = fopen("ID.txt","r");
     if (fp == NULL) {
         printf("Fichier Non-existant\n" );
     }
     while (fgets(line, sizeof(line), fp)) {
         line_number++;
-        if (strstr(line, mot) != NULL) {
+        if (strstr(line, id) != NULL) {
             return(line_number);
             fclose(fp);
             exit(0);
@@ -104,7 +103,7 @@ void suppression_id(char id[18]){
 void change_last(int pc, char id[18]){
     FILE * fm;
     FILE * fo;
-    int ln = 0, inst = 0, dst = 0;
+    int ln = 0;
     char a[10], b[10], c[10], line[5], filename[30], add[5];
     sprintf(filename, "history_clients/%s.txt", id);
     fm = fopen(filename,"r+");
@@ -118,27 +117,37 @@ void change_last(int pc, char id[18]){
         ln++;
         fputs(line, fm);
     }
+    fclose(fm);
+    fclose(fo);
 }
 
-char product_name(char id[5]){
+char product_name(char *id){
     char line[1000];
-    char product_name[50];
+    char *token;
+    char *name = NULL;
     int line_number = 0;
     FILE * fp;
-    strtok(id, "\n");
-    fp = fopen("ID.txt","r");
+    fp = fopen("produit.txt","r");
     if (fp == NULL) {
         printf("Fichier Non-existant\n" );
     }
-    while (fgets(line, sizeof(line), fp)) {
-        *product_name = strtok(line," ");
-        if (strstr(line, id) != NULL) {
-            fclose(fp);
-            return(product_name);
+    while (fgets(line, sizeof(line), fp) != NULL) {
+        token = strtok(line," ");
+        if (token != NULL) {
+            name = token;
+            token = strtok(NULL," ");
+            if (token != NULL) {
+                if (strcmp(token, id) == 0) {
+                    fclose(fp);
+                    return *name;
         }
     }
-    printf("Produit non trouvé à cet ID, veuillez réessayer");
-    return(NULL);
+}
+}
+    printf("Produit non trouve a cet ID, veuillez re-entrer un identifiant valide :\n");
+    scanf("%s",id);
+    product_name(id);
+    fclose(fp);
 }
 
     
@@ -150,9 +159,18 @@ void afficher_histo(char id[18]){
     sprintf(filename, "history_clients/%s.txt", id);
     fc = fopen(filename,"r+");
     fp = fopen("produit.txt","r+");
-    fscanf(fc,"%s\n%s\n%s", a, b, c);
+    fscanf(fc,"%s\n%s\n%s", &a, &b, &c);
+    printf("%s  %s  %s",a,b,c);
     *cnom = product_name(c);
-    *bnom = product_name(b);
+    *bnom = product_name(b); 
     *anom = product_name(a);
-    printf("Premier produit : %s \nDeuxième produit : %s\nTroisième produit : %s\n", cnom, bnom, anom);
+    printf("Premier produit : %s \nDeuxieme produit : %s\nTroisieme produit : %s\n", cnom, bnom, anom);
+    fclose(fc);
+    fclose(fp);
+}
+
+int main(){
+    client_creation("Mamadou","Mbaye");
+    change_last(1002,"trappemutiler");
+    afficher_histo("trappemutiler");
 }
