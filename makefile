@@ -1,4 +1,4 @@
-all : myprog
+all : myshop
 
 Clients.o: Clients.c Clients.h
 	gcc -c Clients.c -o Clients.o
@@ -12,9 +12,9 @@ functions_gestion.o: functions_gestion.c gestion.h
 main.o: main.c
 	gcc -c main.c -o main.o
 
-myprog : Clients.o Achat.o functions_gestion.o main.o
-    gcc Clients.o Achat.o functions_gestion.o main.o -o myprog
+myshop : Clients.o Achat.o functions_gestion.o main.o
+    gcc Clients.o Achat.o functions_gestion.o main.o -o myshop
 
 clean:
 	rm -f *.o 
-	rm myprog
+	rm myshop
