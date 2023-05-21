@@ -17,7 +17,7 @@ typedef struct
   float price;
   int size;
 } Product;
-// une fonction pour ajouter des produits au stock
+// une fonction pour gérer le stock(le calculer)
 int managestock(char *file)
 {
   FILE *fp = fopen(file, "r");
@@ -79,7 +79,7 @@ void addproduct(char *file)
   int q;
   q = managestock(file) + prod.size * prod.quantity;
   printf("%d ", q);
-  if (q > MAX_STOCK)
+  if (q > MAX_STOCK)//voir si l'utilisateur a dépassé la quantité autorisée du stock
   {
     printf("The product wasn't added to your shop\nYou don't have enough place in your stock\n");
   }
@@ -426,7 +426,7 @@ int management(int n)
       }
       else
       {
-        printf("Error:please choose a number between 1 and 4. \n");
+        printf("Error:please choose a number between 1 and 5. \n");
         return 0;
       }
     }
@@ -505,7 +505,7 @@ int management(int n)
     }
     else
     {
-      printf("Error:please choose a number between 1 and 4. \n");
+      printf("Error:please choose a number between 1 and 5. \n");
       return 0;
     }
   }

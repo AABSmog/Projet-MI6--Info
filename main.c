@@ -4,11 +4,11 @@
 
 int main(){
     int n;
-    printf("Bienvenue dans votre magasin de canettes XYZ.\n");
-    printf("Voulez vous:\n");
-    printf("1.Acceder au mode de gestion ?\n");
-    printf("2.Acceder au mode d'achat ?\n");
-    printf("3.Quitter le programme ?\n");
+    printf("Welcome to your drinks' shop XYZ.\n");
+    printf("Would you like to:\n");
+    printf("1.Access the management mode ?\n");
+    printf("2.Access the buyer's mode ?\n");
+    printf("3.Leave the shop ?\n");
     scanf("%d",&n);
     if(n==1){
         management(n);
@@ -20,7 +20,7 @@ int main(){
         return 0;
     }
     else{
-        printf("Erreur: veuillez saisir un nombre entre 1 et 3. \n");
+        printf("Error: please choose a number between 1 and 3. \n");
     }
     return 0;
 }

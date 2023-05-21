@@ -169,7 +169,7 @@ int achat(int n) {
     printf("1.Creer un compte.\n");
     printf("2.Vous connecter.\n");
     printf("3.Suprimer votre compte.\n");
-    printf("4.Quitter le mode achat et retour au choix du mode.\n\n");
+    printf("4.Quitter le programme .\n\n");
     printf("Votre choix:");
     scanf("%d", &choice);
     if(choice==1){
