@@ -71,14 +71,13 @@ void addproduct(char *file)
   }
   printf("Enter the size of the product:\n");
   scanf("%d", &prod.size);
-  while (prod.size != 1 || prod.size != 2 || prod.size != 3)
+  while (prod.size != 1 && prod.size != 2 && prod.size != 3)
   {
     printf("Please re-enter the size of the product \n");
     scanf("%d", &prod.size);
   }
   int q;
   q = managestock(file) + prod.size * prod.quantity;
-  printf("%d ", q);
   if (q > MAX_STOCK)//voir si l'utilisateur a dépassé la quantité autorisée du stock
   {
     printf("The product wasn't added to your shop\nYou don't have enough place in your stock\n");
@@ -94,7 +93,7 @@ void addproduct(char *file)
   }
   // fermer le fichier
   fclose(fp);
-  printf("The product was added successfully\n");
+  printf("\nThe product was added successfully\n");
 }
 // une fonction pour modifier le stock d'un produit(soi l'augmenter ou le réduire)
 void modifystock(char *file, int ref, int quant)
