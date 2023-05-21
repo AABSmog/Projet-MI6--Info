@@ -177,7 +177,7 @@ int achat(int n) {
        scanf("%s", nom);
        printf("Entrez votre prenom:\n");
        scanf("%s", prenom);
-       creation_client(nom,prenom);
+       client_creation(nom,prenom);
      }
      else if(choice==2){
        printf("Entrez votre ID:");
@@ -187,7 +187,7 @@ int achat(int n) {
       else if(choice==3){
        printf("Entrez vos ID:\n");
        scanf("%s", id);
-       supp_client_par_id(id);
+       suppression_id(id);
      }
      else if(choice==4){
         break;

@@ -168,9 +168,3 @@ void afficher_histo(char id[18]){
     fclose(fc);
     fclose(fp);
 }
-
-int main(){
-    client_creation("Mamadou","Mbaye");
-    change_last(1002,"trappemutiler");
-    afficher_histo("trappemutiler");
-}
