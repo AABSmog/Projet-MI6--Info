@@ -159,7 +159,7 @@ void history(char id[18]){
     bnom = product_name(b);
     printf("Deuxieme produit : %s \n", bnom);
     anom = product_name(a);
-    printf("Troisieme produit, %s \n ", anom);
+    printf("Troisieme produit : %s \n ", anom);
     fclose(fc);
     fclose(fp);
 }
