@@ -4,6 +4,20 @@
 #include<errno.h>
 #include"Clients.h"
 #define MAX 1000
+
+void rageQuit(char* msg, int errorCode){
+  if(msg != NULL){
+    printf("%s\n", msg);
+  }
+  if(errorCode == 0){
+    errorCode = 99;    
+  }
+  exit(errorCode);
+}// fonction pour afficher le message d'erreur.
+
+
+
+
 void modifierstock1(char *fichier, int reference, int quant)
 {
 
@@ -61,13 +75,20 @@ void modifierstock1(char *fichier, int reference, int quant)
   rename("temporaire.txt", fichier);
 }
 void afficher_stock(char * fichier){
+
   FILE *file;
   int reference, quantite, taille;
   float prix;
   char nom[100];
   char line[100];
+
+//verif parametre
+
+
   file=fopen(fichier, "r");
-  sscanf(line,"%s %d %d %f %d ",nom, &reference, &quantite, &prix,&taille);
+
+
+  sscanf(line,"%s %d %d %f %d ",nom, &reference, &quantite, &prix,&taille);// verif si la fonction retourne le bon num
   while( fscanf(file, "%s %d %d %f %d", nom, &reference, &quantite, &prix, &taille)==5){  
     printf("Nom:%s Reference:%d quantite:%d prix:%f taille : %d \n",nom, reference, quantite, prix,taille);
   }
