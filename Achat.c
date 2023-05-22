@@ -11,10 +11,10 @@ void modifierstock1(char *fichier, int reference, int quant)
   char prod[50];
   int ref, quantite, taille;
   float prix;
-  // créer un fichier temporaire en mode lecture
-  FILE *tempor = fopen("temporaire.txt", "w");
   // ouvrir le fichier principal en mode lecture
   FILE *fp = fopen(fichier, "r");
+    // créer un fichier temporaire en mode lecture
+  FILE *tempor = fopen("temporaire.txt", "w");
   if (tempor == NULL || fp == NULL) // tester si le fichier s'ouvre correctement ou pas
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
@@ -161,23 +161,23 @@ void espace_achat(char id[]){
 }
 
 int achat(int n) {
-   int choice;
+   int choice=0;
   char nom[50], prenom[50], id[100];
   do{
     printf("\nMode achat:\n");
     printf("Vous voulez:\n");
     printf("1.Creer un compte.\n");
     printf("2.Vous connecter.\n");
-    printf("3.Suprimer votre compte.\n");
-    printf("4.Quitter le mode achat et retour au choix du mode.\n\n");
+    printf("3.Supprimer votre compte.\n");
+    printf("4.Quitter le programme .\n\n");
     printf("Votre choix:");
-    scanf("%d", &choice);
+    scanf(" %d", &choice);
     if(choice==1){
        printf("Quel est votre nom? si vous en avez 2 reliez les par un underscore:\n");
        scanf("%s", nom);
        printf("Entrez votre prenom:\n");
        scanf("%s", prenom);
-       creation_client(nom,prenom);
+       client_creation(nom,prenom);
      }
      else if(choice==2){
        printf("Entrez votre ID:");
@@ -187,13 +187,14 @@ int achat(int n) {
       else if(choice==3){
        printf("Entrez vos ID:\n");
        scanf("%s", id);
-       supp_client_par_id(id);
+       suppression_id(id);
      }
      else if(choice==4){
-        break;
+        return 0;
      }
       else{
        printf("Erreur veuillez rentrer un nombre entre 1; 2; 3 et 4.\n");
+       return 0;
      }
   }while(choice!=4);
   return 0;
