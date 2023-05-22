@@ -117,6 +117,7 @@ void change_last(int pc, char id[18]){
     fclose(fm);
     fclose(fo);
 }
+
 char product_name(char *id){
     char line[1000];
     char *token;
@@ -131,11 +132,11 @@ char product_name(char *id){
         token = strtok(line," ");
         if (token != NULL) {
             name = token;
-            token = strtok(NULL," ");
+            token = strtok(token," ");
             if (token != NULL) {
                 if (strcmp(token, id) == 0) {
                     fclose(fp);
-                    return *name;
+                    return name;
         }
     }
 }
@@ -148,15 +149,15 @@ char product_name(char *id){
 void afficher_histo(char id[18]){
     FILE * fc;
     FILE * fp;
-    char a[10], b[10], c[10], line[5], filename[30], anom[600],bnom[600],cnom[600];
+    char a[10], b[10], c[10], line[5], filename[30], *anom,*bnom,*cnom;
     sprintf(filename, "history_clients/%s.txt", id);
     fc = fopen(filename,"r+");
     fp = fopen("produit.txt","r+");
     fscanf(fc,"%s\n%s\n%s", &a, &b, &c);
     printf("%s  %s  %s",a,b,c);
-    *cnom = product_name(c);
-    *bnom = product_name(b); 
-    *anom = product_name(a);
+    sprintf(cnom ,product_name(c));
+    sprintf(bnom ,product_name(b));
+    sprintf(anom ,product_name(a));
     printf("Premier produit : %s \nDeuxieme produit : %s\nTroisieme produit : %s\n", cnom, bnom, anom);
     fclose(fc);
     fclose(fp);
