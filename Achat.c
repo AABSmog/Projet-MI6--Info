@@ -33,6 +33,10 @@ void modifierstock1(char *fichier, int reference, int quant)
       // modifier la quantite du produit
       quantite = quant + quantite;
       trouve = 1;
+      if(quantite<0){
+        printf("Le stock est insufisant ERROR.\n");
+        exit (1);
+      }
     }
     // ajouter chaque ligne dans le fichier temporaraire
     fprintf(tempor, "%s %d %d %f %d \n", prod, ref, quantite, prix, taille);
