@@ -3,6 +3,7 @@
 #include<string.h>
 #include<errno.h>
 #include"Clients.h"
+
 #define MAX 1000
 
 void rageQuit(char* msg, int errorCode){
