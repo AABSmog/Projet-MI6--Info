@@ -55,7 +55,6 @@ void client_creation(char name[50],char surname[50]){
     fclose(fp);
     fclose(fh);
 }
-
 int line_id(char id[18]){
     char line[1000];
     int line_number = 0;
@@ -75,7 +74,6 @@ int line_id(char id[18]){
     }
     fclose(fp);
 }
-
 void suppression_id(char id[18]){
     FILE * fp;
     FILE * fb;
@@ -99,7 +97,6 @@ void suppression_id(char id[18]){
     fclose(fp);
     fclose(fb);
 }
-
 void change_last(int pc, char id[18]){
     FILE * fm;
     FILE * fo;
@@ -120,7 +117,6 @@ void change_last(int pc, char id[18]){
     fclose(fm);
     fclose(fo);
 }
-
 char product_name(char *id){
     char line[1000];
     char *token;
@@ -149,9 +145,6 @@ char product_name(char *id){
     product_name(id);
     fclose(fp);
 }
-
-    
-
 void afficher_histo(char id[18]){
     FILE * fc;
     FILE * fp;
