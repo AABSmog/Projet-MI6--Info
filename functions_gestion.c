@@ -23,7 +23,7 @@ int managestock(char *file)
   FILE *fp = fopen(file, "r");
   if (fp == NULL)
   {
-    printf("Error opening file %s \n", file);
+    printf("Erreur en ouvrant fichier %s \n", file);
     exit(1);
   }
   char line[MAX];
@@ -45,46 +45,46 @@ void addproduct(char *file)
   if (fp == NULL) // tester si le fichier s'ouvre correctement ou pas
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
-    printf("Error opening file %s \n", file);
+    printf("Erreur en ouvrant le fichier %s \n", file);
     exit(2);
   }
   // définir le produit
   Product prod;
   // demander les informations du produit à l'utilisateur
-  printf("Enter the name of the product:\n");
+  printf("Saisir le nom de votre produit::\n");
   scanf("%s", prod.name);
-  printf("Enter the reference of the product:\n");
+  printf("Saisir la reference de votre produit:\n");
   scanf("%d", &prod.reference);
-  printf("Enter the quantity of the product:\n");
+  printf("Saisir la quantite de votre produit:\n");
   scanf("%d", &prod.quantity);
   while (prod.quantity < 0)
   {
-    printf("Please re-enter the quantity of the product\n");
+    printf("Veuillez resaisir la quantite de votre produit(>0): \n");
     scanf("%d", &prod.quantity);
   }
-  printf("Enter the price of the product:\n");
+  printf("Saisir le prix de votre produit:\n");
   scanf("%f", &prod.price);
   while (prod.price < 0)
   {
-    printf("Please re-enter the price of the product\n");
+    printf("Veuillez resaisir le prix de votre produit(>0): \n");
     scanf("%d", &prod.price);
   }
-  printf("Enter the size of the product:\n");
+  printf("Saisir la taille de votre produit:\n");
   scanf("%d", &prod.size);
   while (prod.size != 1 && prod.size != 2 && prod.size != 3)
   {
-    printf("Please re-enter the size of the product \n");
+    printf("Veuillez resaisir la taille de votre produit(1,2 ou 3): \n");
     scanf("%d", &prod.size);
   }
   int q;
   q = managestock(file) + prod.size * prod.quantity;
-  if (q > MAX_STOCK)//voir si l'utilisateur a dépassé la quantité autorisée du stock
+  if (q > MAX_STOCK) // voir si l'utilisateur a dépassé la quantité autorisée du stock
   {
-    printf("The product wasn't added to your shop\nYou don't have enough place in your stock\n");
+    printf("Le produit n'a pas ete ajoute.\nVous n'avez pas de place dans votre magasin.\n");
   }
   else if (q < 0)
   {
-    printf("The product wasn't added to your shop\nYou can't have a negatif stock\n");
+    printf("Le produit n'a pas ete ajoute.\nVous ne pouvez pas avoir un stock negatif.\n");
   }
   else if (q >= 0 && q <= MAX_STOCK)
   {
@@ -93,7 +93,7 @@ void addproduct(char *file)
   }
   // fermer le fichier
   fclose(fp);
-  printf("\nThe product was added successfully\n");
+  printf("\nThe produit a ete bien ajoute.\n");
 }
 // une fonction pour modifier le stock d'un produit(soi l'augmenter ou le réduire)
 void modifystock(char *file, int ref, int quant)
@@ -105,7 +105,7 @@ void modifystock(char *file, int ref, int quant)
   if (tempor == NULL || fp == NULL) // tester si le fichier s'ouvre correctement ou pas
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
-    printf("Error opening file %s \n", file);
+    printf("Erreur ouvrant le fichier %s \n", file);
     exit(3);
   }
   int found;
@@ -129,12 +129,12 @@ void modifystock(char *file, int ref, int quant)
       }
       else if (q > MAX_STOCK)
       {
-        printf("You don't have enough place in your stock to add such quantity\n");
+        printf("Vous n'avez pas de place dans votre magasin pour ajouter une telle quantite.\n");
         found = 3;
       }
       else if (q < 0)
       {
-        printf("You can't reduce your stock by such quantity \n");
+        printf("Vous ne pouvez pas reduire le stock de cette quantite.\n");
         found = 3;
       }
     }
@@ -152,12 +152,12 @@ void modifystock(char *file, int ref, int quant)
   if (found == 1)
   // si le produit a été trouvé et modifié, ce message sera affiché
   {
-    printf("The stock was modified \n");
+    printf("Le stock a ete modifie. \n");
   }
   else if (found == 0)
   // si le produit n'a pas été trouvé et modifié, ce message sera affiché
   {
-    printf("This product isn't available in stock  \n");
+    printf("Ce produit est indisponible.\n");
   }
 }
 // une fonction pour afficher les produits avec 0 en stock
@@ -168,13 +168,13 @@ void outofstock(char *file)
   if (fp == NULL) // tester si le fichier s'ouvre correctement ou pas
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
-    printf("Error opening file %s \n", file);
+    printf("Erreur en ouvrant le fichier %s \n", file);
     exit(4);
   }
   char line[MAX];
   int nostock;
   nostock = 0;
-  printf("Products that are out of stock :\n");
+  printf("Produits en rupture de stock :\n");
   // lire le fichier ligne par ligne
   while (fgets(line, sizeof(line), fp))
   {
@@ -183,13 +183,13 @@ void outofstock(char *file)
     if (prod.quantity == 0) // si la quantité du produit est égale à 0
     {
       // afficher toutes les informations du produit avec le stock à 0
-      printf("Name: %s Reference: %d Stock: %d Price: %f Size: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
+      printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
       nostock = 1;
     }
   }
   if (nostock == 0) // si aucun produit n'as un stock à 0
   {
-    printf("There is no product out of stock\n");
+    printf("Il n'y a aucun produit en rupture de stock.\n");
   }
   // fermer le fichier
   fclose(fp);
@@ -202,7 +202,7 @@ void searchrefproduct(char *file, int number)
   if (fp == NULL)
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
-    printf("Error opening file %s \n", fp);
+    printf("Erreur en ouvrant le fichier %s \n", fp);
     exit(5);
   }
   int found;
@@ -215,15 +215,15 @@ void searchrefproduct(char *file, int number)
     if (prod.reference == number) // si la réference d'un produit est la même que la réference saisie par l'utilisateur
     {
       // afficher toutes les informations du produit
-      printf("The product with the reference '%d' was found in stock\nHere are its informations:\n", number);
-      printf("Name: %s Reference: %d Stock: %d Price: %f Size: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
+      printf("Le produit avec la reference '%d' a ete trouve en stock.\nVoici ses informations :\n", number);
+      printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
       found = 1;
       break;
     }
   }
   if (found == 0) // si aucune réference des produits n'est la même que celle saisie par l'utilisateur
   {
-    printf("The product with the reference '%d' wasn't found in stock\n", number);
+    printf("Ce produit est indisponible.\n");
   }
   // fermer le fichier
   fclose(fp);
@@ -236,7 +236,7 @@ void searchnameproduct(char *file, char *word)
   if (fp == NULL)
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
-    printf("Error opening file %s \n", fp);
+    printf("Erreur en ouvrant le fichier %s \n", fp);
     exit(6);
   }
   int found;
@@ -259,8 +259,8 @@ void searchnameproduct(char *file, char *word)
         ptr_line++;
         if (*ptr_word == '\0' && *ptr_line == ' ') // si c'est la fin du nom de produit et le caractére suivant dans la ligne est un espace
         {
-          printf("The product '%s' was found in stock \nHere are its informations : \n", word);
-          printf("Name: %s Reference: %d Stock: %d Price: %f Size: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
+          printf("Le produit '%s' a ete trouve en stock.\nVoici ses informations : \n", word);
+          printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
           found = 1;
           break;
         }
@@ -276,7 +276,7 @@ void searchnameproduct(char *file, char *word)
   }
   if (found == 0) // si le produit n'as pas été trouvé
   {
-    printf("This product isn't in stock\n");
+    printf("Ce produit est indisponible.\n");
   }
   // fermer le fichier
   fclose(fp);
@@ -288,7 +288,7 @@ void lowstock(char *file)
   if (fp == NULL)
   {
     // si le fichier ne s'ouvre pas correctement, afficher un message d'erreur et terminer le programme
-    printf("Error opening file %s \n", file);
+    printf("Erreur en ouvrant le fichier %s \n", file);
     exit(7);
   }
   char products[5][MAX];
@@ -315,14 +315,14 @@ void lowstock(char *file)
       strcpy(products[i], line);
     }
   }
-  printf("5 products with the lowest stock:\n");
+  printf("5 produits avec le stock le plus faible:\n");
   for (int i = 0; i < 5; i++) // une boucle pour afficher les produits avec les faibles stocks
   {
     if (quantities[i] != MAX)
     {
       Product prod;
       sscanf(products[i], "%s %d %d %f %d ", prod.name, &prod.reference, &prod.quantity, &prod.price, &prod.size);
-      printf("Name: %s Reference: %d Stock: %d Price: %f Size: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
+      printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
     }
   }
   // fermer le fichier
@@ -341,15 +341,15 @@ int management(int n)
   ref = 0;
   int choice;
   choice = 0;
-  printf("Please enter your management ID.\n");
+  printf("Veuillez entrer votre ID.\n");
   scanf("%d", &identifier);
   while (i != 0 && choice == 0)
   {
     if (identifier != 123321 && identifier != 987789)
     {
       i--;
-      printf("ID not recognized.\n");
-      printf("You have %d attempts left.\nPlease re-enter your management ID.\n", i);
+      printf("ID non reconnue.\n");
+      printf("Vous avez %d tentatives restatntes.\nVeuillez resaisir votre ID.\n", i);
       scanf("%d", &identifier);
     }
     else if (identifier == 123321 || identifier == 987789)
@@ -358,22 +358,22 @@ int management(int n)
       printf("MODE GESTION : \n");
       outofstock("produit.txt");
       lowstock("produit.txt");
-      printf("Would you like to :\n");
-      printf("1.Search for a product using its name ?\n");
-      printf("2.Search for a product using its reference ?\n");
-      printf("3.Modify the stock of a product ?\n");
-      printf("4.Add a product to stock ?\n");
-      printf("5.Leave the management programme ? \n");
+      printf("Voulez vous : \n");
+      printf("1.Chercher un produit en utilisant son nom ?\n");
+      printf("2.Chercher un produit en utilisant sa reference ?\n");
+      printf("3.Modifier le stock d'un produit ?\n");
+      printf("4.Ajouter un produit au stock ?\n");
+      printf("5.Quitter le programme ? \n");
       scanf("%d", &a);
       if (a == 1)
       {
-        printf("Enter the name of the product \n");
+        printf("Entrer le nom du produit : \n");
         scanf("%s", name);
         searchnameproduct("produit.txt", name);
       }
       else if (a == 2)
       {
-        printf("Enter the reference of the product \n");
+        printf("Entrer la reference du produit :  \n");
         scanf("%d", &ref);
         searchrefproduct("produit.txt", ref);
       }
@@ -385,33 +385,33 @@ int management(int n)
         quant = 0;
         int n;
         n = 0;
-        printf("Would yo like to: \n");
-        printf("1.Increase the stock ? \n");
-        printf("2.Reduce the stock ? \n");
+        printf("Voulez vous : \n");
+        printf("1.Augmenter le stock ? \n");
+        printf("2.Reduire le stock ? \n");
         scanf("%d", &n);
         if (n == 1)
         {
-          printf("Please enter the reference of the product you want to increase in stock: ");
+          printf("Veuillez entrer la refernce du produit : ");
           scanf("%d", &reference);
           printf("\n");
-          printf("Please enter the quantity you want to add to stock ");
+          printf("Veuillez entrer la quantite a ajouter au stock : ");
           scanf("%d", &quant);
           printf("\n");
           modifystock("produit.txt", reference, quant);
         }
         else if (n == 2)
         {
-          printf("Please enter the reference of the product you want to reduce in stock: ");
+          printf("Veuillez entrer la refernce du produit : ");
           scanf("%d", &reference);
           printf("\n");
-          printf("Please enter the quantity you want to reduce in stock: ");
+          printf("Veuillez entrer la quantite a reduire dans le stock : ");
           scanf("%d", &quant);
           printf("\n");
           modifystock("produit.txt", reference, -quant);
         }
         else
         {
-          printf("Error: please enter either 1 or 2. \n");
+          printf("Erreur : veuillez saisir soi 1 soi 2. \n");
         }
       }
       else if (a == 4)
@@ -420,39 +420,39 @@ int management(int n)
       }
       else if (a == 5)
       {
-        printf("Thanks for your visit ! \n");
+        printf("Merci pour votre visite ! \n");
         return 0;
       }
       else
       {
-        printf("Error:please choose a number between 1 and 5. \n");
+        printf("Erreur : veuillez choisir un nombre entre 1 et 5. \n");
         return 0;
       }
     }
-    if (i == 0)
-    {
-      printf("Your ID is either uncorrect or not registered in the program.\nFor further information, please check with your manager.\n");
-      return 0;
-    }
+  }
+  if (i == 0)
+  {
+    printf("Votre ID est incorrect ou n'est pas enregistre dans le systeme.\nPour plus d'informations, veuillez consulter votre manager.\n");
+    return 0;
   }
   while (i != 0 && choice != 0 && (identifier == 123321 || identifier == 987789))
   {
-    printf("Would you like to do something else ?\n");
-    printf("1.Search for a product using its name ?\n");
-    printf("2.Search for a product using its reference ?\n");
-    printf("3.Modify the stock of a product ?\n");
-    printf("4.Add a product to stock ?\n");
-    printf("5.Leave the management programme ? \n");
+    printf("Voulez vous faire autre chose ?\n");
+    printf("1.Chercher un produit en utilisant son nom ?\n");
+    printf("2.Chercher un produit en utilisant sa reference ?\n");
+    printf("3.Modifier le stock d'un produit ?\n");
+    printf("4.Ajouter un produit au stock ?\n");
+    printf("5.Quitter le programme ? \n");
     scanf("%d", &a);
     if (a == 1)
     {
-      printf("Enter the name of the product \n");
+      printf("Entrer le nom du produit : \n");
       scanf("%s", name);
       searchnameproduct("produit.txt", name);
     }
     else if (a == 2)
     {
-      printf("Enter the reference of the product \n");
+      printf("Entrer la reference du produit :  \n");
       scanf("%d", &ref);
       searchrefproduct("produit.txt", ref);
     }
@@ -464,33 +464,33 @@ int management(int n)
       quant = 0;
       int n;
       n = 0;
-      printf("Would yo like to: \n");
-      printf("1.Increase the stock ? \n");
-      printf("2.Reduce the stock ? \n");
+      printf("Voulez vous : \n");
+      printf("1.Augmenter le stock ? \n");
+      printf("2.Reduire le stock ? \n");
       scanf("%d", &n);
       if (n == 1)
       {
-        printf("Please enter the reference of the product you want to increase in stock: ");
+        printf("Veuillez entrer la refernce du produit : ");
         scanf("%d", &reference);
         printf("\n");
-        printf("Please enter the quantity you want to add to stock ");
+        printf("Veuillez entrer la quantite a ajouter au stock : ");
         scanf("%d", &quant);
         printf("\n");
         modifystock("produit.txt", reference, quant);
       }
       else if (n == 2)
       {
-        printf("Please enter the reference of the product you want to reduce in stock: ");
+        printf("Veuillez entrer la refernce du produit : ");
         scanf("%d", &reference);
         printf("\n");
-        printf("Please enter the quantity you want to reduce in stock: ");
+        printf("Veuillez entrer la quantite a reduire dans le stock : ");
         scanf("%d", &quant);
         printf("\n");
         modifystock("produit.txt", reference, -quant);
       }
       else
       {
-        printf("Error: please enter either 1 or 2. \n");
+        printf("Erreur : veuillez saisir soi 1 soi 2. \n");
       }
     }
     else if (a == 4)
@@ -499,12 +499,12 @@ int management(int n)
     }
     else if (a == 5)
     {
-      printf("Thanks for your visit ! \n");
+      printf("Merci pour votre visite ! \n");
       return 0;
     }
     else
     {
-      printf("Error:please choose a number between 1 and 5. \n");
+      printf("Erreur : veuillez choisir un nombre entre 1 et 5. \n");
       return 0;
     }
   }
