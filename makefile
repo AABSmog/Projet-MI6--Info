@@ -13,7 +13,7 @@ main.o: main.c
 	gcc -c main.c -o main.o
 
 myshop : Clients.o Achat.o functions_gestion.o main.o
-    gcc Clients.o Achat.o functions_gestion.o main.o -o myshop
+	gcc Clients.o Achat.o functions_gestion.o main.o -o myshop
 
 clean:
 	rm -f *.o 
