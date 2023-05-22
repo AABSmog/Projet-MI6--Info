@@ -155,10 +155,11 @@ void history(char id[18]){
     fp = fopen("produit.txt","r+");
     fscanf(fc,"%s\n%s\n%s\n", &a, &b, &c);
     cnom = product_name(c);
-    printf(cnom);
+    printf("Premier produit : %s \n", cnom);
     bnom = product_name(b);
+    printf("Deuxieme produit : %s \n", bnom);
     anom = product_name(a);
-    printf("Premier produit : %s \nDeuxieme produit : %s\nTroisieme produit : %s\n", anom, cnom,  bnom);
+    printf("Troisieme produit, %s \n ", anom);
     fclose(fc);
     fclose(fp);
 }
