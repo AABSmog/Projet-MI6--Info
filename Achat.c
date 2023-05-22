@@ -108,7 +108,7 @@ void acheter(int ref, int quantite, char id[]){
        fclose(file);
        modifierstock1("produit.txt", ref,-quantite);
        depense= depense + prix*quantite;
-       for(i = 0; i <= quantite; i++ ){
+       for(i = 0; i < quantite; i++ ){
        change_last(ref,id);
        }
       printf("vous venez de depenser: %f\n",depense);
@@ -120,7 +120,8 @@ void acheter(int ref, int quantite, char id[]){
 
   }
   else{
-     printf("Reference introuvable. Recommence la procedure en tapant 2 pour pouvoir acheter un article et rentre une bonne reference ;)\n"); 
+     printf("Reference introuvable. Recommence la procedure en tapant 2 pour pouvoir acheter un article et rentre une bonne reference ;)\n");
+     exit(0); 
   }    
   fclose(file);
 }
