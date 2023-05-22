@@ -4,7 +4,6 @@
 #include<errno.h>
 #include"Clients.h"
 #define MAX 1000
-
 void modifierstock1(char *fichier, int reference, int quant)
 {
 
@@ -72,7 +71,7 @@ void afficher_stock(char * fichier){
 }
 void acheter(int ref, int quantite, char id[]){
   float depense=0;
-  FILE *file, *file2;
+  FILE *file;
   char line[100], name[100], nom_fichier[100];
   int reference, stock, taille, c=0;
   float prix;
@@ -80,6 +79,7 @@ void acheter(int ref, int quantite, char id[]){
   while(fgets(line, sizeof(line), file)!= NULL){
     sscanf(line,"%s %d %d %f %d", name, &reference, &stock, &prix, &taille);
     if(reference==ref){
+       fclose(file);
        modifierstock1("produit.txt", ref,-quantite);
        depense= depense + prix*quantite;
       printf("vous venez de depenser: %f\n",depense);
@@ -146,12 +146,13 @@ void espace_achat(char id[]){
   while(fgets(line, sizeof(line), file)!= NULL || c==1){
     sscanf(line,"%s %s %s", username, name, firstname);
     if(strcmp(id,username)==0){
-     printf("Bienvenu %s %s!\n", name, firstname);
+     printf("Bienvenue %s %s!\n", name, firstname);
      c=1;
      break;
     }
   }
    if(c==1){
+     fclose(file);
      espace_achat(id);
    }
    else{
