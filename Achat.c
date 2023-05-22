@@ -146,7 +146,7 @@ void espace_achat(char id[]){
       acheter(ref, quant, id);
     }
     else if(choice==3){
-      //fonction historique assane
+      history(id);
     }
     else if(choice==4){
       printf("A la prochaine!\n");
