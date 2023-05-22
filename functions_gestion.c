@@ -147,11 +147,7 @@ void modifystock(char *file, int ref, int quant)
   // fermer le fichier temporaire
   fclose(tempor);
   // supprimer le fichier principal
-  printf("%s\n",file);
- if (remove(file)!=0){
-  printf("Erreur remove \n") ;
-  printf("%s\n",strerror(errno));
- }
+  remove(file);
   // renommer le fichier temporaire avec le nom du fichier principal
   rename("temporary.txt", file);
   if (found == 1)
