@@ -118,13 +118,13 @@ void change_last(int pc, char id[18]){
     fclose(fo);
 }
 
-char product_name(char *id){
+char* product_name(char *id){
     char line[1000];
-    char *token;
+    char *token = NULL;
     char *name = NULL;
     int line_number = 0;
     FILE * fp;
-    fp = fopen("produit.txt","r");
+    fp = fopen("produit.txt","r+");
     if (fp == NULL) {
         printf("Fichier Non-existant\n" );
     }
@@ -146,23 +146,19 @@ char product_name(char *id){
     product_name(id);
     fclose(fp);
 }
-void afficher_histo(char id[18]){
+void history(char id[18]){
     FILE * fc;
     FILE * fp;
     char a[10], b[10], c[10], line[5], filename[30], *anom,*bnom,*cnom;
     sprintf(filename, "history_clients/%s.txt", id);
     fc = fopen(filename,"r+");
     fp = fopen("produit.txt","r+");
-    fscanf(fc,"%s\n%s\n%s", &a, &b, &c);
+    fscanf(fc,"%s\n%s\n%s\n", &a, &b, &c);
     cnom = product_name(c);
+    printf(cnom);
     bnom = product_name(b);
     anom = product_name(a);
-    printf("Premier produit : %s \nDeuxieme produit : %s\nTroisieme produit : %s\n", cnom, bnom, anom);
+    printf("Premier produit : %s \nDeuxieme produit : %s\nTroisieme produit : %s\n", anom, cnom,  bnom);
     fclose(fc);
     fclose(fp);
-}
-
-int main(){
-    afficher_histo("trappemutiler");
-
 }

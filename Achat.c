@@ -3,7 +3,22 @@
 #include<string.h>
 #include<errno.h>
 #include"Clients.h"
+
 #define MAX 1000
+
+void rageQuit(char* msg, int errorCode){
+  if(msg != NULL){
+    printf("%s\n", msg);
+  }
+  if(errorCode == 0){
+    errorCode = 99;    
+  }
+  exit(errorCode);
+}// fonction pour afficher le message d'erreur.
+
+
+
+
 void modifierstock1(char *fichier, int reference, int quant)
 {
 
@@ -33,6 +48,10 @@ void modifierstock1(char *fichier, int reference, int quant)
       // modifier la quantite du produit
       quantite = quant + quantite;
       trouve = 1;
+      if(quantite<0){
+        printf("Le stock est insufisant ERROR.\n");
+        exit (1);
+      }
     }
     // ajouter chaque ligne dans le fichier temporaraire
     fprintf(tempor, "%s %d %d %f %d \n", prod, ref, quantite, prix, taille);
@@ -57,13 +76,20 @@ void modifierstock1(char *fichier, int reference, int quant)
   rename("temporaire.txt", fichier);
 }
 void afficher_stock(char * fichier){
+
   FILE *file;
   int reference, quantite, taille;
   float prix;
   char nom[100];
   char line[100];
+
+//verif parametre
+
+
   file=fopen(fichier, "r");
-  sscanf(line,"%s %d %d %f %d ",nom, &reference, &quantite, &prix,&taille);
+
+
+  sscanf(line,"%s %d %d %f %d ",nom, &reference, &quantite, &prix,&taille);// verif si la fonction retourne le bon num
   while( fscanf(file, "%s %d %d %f %d", nom, &reference, &quantite, &prix, &taille)==5){  
     printf("Nom:%s Reference:%d quantite:%d prix:%f taille : %d \n",nom, reference, quantite, prix,taille);
   }
@@ -121,7 +147,7 @@ void espace_achat(char id[]){
       acheter(ref, quant, id);
     }
     else if(choice==3){
-      //fonction historique assane
+      history(id);
     }
     else if(choice==4){
       printf("A la prochaine!\n");

@@ -9,3 +9,4 @@ void client_creation(char name[50],char surname[50]);
 int line_id(char id[18]);
 void suppression_id(char id[18]);
 void change_last(int pc, char id[18]);
+void history(char id[18]);
