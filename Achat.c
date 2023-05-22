@@ -108,7 +108,7 @@ void acheter(int ref, int quantite, char id[]){
        fclose(file);
        modifierstock1("produit.txt", ref,-quantite);
        depense= depense + prix*quantite;
-       for(i = 0 , i <= quantite, i++ ){
+       for(i = 0; i <= quantite; i++ ){
        change_last(ref,id);
        }
       printf("vous venez de depenser: %f\n",depense);
