@@ -163,8 +163,3 @@ void history(char id[18]){
     fclose(fc);
     fclose(fp);
 }
-
-int main(){
-    history("trappemutiler");
-
-}

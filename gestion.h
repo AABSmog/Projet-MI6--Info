@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include<ctype.h>
-#define MAX 10000
+#define MAX 1000
 #define MAX_STOCK 200
 int managestock(char* file);
 void addproduct(char* file);
