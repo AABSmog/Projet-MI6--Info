@@ -110,12 +110,12 @@ char* product_name(char *id){
     while (fgets(line, sizeof(line), fp) != NULL) {
         token = strtok(line," ");
         if (token != NULL) {
-            name = token;
-            token = strtok(token," ");
+            token = line;
+            name = strtok(NULL," ");
             if (token != NULL) {
-                if (strcmp(token, id) == 0) {
+                if (strcmp(name, id) == 0) {
                     fclose(fp);
-                    return name;
+                    return token;
         }
     }
 }
@@ -136,11 +136,15 @@ void afficher_histo(char id[18]){
     fc = fopen(filename,"r+");
     fp = fopen("produit.txt","r+");
     fscanf(fc,"%s\n%s\n%s", &a, &b, &c);
-    printf("%s  %s  %s",a,b,c);
-    sprintf(cnom ,product_name(c));
-    sprintf(bnom ,product_name(b));
-    sprintf(anom ,product_name(a));
+    cnom = product_name(c);
+    bnom = product_name(b);
+    anom = product_name(a);
     printf("Premier produit : %s \nDeuxieme produit : %s\nTroisieme produit : %s\n", cnom, bnom, anom);
     fclose(fc);
     fclose(fp);
+}
+
+int main(){
+    afficher_histo("trappemutiler");
+
 }
