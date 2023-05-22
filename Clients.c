@@ -51,7 +51,7 @@ void client_creation(char name[50],char surname[50]){
     fh = fopen(filename,"w");
     fprintf(fh,"0\n0\n0\n");
     printf("Votre identifiant est :%s.\n Retenez le bien!\n",id);
-    fprintf(fp ,"\n%s %s %s\n",id, name, surname);
+    fprintf(fp ,"%s %s %s\n",id, name, surname);
     fclose(fp);
     fclose(fh);
 }

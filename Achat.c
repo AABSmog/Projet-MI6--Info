@@ -99,7 +99,7 @@ void acheter(int ref, int quantite, char id[]){
   float depense=0;
   FILE *file;
   char line[100], name[100], nom_fichier[100], *refh;
-  int reference, stock, taille, c=0;
+  int reference, stock, taille, c=0, i = 0;
   float prix;
   file=fopen("produit.txt", "r");
   while(fgets(line, sizeof(line), file)!= NULL){
@@ -108,7 +108,9 @@ void acheter(int ref, int quantite, char id[]){
        fclose(file);
        modifierstock1("produit.txt", ref,-quantite);
        depense= depense + prix*quantite;
+       for(i = 0; i < quantite; i++ ){
        change_last(ref,id);
+       }
       printf("vous venez de depenser: %f\n",depense);
       c=1;
       break;
@@ -118,7 +120,8 @@ void acheter(int ref, int quantite, char id[]){
 
   }
   else{
-     printf("Reference introuvable. Recommence la procedure en tapant 2 pour pouvoir acheter un article et rentre une bonne reference ;)\n"); 
+     printf("Reference introuvable. Recommence la procedure en tapant 2 pour pouvoir acheter un article et rentre une bonne reference ;)\n");
+     exit(0); 
   }    
   fclose(file);
 }

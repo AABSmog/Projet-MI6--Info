@@ -225,6 +225,7 @@ void searchrefproduct(char *file, int number)
   if (found == 0) // si aucune réference des produits n'est la même que celle saisie par l'utilisateur
   {
     printf("Ce produit est indisponible.\n");
+    exit(0);
   }
   // fermer le fichier
   fclose(fp);
