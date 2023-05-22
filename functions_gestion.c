@@ -35,6 +35,7 @@ int managestock(char *file)
     sscanf(line, "%s %d %d %f %d", prod.name, &prod.reference, &prod.quantity, &prod.price, &prod.size);
     q = q + (prod.quantity * prod.size);
   }
+  fclose(fp);
   return q;
 }
 // une fonction pour ajouter des produits au stock
@@ -146,7 +147,11 @@ void modifystock(char *file, int ref, int quant)
   // fermer le fichier temporaire
   fclose(tempor);
   // supprimer le fichier principal
-  remove(file);
+  printf("%s\n",file);
+ if (remove(file)!=0){
+  printf("Erreur remove \n") ;
+  printf("%s\n",strerror(errno));
+ }
   // renommer le fichier temporaire avec le nom du fichier principal
   rename("temporary.txt", file);
   if (found == 1)
