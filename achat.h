@@ -4,11 +4,11 @@
     #include<stdlib.h>
     #include<string.h>
     #include<errno.h>
-    void modifierstock1(char *fichier, int reference, int quant);
-    void afficher_stock(char * fichier);
-    void acheter(int ref, int quantite, char id[]);
-    void espace_achat(char id[]);
+    void modifystock1(char *fichier, int reference, int quant);
+    void display_stock(char * fichier);
+    void buy(int ref, int quantite, char id[]);
+    void shopping_area(char id[]);
     void connect_by_id(char *id);
-    int achat(int n);
+    int buying(int n);
     int menu_principal();
 #endif
