@@ -35,8 +35,10 @@ int managestock(char *file)
     sscanf(line, "%s %d %d %f %d", prod.name, &prod.reference, &prod.quantity, &prod.price, &prod.size);
     q = q + (prod.quantity * prod.size); // faire la somme de la quantité pour savoir si on a depassé le max stock ou pas
   }
+
   fclose(fp);
   return q;
+  
 }
 // une fonction pour ajouter des produits au stock
 int addproduct(char *file)
