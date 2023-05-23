@@ -11,11 +11,19 @@ Bienvenue dans votre magasin de boissons XYZ, le projet se compose d'un mode ges
    -    Pour la taille, elle doit être soi 1 (petit), soi 2 (moyen) ou soi 3 (grand).
 -   L'ID gestionnaire est 123321 ou 987789 !!
 ### Utilisation
+git clone
+
 Compiler le programme en utilisant le makefile.
 -	Ouvrez votre terminal Linux.
 -	Accéder au répertoire ou se trouve le makefile et l’ensemble des codes utilisés pour le programme.
 -	 Tapez  ‘make’
 -	Tapez  ./myshop 
+Si le makefile ne marche pas, voici les commandes à taper pour compiler le programme
+-  gcc -c Clients.c -o Clients.o
+-  gcc -c Achat.c -o Achat.o
+-  gcc -c functions_gestion.c -o functions_gestion.o
+-  gcc -c main.c -o main.o
+-  gcc Clients.o Achat.o functions_gestion.o main.o -o myshop
 ### Auteurs
 -	Hamza EL KARCHOUNI
 -	Allan SOUGANI KONE
