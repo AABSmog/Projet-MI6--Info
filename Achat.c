@@ -75,7 +75,7 @@ void modifystock1(char *file, int reference, int quant)
   // renommer le fichier temporaire avec le nom du fichier principal
   rename("temporaire.txt", file);
 }
-void display_stock(char * file){
+void display_stock(char *file1){
 
   FILE *file;
   int reference, quantity, size;
@@ -86,7 +86,7 @@ void display_stock(char * file){
 //verif parametre
 
 
-  file=fopen(file, "r");
+  file=fopen(file1, "r");
 
 
   sscanf(line,"%s %d %d %f %d ",name, &reference, &quantity, &price,&size);// verif si la fonction retourne le bon num

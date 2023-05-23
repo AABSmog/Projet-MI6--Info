@@ -15,7 +15,7 @@ int main(){
         management(n);
     }
     else if(n==2){
-        achat(n);
+        buying(n);
     }
     else if(n==3){
         return 0;
