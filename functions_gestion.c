@@ -492,6 +492,10 @@ int management(int n)
       {
         printf("Veuillez entrer la refernce du produit : ");
         scanf("%d", &reference);
+        if(isdigit(reference)!=0){
+          printf("Erreur.\n");
+          return 0;
+        }
         printf("\n");
         printf("Veuillez entrer la quantite a reduire dans le stock : ");
         scanf("%d", &quant);
