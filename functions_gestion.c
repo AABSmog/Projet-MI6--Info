@@ -120,29 +120,31 @@ void modifystock(char *file, int ref, int quant)
     sscanf(line, "%s %d %d %f %d", prod.name, &prod.reference, &prod.quantity, &prod.price, &prod.size);
     if (ref == prod.reference) // voir si la réference du produit est la même que celle recherchée
     {
-      if(prod.quantity+quant>=0){
-      int q = 0;
-      q = managestock(file) + (quant * prod.size);
-      if (q >= 0 && q <= MAX_STOCK)
+      if (prod.quantity + quant >= 0)
       {
-        // modifier la quantité du produit
-        prod.quantity = quant + prod.quantity;
-        found = 1;
+        int q = 0;
+        q = managestock(file) + (quant * prod.size);
+        if (q >= 0 && q <= MAX_STOCK)
+        {
+          // modifier la quantité du produit
+          prod.quantity = quant + prod.quantity;
+          found = 1;
+        }
+        else if (q > MAX_STOCK)
+        {
+          printf("Vous n'avez pas de place dans votre magasin pour ajouter une telle quantite.\n");
+          found = 3;
+        }
+        else if (q < 0)
+        {
+          printf("Vous ne pouvez pas reduire le stock de cette quantite.\n");
+          found = 3;
+        }
       }
-      else if (q > MAX_STOCK)
+      else if (prod.quantity + quant < 0)
       {
-        printf("Vous n'avez pas de place dans votre magasin pour ajouter une telle quantite.\n");
-        found = 3;
-      }
-      else if (q < 0)
-      {
-        printf("Vous ne pouvez pas reduire le stock de cette quantite.\n");
-        found = 3;
-      }
-      }
-      else if(prod.quantity+quant<0){
         printf("Impossible de reduire le stock d'une telle quantite \n");
-        found=3;
+        found = 3;
       }
     }
     // ajouter chaque ligne dans le fichier temporaraire
