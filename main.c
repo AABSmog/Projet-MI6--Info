@@ -9,6 +9,7 @@ int main(){
     printf("1.Acceder au mode gestion ?\n");
     printf("2.Acceder au mode d'achat ?\n");
     printf("3.Quitter le magasin ?\n");
+    printf("Votre choix:");
     scanf("%d",&n);
     if(n==1){
         management(n);
