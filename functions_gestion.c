@@ -41,7 +41,7 @@ int managestock(char *file)
 // une fonction pour ajouter des produits au stock
 int addproduct(char *file)
 {
-  // ouvrir le fichier en mode écriture en partant de la fin
+  // ouvrir le fichier en mode écriture et lecture
   FILE *fp = fopen(file, "a+");
   char line[MAX];
   if (fp == NULL) // tester si le fichier s'ouvre correctement ou pas
