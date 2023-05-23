@@ -89,7 +89,7 @@ void display_stock(char *file1){
   file=fopen(file1, "r");
 
 
-  sscanf(line,"%s %d %d %f %d ",name, &reference, &quantity, &price,&size);// verif si la fonction retourne le bon num
+  //sscanf(line,"%s %d %d %f %d ",name, &reference, &quantity, &price,&size);verif si la fonction retourne le bon num
   while( fscanf(file, "%s %d %d %f %d", name, &reference, &quantity, &price, &size)==5){  
     printf("Nom:%s Reference:%d quantite:%d prix:%f taille : %d \n",name, reference, quantity, price,size);
   }

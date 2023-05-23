@@ -1,9 +1,4 @@
-rien 0 0 0.000000 0 
-<<<<<<< HEAD
-Cocacola 1001 5 1.200000 1 
-=======
 Cocacola 1001 12 1.200000 1 
->>>>>>> b53a5bacf4c39e882fd039a2769e43c6408dbbad
 Cristalline 1002 8 0.990000 2 
 Tropico 1003 13 1.200000 1 
 Oasis 1004 5 1.200000 1 
