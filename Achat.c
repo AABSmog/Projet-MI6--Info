@@ -27,7 +27,7 @@ void modifystock1(char *file, int reference, int quant)
   float price;
   // ouvrir le fichier principal en mode lecture
   FILE *fp = fopen(file, "r");
-    // créer un fichier temporaire en mode lecture
+    // creer un fichier temporaire en mode lecture
   FILE *tempor = fopen("temporaire.txt", "w");
   if (tempor == NULL || fp == NULL) // tester si le fichier s'ouvre correctement ou pas
   {
@@ -43,7 +43,7 @@ void modifystock1(char *file, int reference, int quant)
   {
     // lire les informations du produit dans le fichier
     sscanf(line, "%s %d %d %f %d", prod,  &ref, &quantity, &price, &size);
-    if (reference == ref) // voir si la réference du produit est la même que celle recherchée
+    if (reference == ref) // voir si la reference du produit est la même que celle recherchee
     {
       // modifier la quantite du produit
       quantity = quant + quantity;
@@ -89,7 +89,7 @@ void display_stock(char *file1){
   file=fopen(file1, "r");
 
 
-  sscanf(line,"%s %d %d %f %d ",name, &reference, &quantity, &price,&size);// verif si la fonction retourne le bon num
+  //sscanf(line,"%s %d %d %f %d ",name, &reference, &quantity, &price,&size);verif si la fonction retourne le bon num
   while( fscanf(file, "%s %d %d %f %d", name, &reference, &quantity, &price, &size)==5){  
     printf("Nom:%s Reference:%d quantite:%d prix:%f taille : %d \n",name, reference, quantity, price,size);
   }
@@ -130,11 +130,11 @@ void shopping_area(char id[]){
   int choice, ref, quant;
   char name[50], firstname[50];
   do{
-  printf("\nVous voilà dans la zone achat!\n");
+  printf("\nVous voila dans la zone achat!\n");
   printf("Vous voulez:\n");
   printf("1.Afficher les produits disponibles.\n");
   printf("2.Acheter un article.\n");
-  printf("3.Acceder à l'historique d'achat.\n");
+  printf("3.Acceder a l'historique d'achat.\n");
   printf("4.Quitter et ayez la possibilite de supprimer votre compte.\n");
   printf("\nVotre choix:");
   scanf("%d", &choice);
