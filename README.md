@@ -9,6 +9,7 @@ Bienvenue dans votre magasin de boissons XYZ, le projet se compose d'un mode ges
    -    Pour la référence, elle doit être comprise entre 1000 et 10000.
    -    Pour la quantité et le prix, ils doivent être strictement positifs.
    -    Pour la taille, elle doit être soi 1 (petit), soi 2 (moyen) ou soi 3 (grand).
+-   L'ID gestionnaire est 123321 ou 987789 !!
 ### Utilisation
 Compiler le programme en utilisant le makefile.
 -	Ouvrez votre terminal Linux.
