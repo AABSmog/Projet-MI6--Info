@@ -25,4 +25,6 @@ racineparkings crfs bgz
 choixlavabo SOUNGANI_KONE Allan
 punirbel Harrah_sambal� Harrah_sambal�
 bathenfantin aze zer
-visiterempan aze zer
+visiterempan aze zer 
+ainsibleue test test
+suffixerumeurs test test
