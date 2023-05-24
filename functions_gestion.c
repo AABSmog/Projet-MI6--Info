@@ -828,4 +828,5 @@ int management(int n)
       break;
     }
   }
+  return(0);
 }
