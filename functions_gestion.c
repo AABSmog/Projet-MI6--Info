@@ -815,6 +815,7 @@ int management(int n)
     else if (a == 6)
     {
       main_menu();
+      exit(0);
     }
     else if (a == 7)
     {
