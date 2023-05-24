@@ -227,5 +227,5 @@ int buying(int n) {
        return 0;
      }
   }while(choice!=4);
-  return 0;
+  exit(0);
 }
