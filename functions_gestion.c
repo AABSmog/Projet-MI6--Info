@@ -623,7 +623,7 @@ int management(int n)
       }
       else
       {
-        printf("Erreur : veuillez choisir un nombre entre 1 et 5. \n");
+        printf("Erreur : veuillez choisir un nombre entre 1 et 6. \n");
         break;
       }
     }
@@ -641,7 +641,7 @@ int management(int n)
     printf("3.Modifier le stock d'un produit ?\n");
     printf("4.Ajouter un produit au stock ?\n");
     printf("5.Afficher tous les produits ? \n");
-    printf("6.Changer de mode?");
+    printf("6.Changer de mode?\n");
     printf("7.Quitter le programme ? \n");
     scanf("%d", &a);
     if (a == 1) // si l'utilisateur souhaite chercher un produit en utilisant son nom
@@ -823,7 +823,7 @@ int management(int n)
     }
     else
     {
-      printf("Erreur : veuillez choisir un nombre entre 1 et 5. \n");
+      printf("Erreur : veuillez choisir un nombre entre 1 et 6. \n");
       break;
     }
   }
