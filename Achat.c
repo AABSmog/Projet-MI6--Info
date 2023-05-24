@@ -116,7 +116,7 @@ void display_stock(char *file1){
   }
   fclose(file);
 }
-int buy(int ref, int quantity, char id[]){
+float buy(int ref, int quantity, char id[]){
   float spent=0;
   FILE *file;
   char line[100], name[100], file_name[100], *refh;
@@ -132,7 +132,6 @@ int buy(int ref, int quantity, char id[]){
        for(i = 0; i < quantity; i++ ){
        change_last(ref,id);
        }
-      printf("Vous venez de depenser: %f\n",spent);
       c=1;
       break;
     }
@@ -150,6 +149,7 @@ int buy(int ref, int quantity, char id[]){
 
 void shopping_area(char id[]){
   int choice, ref, quant;
+  float spent=0.0;
   char name[50], firstname[50];
   do{
   printf("\nVous voila dans la zone achat!\n");
@@ -171,7 +171,8 @@ void shopping_area(char id[]){
       getref(ref);
       printf("Donnez la quantite que vous souhaitez acheter de ce produit:");
       scanf("%d", &quant);
-      buy(ref, quant, id);
+      spent=buy(ref, quant, id) + spent;
+      printf("Vous venez de depenser: %f\n",spent);
     }
     else if(choice==3){
       history(id);
