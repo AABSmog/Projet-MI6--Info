@@ -618,6 +618,7 @@ int management(int n)
       else
       {
         printf("Erreur : veuillez choisir un nombre entre 1 et 5. \n");
+        break;
       }
     }
   }
@@ -793,6 +794,7 @@ int management(int n)
       else
       {
         printf("Erreur : veuillez saisir soi 1 soi 2. \n");
+        n=0;
       }
     }
     else if (a == 4)
@@ -811,6 +813,7 @@ int management(int n)
     else
     {
       printf("Erreur : veuillez choisir un nombre entre 1 et 5. \n");
+      break;
     }
   }
 }
