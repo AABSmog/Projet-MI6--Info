@@ -12,7 +12,7 @@ Bienvenue dans votre magasin de boissons XYZ, le projet se compose d'un mode ges
 -   L'ID gestionnaire est 123321 ou 987789 !!
 ### Utilisation
 Pour obtenir une copie de ce projet, vous pouvez utiliser soi le git clone ou le télécharger au format ZIP.
--  git clone (Vous devrez avoir Git installé sur votre machine pour pouvoir utiliser la commande git clone !!!):
+-  git clone (Vous devrez avoir Git installé sur votre machine pour pouvoir utiliser la commande git clone):
    -  Copiez l'URL du dépôt GitHub en cliquant sur le bouton "Code" sur la page principale du dépôt.
    -  Ouvrez votre teminal.
    -  Utilisez la commande git clone suivie de l'URL du dépôt GitHub.
