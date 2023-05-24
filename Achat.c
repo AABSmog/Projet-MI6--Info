@@ -49,8 +49,8 @@ void modifystock1(char *file, int reference, int quant)
       quantity = quant + quantity;
       find = 1;
       if(quantity<0){
-        printf("Le stock est insufisant ERROR.\n");
-        exit (1);
+        printf("Le stock est insuffisant ERROR.\n");
+        exit(0);
       }
     }
     // ajouter chaque ligne dans le fichier temporaraire
@@ -76,22 +76,19 @@ void modifystock1(char *file, int reference, int quant)
   rename("temporaire.txt", file);
 }
 void display_stock(char *file1){
-
   FILE *file;
   int reference, quantity, size;
   float price;
   char name[100];
   char line[100];
-
 //verif parametre
-
-
   file=fopen(file1, "r");
-
-
-  sscanf(line,"%s %d %d %f %d ",name, &reference, &quantity, &price,&size);// verif si la fonction retourne le bon num
-  while( fscanf(file, "%s %d %d %f %d", name, &reference, &quantity, &price, &size)==5){  
+  sscanf(line,"%s %d %d %f %d ",name, &reference, &quantity, &price,&size);//verif si la fonction retourne le bon num
+  while( fscanf(file, "%s %d %d %f %d", name, &reference, &quantity, &price, &size)==5){ 
+    if(quantity!=0){ 
     printf("Nom:%s Reference:%d quantite:%d prix:%f taille : %d \n",name, reference, quantity, price,size);
+  }
+  else if(quantity==0){}
   }
   fclose(file);
 }
@@ -111,7 +108,7 @@ void buy(int ref, int quantity, char id[]){
        for(i = 0; i < quantity; i++ ){
        change_last(ref,id);
        }
-      printf("vous venez de depenser: %f\n",spent);
+      printf("Vous venez de depenser: %f\n",spent);
       c=1;
       break;
     }
@@ -120,8 +117,8 @@ void buy(int ref, int quantity, char id[]){
 
   }
   else{
-     printf("Reference introuvable. Recommence la procedure en tapant 2 pour pouvoir acheter un article et rentre une bonne reference ;)\n");
-     exit(0); 
+     printf("Reference introuvable. Recommencez la procedure en tapant 2 pour pouvoir acheter un article et rentrez une bonne reference ;)\n");
+     exit(0);
   }    
   fclose(file);
 }
@@ -158,6 +155,7 @@ void shopping_area(char id[]){
     }
     else{
       printf("Erreur veuillez rentrer un nombre entre 1; 2; 3 et 4.\n");
+      break;
     } 
   }while(choice!=4);
 }
@@ -221,6 +219,7 @@ int buying(int n) {
        suppression_id(id);
      }
      else if(choice==4){
+      printf("Merci pour votre visite !");
         return 0;
      }
       else{
