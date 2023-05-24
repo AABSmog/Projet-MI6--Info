@@ -51,7 +51,7 @@ void client_creation(char name[50],char surname[50]){
     fh = fopen(filename,"w");
     fprintf(fh,"0\n0\n0\n");
     printf("Votre identifiant est :%s.\n Retenez le bien!\n",id);
-    fprintf(fp ,"%s %s %s\n",id, name, surname);
+    fprintf(fp ,"\n%s %s %s\n",id, name, surname);
     fclose(fp);
     fclose(fh);
 }
@@ -160,6 +160,7 @@ void history(char id[18]){
     printf("Deuxieme produit : %s \n", bnom);
     anom = product_name(a);
     printf("Troisieme produit : %s \n ", anom);
+    
     fclose(fc);
     fclose(fp);
 }

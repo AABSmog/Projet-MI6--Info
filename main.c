@@ -1,8 +1,9 @@
-#include"gestion.h"
-#include"achat.h"
-#include"Clients.h"
+#include "gestion.h"
+#include "achat.h"
+#include "Clients.h"
 
-int main(){
+void main_menu()
+{
     int n;
     printf("Bienvenue dans votre magasin des boissons XYZ.\n");
     printf("Voulez vous: \n");
@@ -10,18 +11,48 @@ int main(){
     printf("2.Acceder au mode d'achat ?\n");
     printf("3.Quitter le magasin ?\n");
     printf("Votre choix:");
-    scanf("%d",&n);
-    if(n==1){
+    scanf("%d", &n);
+    if (n == 1)
+    {
         management(n);
     }
-    else if(n==2){
+    else if (n == 2)
+    {
         buying(n);
     }
-    else if(n==3){
-        return 0;
+    else if (n == 3)
+    {
+        exit(0);
     }
-    else{
-        printf("Erreur : veuillez choisir un nombre entre 1 et 3.\n");
+    int try = 2;
+    while (n != 1 && n != 2 && n != 3 && try != 0)
+    {
+        printf("Choix invalide : \n");
+        printf("1.Acceder au mode gestion ?\n");
+        printf("2.Acceder au mode d'achat ?\n");
+        printf("3.Quitter le magasin ?\n");
+        scanf("%d", &n);
+        try--;
+        if (n == 1)
+        {
+            management(n);
+        }
+        else if (n == 2)
+        {
+            buying(n);
+        }
+        else if (n == 3)
+        {
+            exit(0);
+        }
     }
+    if(try==0){
+        printf("Choix invalide. \n");
+        main_menu();
+    }
+}
+
+int main(){
+    main_menu();
     return 0;
 }

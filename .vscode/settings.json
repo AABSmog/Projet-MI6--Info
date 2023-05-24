@@ -34,5 +34,12 @@
     "**/.vscode/**"
   ],
   "C_Cpp_Runner.useAddressSanitizer": false,
-  "C_Cpp_Runner.showCompilationTime": false
+  "C_Cpp_Runner.showCompilationTime": false,
+  "makefile.launchConfigurations": [
+    {
+      "cwd": "c:\\Users\\dell\\Desktop\\Projet-MI6--Info",
+      "binaryPath": "c:\\Users\\dell\\Desktop\\Projet-MI6--Info\\myshop",
+      "binaryArgs": []
+    }
+  ]
 }

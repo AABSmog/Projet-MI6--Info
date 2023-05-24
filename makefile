@@ -9,7 +9,7 @@ Achat.o: Achat.c achat.h
 functions_gestion.o: functions_gestion.c gestion.h
 	gcc -c functions_gestion.c -o functions_gestion.o
 
-main.o: main.c
+main.o: main.c main.h
 	gcc -c main.c -o main.o
 
 myshop : Clients.o Achat.o functions_gestion.o main.o
