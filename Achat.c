@@ -76,7 +76,7 @@ void modifystock1(char *file, int reference, int quant)
   rename("temporaire.txt", file);
 }
 void display_stock(char *file1){
-
+ 
   FILE *file;
   int reference, quantity, size;
   float price;
