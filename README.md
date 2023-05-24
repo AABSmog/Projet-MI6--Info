@@ -11,8 +11,17 @@ Bienvenue dans votre magasin de boissons XYZ, le projet se compose d'un mode ges
    -    Pour la taille, elle doit être soi 1 (petit), soi 2 (moyen) ou soi 3 (grand).
 -   L'ID gestionnaire est 123321 ou 987789 !!
 ### Utilisation
-git clone
-
+Pour obtenir une copie de ce projet, vous pouvez utiliser soi le git clone ou le télécharger au format ZIP.
+-  git clone :
+   -  Copiez l'URL du dépôt GitHub en cliquant sur le bouton "Code" sur la page principale du dépôt.
+   -  Ouvrez votre teminal.
+   -  Utilisez la commande git clone suivie de l'URL du dépôt GitHub.
+   -  Une fois terminée, vous allez avoir une version du projet sur votre machine.
+   Vous devrez avoir Git installé sur votre machine pour pouvoir utiliser la commande git clone !!!
+-  Format ZIP :
+   -  Clickez sur le bouton "Code" sur la page principale du dépôt GitHub.
+   -  Sélectionnez "Download ZIP".
+   -  Une fois le téléchargement est terminé, vous pouvez extraire le fichier ZIP sur un répertoire de votre choix.
 Compiler le programme en utilisant le makefile.
 -	Ouvrez votre terminal Linux.
 -	Accéder au répertoire ou se trouve le makefile et l’ensemble des codes utilisés pour le programme.
@@ -24,6 +33,7 @@ Si le makefile ne marche pas, voici les commandes à taper pour compiler le prog
 -  gcc -c functions_gestion.c -o functions_gestion.o
 -  gcc -c main.c -o main.o
 -  gcc Clients.o Achat.o functions_gestion.o main.o -o myshop
+-  Maintenant, votre projet doit être compilé et vous pouvez l'executer en tapant ./myshop sur votre terminal.
 ### Auteurs
 -	Hamza EL KARCHOUNI
 -	Allan SOUGANI KONE
