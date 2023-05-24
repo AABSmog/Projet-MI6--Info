@@ -14,4 +14,5 @@ int searchrefproduct(char *file, int number);
 void searchnameproduct(char *file, char *word);
 void lowstock(char *file);
 int management(int n);
+void displaystock(char *file);
 #endif

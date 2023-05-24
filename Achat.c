@@ -85,8 +85,11 @@ void display_stock(char *file1){
 //verif parametre
   file=fopen(file1, "r");
   sscanf(line,"%s %d %d %f %d ",name, &reference, &quantity, &price,&size);//verif si la fonction retourne le bon num
-  while( fscanf(file, "%s %d %d %f %d", name, &reference, &quantity, &price, &size)==5){  
+  while( fscanf(file, "%s %d %d %f %d", name, &reference, &quantity, &price, &size)==5){ 
+    if(quantity!=0){ 
     printf("Nom:%s Reference:%d quantite:%d prix:%f taille : %d \n",name, reference, quantity, price,size);
+  }
+  else if(quantity==0){}
   }
   fclose(file);
 }
@@ -216,6 +219,7 @@ int buying(int n) {
        suppression_id(id);
      }
      else if(choice==4){
+      printf("Merci pour votre visite !");
         return 0;
      }
       else{

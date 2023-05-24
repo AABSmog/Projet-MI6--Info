@@ -8,6 +8,7 @@ int searchrefproduct();
 void searchnameproduct();
 void lowstock();
 int management();
+void displaystock();
 // définir une structure de produits
 typedef struct
 {
@@ -38,7 +39,6 @@ int managestock(char *file)
 
   fclose(fp);
   return q;
-  
 }
 // une fonction pour ajouter des produits au stock
 int addproduct(char *file)
@@ -387,6 +387,23 @@ void lowstock(char *file)
   // fermer le fichier
   fclose(fp);
 }
+void displaystock(char *file)
+{
+  FILE *fp = fopen(file, "r");
+  if (fp == NULL)
+  {
+    printf("Erreur en ouvrant le fichier %s \n", file);
+    exit(1);
+  }
+  char line[MAX];
+  while (fgets(line, sizeof(line), fp))
+  {
+    Product prod;
+    sscanf(line, "%s %d %d %f %d ", prod.name, &prod.reference, &prod.quantity, &prod.price, &prod.size);
+    printf("Nom:%s Reference:%d Quantite:%d Prix:%f Taille : %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
+  }
+  fclose(fp);
+}
 int management(int n)
 {
   // declaration des variables qu'on va utiliser
@@ -423,7 +440,8 @@ int management(int n)
       printf("2.Chercher un produit en utilisant sa reference ?\n");
       printf("3.Modifier le stock d'un produit ?\n");
       printf("4.Ajouter un produit au stock ?\n");
-      printf("5.Quitter le programme ? \n");
+      printf("5.Afficher tous les produits ? \n");
+      printf("6.Quitter le programme ? \n");
       scanf("%d", &a);
       if (a == 1) // si l'utilisateur souhaite chercher un produit en utilisant son nom
       {
@@ -590,6 +608,10 @@ int management(int n)
       }
       else if (a == 5)
       {
+        displaystock("produit.txt");
+      }
+      else if (a == 6)
+      {
         printf("Merci pour votre visite ! \n");
         return 0;
       }
@@ -611,7 +633,8 @@ int management(int n)
     printf("2.Chercher un produit en utilisant sa reference ?\n");
     printf("3.Modifier le stock d'un produit ?\n");
     printf("4.Ajouter un produit au stock ?\n");
-    printf("5.Quitter le programme ? \n");
+    printf("5.Afficher tous les produits ? \n");
+    printf("6.Quitter le programme ? \n");
     scanf("%d", &a);
     if (a == 1) // si l'utilisateur souhaite chercher un produit en utilisant son nom
     {
@@ -678,11 +701,11 @@ int management(int n)
                 break;
               }
             }
-            else
-            {
-              printf("Veuillez resaisir la reference: ");
-              try--;
-            }
+          }
+          else
+          {
+            printf("Veuillez resaisir la reference: ");
+            try--;
           }
         }
         if (try == 0)
@@ -733,11 +756,11 @@ int management(int n)
                 break;
               }
             }
-            else
-            {
-              printf("Veuillez resaisir la reference: ");
-              try--;
-            }
+          }
+          else
+          {
+            printf("Veuillez resaisir la reference: ");
+            try--;
           }
         }
         if (try == 0)
@@ -777,6 +800,10 @@ int management(int n)
       addproduct("produit.txt");
     }
     else if (a == 5)
+    {
+      displaystock("produit.txt");
+    }
+    else if (a == 6)
     {
       printf("Merci pour votre visite ! \n");
       return 0;
