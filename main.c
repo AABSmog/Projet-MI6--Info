@@ -2,7 +2,7 @@
 #include "achat.h"
 #include "Clients.h"
 
-int main()
+void main_menu()
 {
     int n;
     printf("Bienvenue dans votre magasin des boissons XYZ.\n");
@@ -22,12 +22,12 @@ int main()
     }
     else if (n == 3)
     {
-        return 0;
+        exit(0);
     }
     int try = 2;
     while (n != 1 && n != 2 && n != 3 && try != 0)
     {
-        printf("Veuillez refaire votre choix : \n");
+        printf("Choix invalide : \n");
         printf("1.Acceder au mode gestion ?\n");
         printf("2.Acceder au mode d'achat ?\n");
         printf("3.Quitter le magasin ?\n");
@@ -43,12 +43,16 @@ int main()
         }
         else if (n == 3)
         {
-            return 0;
+            exit(0);
         }
     }
     if(try==0){
         printf("Choix invalide. \n");
-        return 0;
+        main_menu();
     }
+}
+
+int main(){
+    main_menu();
     return 0;
 }
