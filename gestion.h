@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include<errno.h>
 #define MAX 1000
 #define MAX_STOCK 200
 int managestock(char *file);

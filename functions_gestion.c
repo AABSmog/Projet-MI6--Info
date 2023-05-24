@@ -37,7 +37,6 @@ int managestock(char *file)
     sscanf(line, "%s %d %d %f %d", prod.name, &prod.reference, &prod.quantity, &prod.price, &prod.size);
     q = q + (prod.quantity * prod.size); // faire la somme de la quantité pour savoir si on a depassé le max stock ou pas
   }
-
   fclose(fp);
   return q;
 }
@@ -141,7 +140,7 @@ int addproduct(char *file)
   }
   // fermer le fichier
   fclose(fp);
-  printf("\nThe produit a ete bien ajoute.\n");
+  printf("\nLe produit a ete bien ajoute.\n");
   return 0;
 }
 // une fonction pour modifier le stock d'un produit(soi l'augmenter ou le réduire)
@@ -149,7 +148,7 @@ void modifystock(char *file, int ref, int quant)
 {
   // ouvrir le fichier principal en mode lecture
   FILE *fp = fopen(file, "r");
-  // créer un fichier temporaire en mode lecture
+  // créer un fichier temporaire en mode ecriture
   FILE *tempor = fopen("temporary.txt", "w");
   if (tempor == NULL || fp == NULL) // tester si le fichier s'ouvre correctement ou pas
   {
@@ -203,7 +202,9 @@ void modifystock(char *file, int ref, int quant)
   // fermer le fichier temporaire
   fclose(tempor);
   // supprimer le fichier principal
-  remove(file);
+  if(remove(file)!=0){
+   printf("Erreur %s.\n",strerror(errno));
+  }
   // renommer le fichier temporaire avec le nom du fichier principal
   rename("temporary.txt", file);
   if (found == 1)
@@ -442,7 +443,7 @@ int management(int n)
       printf("3.Modifier le stock d'un produit ?\n");
       printf("4.Ajouter un produit au stock ?\n");
       printf("5.Afficher tous les produits ? \n");
-      printf("6.Changer de mode ? \n" );
+      printf("6.Changer de mode ? \n");
       printf("7.Quitter le programme ? \n");
       scanf("%d", &a);
       if (a == 1) // si l'utilisateur souhaite chercher un produit en utilisant son nom
@@ -801,7 +802,7 @@ int management(int n)
       else
       {
         printf("Erreur : veuillez saisir soi 1 soi 2. \n");
-        n=0;
+        n = 0;
       }
     }
     else if (a == 4)
@@ -828,5 +829,5 @@ int management(int n)
       break;
     }
   }
-  return(0);
+  return (0);
 }
