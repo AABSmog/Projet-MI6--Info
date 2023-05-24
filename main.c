@@ -22,6 +22,7 @@ void main_menu()
     }
     else if (n == 3)
     {
+        printf("Merci pour votre visite !\n");
         exit(0);
     }
     int try = 2;
@@ -47,13 +48,15 @@ void main_menu()
             exit(0);
         }
     }
-    if(try==0){
+    if (try == 0)
+    {
         printf("Choix invalide. \n");
         main_menu();
     }
 }
 
-int main(){
+int main()
+{
     main_menu();
     return 0;
 }

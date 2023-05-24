@@ -648,7 +648,6 @@ int management(int n)
       else
       {
         printf("Erreur : veuillez choisir un nombre entre 1 et 6. \n");
-        break;
       }
     }
   }
@@ -855,7 +854,6 @@ int management(int n)
     else
     {
       printf("Erreur : veuillez choisir un nombre entre 1 et 6. \n");
-      break;
     }
   }
 }
