@@ -67,23 +67,27 @@ int addproduct(char *file)
     {
       printf("Erreur : cette reference existe deja dans le magasin \n");
       printf("Impossible d'ajouter ce produit \n");
+      fclose(fp);
       return 0;
     }
   }
   int try = 2;
   while (prod1.reference < 1000 && prod1.reference > 10000 && try != 0) // une boucle pour redemander à l'utilisateur de saisir la resaisir si celle saisie avant est incorrect
   {
-    printf("Veuillez resaisir la reference de votre produit: \n");
+    printf("Veuillez resaisir la reference de votre produit : ");
     scanf("%d", &prod1.reference);
+    printf("\n");
     try--;
   }
   if (try == 0)
   {
     printf("La reference saisie est incorrect \n");
+    fclose(fp);
     return 0;
   }
-  printf("Saisir la quantite de votre produit:\n");
+  printf("Saisir la quantite de votre produit : ");
   scanf("%d", &prod1.quantity);
+  printf("\n");
   while (prod1.quantity < 0 && try != 0) // une boucle pour redemander à l'utilisateur de saisir la quantité si celle saisie avant est incorrect
   {
     printf("Veuillez resaisir la quantite de votre produit(>0): \n");
@@ -93,6 +97,7 @@ int addproduct(char *file)
   if (try == 0)
   {
     printf("La quantite saisie est incorrect \n");
+    fclose(fp);
     return 0;
   }
   try = 2;
@@ -107,6 +112,7 @@ int addproduct(char *file)
   if (try == 0)
   {
     printf("Le prix saisi est incorrect \n");
+    fclose(fp);
     return 0;
   }
   try = 2;
@@ -121,6 +127,7 @@ int addproduct(char *file)
   if (try == 0)
   {
     printf("La taille saisie est incorrect \n");
+    fclose(fp);
     return 0;
   }
   int q;
@@ -202,9 +209,7 @@ void modifystock(char *file, int ref, int quant)
   // fermer le fichier temporaire
   fclose(tempor);
   // supprimer le fichier principal
-  if(remove(file)!=0){
-   printf("Erreur %s.\n",strerror(errno));
-  }
+  remove(file);
   // renommer le fichier temporaire avec le nom du fichier principal
   rename("temporary.txt", file);
   if (found == 1)
@@ -217,6 +222,7 @@ void modifystock(char *file, int ref, int quant)
   {
     printf("Ce produit est indisponible.\n");
   }
+  printf("\n");
 }
 // une fonction pour afficher les produits avec 0 en stock
 void outofstock(char *file)
@@ -249,6 +255,7 @@ void outofstock(char *file)
   {
     printf("Il n'y a aucun produit en rupture de stock.\n");
   }
+  printf("\n");
   // fermer le fichier
   fclose(fp);
 }
@@ -275,7 +282,9 @@ int searchrefproduct(char *file, int number)
       // afficher toutes les informations du produit
       printf("Le produit avec la reference '%d' a ete trouve en stock.\nVoici ses informations :\n", number);
       printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
+      printf("\n");
       found = 1;
+      fclose(fp);
       return 1;
       break;
     }
@@ -283,8 +292,10 @@ int searchrefproduct(char *file, int number)
   if (found == 0) // si aucune réference des produits n'est la même que celle saisie par l'utilisateur
   {
     printf("Ce produit est indisponible.\n");
+    fclose(fp);
     return 0;
   }
+  printf("\n");
   // fermer le fichier
   fclose(fp);
 }
@@ -321,6 +332,7 @@ void searchnameproduct(char *file, char *word)
         {
           printf("Le produit '%s' a ete trouve en stock.\nVoici ses informations : \n", word);
           printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
+          printf("\n");
           found = 1;
           break;
         }
@@ -338,6 +350,7 @@ void searchnameproduct(char *file, char *word)
   {
     printf("Ce produit est indisponible.\n");
   }
+  printf("\n");
   // fermer le fichier
   fclose(fp);
 }
@@ -386,6 +399,7 @@ void lowstock(char *file)
       printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
     }
   }
+  printf("\n");
   // fermer le fichier
   fclose(fp);
 }
@@ -404,6 +418,7 @@ void displaystock(char *file)
     sscanf(line, "%s %d %d %f %d ", prod.name, &prod.reference, &prod.quantity, &prod.price, &prod.size);
     printf("Nom:%s Reference:%d Quantite:%d Prix:%f Taille : %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
   }
+  printf("\n");
   fclose(fp);
 }
 int management(int n)
@@ -445,21 +460,25 @@ int management(int n)
       printf("5.Afficher tous les produits ? \n");
       printf("6.Changer de mode ? \n");
       printf("7.Quitter le programme ? \n");
+      printf("Votre choix : ");
       scanf("%d", &a);
+      printf("\n");
       if (a == 1) // si l'utilisateur souhaite chercher un produit en utilisant son nom
       {
-        printf("Entrer le nom du produit : \n");
+        printf("Entrer le nom du produit : ");
         scanf("%s", name);
+        printf("\n");
         searchnameproduct("produit.txt", name);
       }
       else if (a == 2)
       {
         int try = 2;
-        printf("Entrer la reference du produit (comprise entre 1000 et 10000): \n");
+        printf("Entrer la reference du produit (comprise entre 1000 et 10000): ");
         while (try > 0) // donner la possibilité de resaisir la reference
         {
           if (scanf("%d", &ref) == 1)
           {
+            printf("\n");
             if (ref >= 1000 && ref <= 10000)
             {
               searchrefproduct("produit.txt", ref);
@@ -493,11 +512,12 @@ int management(int n)
         scanf("%d", &n);
         if (n == 1)
         {
-          printf("Entrer la reference du produit (comprise entre 1000 et 10000): \n");
+          printf("Entrer la reference du produit (comprise entre 1000 et 10000): ");
           while (try > 0)
           {
             if (scanf("%d", &reference) == 1)
             {
+              printf("\n");
               if (reference >= 1000 && reference <= 10000)
               {
                 int i = searchrefproduct("produit.txt", reference);
@@ -514,7 +534,7 @@ int management(int n)
             }
             else
             {
-              printf("Veuillez resaisir la reference: ");
+              printf("Veuillez resaisir la reference : ");
               try--;
             }
           }
@@ -530,10 +550,11 @@ int management(int n)
           {
             if (scanf("%d", &quant) == 1)
             {
+              printf("\n");
               if (quant > 0)
                 break;
             }
-            printf("Veuillez resaisir la quantite :\n");
+            printf("Veuillez resaisir la quantite : ");
             scanf("%d", &quant);
             try--;
           }
@@ -548,17 +569,18 @@ int management(int n)
         else if (n == 2)
         {
           try = 2;
-          printf("Entrer la reference du produit (comprise entre 1000 et 10000): \n");
+          printf("Entrer la reference du produit (comprise entre 1000 et 10000): ");
           while (try > 0)
           {
             if (scanf("%d", &reference) == 1)
             {
+              printf("\n");
               if (reference >= 1000 && reference <= 10000)
               {
                 int i = searchrefproduct("produit.txt", reference);
                 if (i == 0)
                 {
-                  printf("Veuillez resaisir la reference \n");
+                  printf("Veuillez resaisir la reference : ");
                   try--;
                 }
                 else if (i == 1)
@@ -569,7 +591,7 @@ int management(int n)
             }
             else
             {
-              printf("Veuillez resaisir la reference: ");
+              printf("Veuillez resaisir la reference : ");
               try--;
             }
           }
@@ -585,10 +607,11 @@ int management(int n)
           {
             if (scanf("%d", &quant) == 1)
             {
+              printf("\n");
               if (quant > 0)
                 break;
             }
-            printf("Veuillez resaisir la quantite :\n");
+            printf("Veuillez resaisir la quantite : ");
             scanf("%d", &quant);
             try--;
           }
@@ -642,23 +665,27 @@ int management(int n)
     printf("3.Modifier le stock d'un produit ?\n");
     printf("4.Ajouter un produit au stock ?\n");
     printf("5.Afficher tous les produits ? \n");
-    printf("6.Changer de mode?\n");
+    printf("6.Changer de mode ? \n");
     printf("7.Quitter le programme ? \n");
+    printf("Votre choix : ");
     scanf("%d", &a);
+    printf("\n");
     if (a == 1) // si l'utilisateur souhaite chercher un produit en utilisant son nom
     {
-      printf("Entrer le nom du produit : \n");
+      printf("Entrer le nom du produit : ");
       scanf("%s", name);
+      printf("\n");
       searchnameproduct("produit.txt", name);
     }
     else if (a == 2)
     {
       int try = 2;
-      printf("Entrer la reference du produit (comprise entre 1000 et 10000): \n");
+      printf("Entrer la reference du produit (comprise entre 1000 et 10000): ");
       while (try > 0) // donner la possibilité de resaisir la reference
       {
         if (scanf("%d", &ref) == 1)
         {
+          printf("\n");
           if (ref >= 1000 && ref <= 10000)
           {
             searchrefproduct("produit.txt", ref);
@@ -692,11 +719,12 @@ int management(int n)
       scanf("%d", &n);
       if (n == 1)
       {
-        printf("Entrer la reference du produit (comprise entre 1000 et 10000): \n");
+        printf("Entrer la reference du produit (comprise entre 1000 et 10000): ");
         while (try > 0)
         {
           if (scanf("%d", &reference) == 1)
           {
+            printf("\n");
             if (reference >= 1000 && reference <= 10000)
             {
               int i = searchrefproduct("produit.txt", reference);
@@ -713,7 +741,7 @@ int management(int n)
           }
           else
           {
-            printf("Veuillez resaisir la reference: ");
+            printf("Veuillez resaisir la reference : ");
             try--;
           }
         }
@@ -729,10 +757,11 @@ int management(int n)
         {
           if (scanf("%d", &quant) == 1)
           {
+            printf("\n");
             if (quant > 0)
               break;
           }
-          printf("Veuillez resaisir la quantite :\n");
+          printf("Veuillez resaisir la quantite : ");
           scanf("%d", &quant);
           try--;
         }
@@ -747,17 +776,18 @@ int management(int n)
       else if (n == 2)
       {
         try = 2;
-        printf("Entrer la reference du produit (comprise entre 1000 et 10000): \n");
+        printf("Entrer la reference du produit (comprise entre 1000 et 10000): ");
         while (try > 0)
         {
           if (scanf("%d", &reference) == 1)
           {
+            printf("\n");
             if (reference >= 1000 && reference <= 10000)
             {
               int i = searchrefproduct("produit.txt", reference);
               if (i == 0)
               {
-                printf("Veuillez resaisir la reference \n");
+                printf("Veuillez resaisir la reference : ");
                 try--;
               }
               else if (i == 1)
@@ -768,7 +798,7 @@ int management(int n)
           }
           else
           {
-            printf("Veuillez resaisir la reference: ");
+            printf("Veuillez resaisir la reference : ");
             try--;
           }
         }
@@ -784,10 +814,11 @@ int management(int n)
         {
           if (scanf("%d", &quant) == 1)
           {
+            printf("\n");
             if (quant > 0)
               break;
           }
-          printf("Veuillez resaisir la quantite :\n");
+          printf("Veuillez resaisir la quantite : ");
           scanf("%d", &quant);
           try--;
         }
@@ -802,7 +833,6 @@ int management(int n)
       else
       {
         printf("Erreur : veuillez saisir soi 1 soi 2. \n");
-        n = 0;
       }
     }
     else if (a == 4)
@@ -816,7 +846,6 @@ int management(int n)
     else if (a == 6)
     {
       main_menu();
-      exit(0);
     }
     else if (a == 7)
     {
@@ -829,5 +858,4 @@ int management(int n)
       break;
     }
   }
-  return (0);
 }

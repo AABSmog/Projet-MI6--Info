@@ -43,6 +43,7 @@ void main_menu()
         }
         else if (n == 3)
         {
+            printf("Merci pour votre visite !\n");
             exit(0);
         }
     }

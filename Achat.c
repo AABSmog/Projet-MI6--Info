@@ -126,7 +126,7 @@ int buy(int ref, int quantity, char id[]){
   while(fgets(line, sizeof(line), file)!= NULL){
     sscanf(line,"%s %d %d %f %d", name, &reference, &stock, &price, &size);
     if(reference==ref){
-      // fclose(file);
+       fclose(file);
        modifystock1("produit.txt", ref,-quantity);
        spent= spent + price*quantity;
        for(i = 0; i < quantity; i++ ){
