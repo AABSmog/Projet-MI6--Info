@@ -220,7 +220,7 @@ int buying(int n) {
      }
      else if(choice==4){
       printf("Merci pour votre visite !");
-        return 0;
+      exit(0);
      }
       else{
        printf("Erreur veuillez rentrer un nombre entre 1; 2; 3 et 4.\n");
