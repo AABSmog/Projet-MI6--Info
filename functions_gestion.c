@@ -614,6 +614,10 @@ int management(int n)
       }
       else if (a == 6)
       {
+        main_menu();
+      }
+      else if (a == 7)
+      {
         printf("Merci pour votre visite ! \n");
         return 0;
       }
