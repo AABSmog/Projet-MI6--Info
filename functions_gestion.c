@@ -442,7 +442,7 @@ int management(int n)
       printf("3.Modifier le stock d'un produit ?\n");
       printf("4.Ajouter un produit au stock ?\n");
       printf("5.Afficher tous les produits ? \n");
-      printf("6.Changer de mode ? \n");
+      printf("6.Changer de mode ? \n" );
       printf("7.Quitter le programme ? \n");
       scanf("%d", &a);
       if (a == 1) // si l'utilisateur souhaite chercher un produit en utilisant son nom
@@ -637,7 +637,8 @@ int management(int n)
     printf("3.Modifier le stock d'un produit ?\n");
     printf("4.Ajouter un produit au stock ?\n");
     printf("5.Afficher tous les produits ? \n");
-    printf("6.Quitter le programme ? \n");
+    printf("6.Changer de mode?");
+    printf("7.Quitter le programme ? \n");
     scanf("%d", &a);
     if (a == 1) // si l'utilisateur souhaite chercher un produit en utilisant son nom
     {
