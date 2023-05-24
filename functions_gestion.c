@@ -1,5 +1,5 @@
 #include "gestion.h"
-#include 
+#include "main.h"
 // définir les fonctions qu'on va utiliser
 int managestock();
 int addproduct();
