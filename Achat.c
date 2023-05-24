@@ -131,7 +131,6 @@ float buy(int ref, int quantity, char id[]){
        for(i = 0; i < quantity; i++ ){
        change_last(ref,id);
        }
-      printf("Vous venez de depenser: %f\n",spent);
       c=1;
       break;
     }
