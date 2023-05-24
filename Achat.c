@@ -6,6 +6,30 @@
 
 #define MAX 1000
 
+void getref(int ref){
+  FILE *file;
+  char line[100], name[100], file_name[100], *refh;
+  int reference, stock, size, c=0, i = 0;
+  float price;
+  file=fopen("produit.txt", "r");
+  while(fgets(line, sizeof(line), file)!= NULL){
+    sscanf(line,"%s %d %d %f %d", name, &reference, &stock, &price, &size);
+    if(reference==ref){
+      c=1;
+      break;
+    }
+  }
+  if(c==1){
+
+  }
+  else{
+     printf("Reference introuvable. Recommencez la procedure en tapant 2 pour pouvoir acheter un article et rentrez une bonne reference ;)\n");
+     exit(0);
+  }    
+  fclose(file);
+}
+  
+
 void rageQuit(char* msg, int errorCode){
   if(msg != NULL){
     printf("%s\n", msg);
@@ -92,7 +116,7 @@ void display_stock(char *file1){
   }
   fclose(file);
 }
-void buy(int ref, int quantity, char id[]){
+int buy(int ref, int quantity, char id[]){
   float spent=0;
   FILE *file;
   char line[100], name[100], file_name[100], *refh;
@@ -102,7 +126,7 @@ void buy(int ref, int quantity, char id[]){
   while(fgets(line, sizeof(line), file)!= NULL){
     sscanf(line,"%s %d %d %f %d", name, &reference, &stock, &price, &size);
     if(reference==ref){
-       fclose(file);
+      // fclose(file);
        modifystock1("produit.txt", ref,-quantity);
        spent= spent + price*quantity;
        for(i = 0; i < quantity; i++ ){
@@ -121,6 +145,7 @@ void buy(int ref, int quantity, char id[]){
      exit(0);
   }    
   fclose(file);
+  return spent;
 }
 
 void shopping_area(char id[]){
@@ -143,6 +168,7 @@ void shopping_area(char id[]){
     else if(choice==2){
       printf("Donnez la reference du produit que vous souhaitez acheter:");
       scanf("%d", &ref);
+      getref(ref);
       printf("Donnez la quantite que vous souhaitez acheter de ce produit:");
       scanf("%d", &quant);
       buy(ref, quant, id);
