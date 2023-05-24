@@ -6,7 +6,7 @@
     #include<errno.h>
     void modifystock1(char *fichier, int reference, int quant);
     void display_stock(char * fichier);
-    int buy(int ref, int quantite, char id[]);
+    float buy(int ref, int quantite, char id[]);
     void shopping_area(char id[]);
     void connect_by_id(char *id);
     int buying(int n);
