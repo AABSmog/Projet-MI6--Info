@@ -17,4 +17,5 @@
     void displaystock(char *file);
     int scanint(char*input);
     float scanfloat(char * input);
+    int searchsizeproduct(char *file, int number);
 #endif
