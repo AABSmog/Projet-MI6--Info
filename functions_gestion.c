@@ -508,7 +508,7 @@ int management(int n)
     if (identifier != 123321 && identifier != 987789) // si la reference est incorrecte, donner à l'utilisteur la possibilité de la resaisir
     {
       printf("ID non reconnue.\n");
-      printf("Vous avez %d tentatives restatntes.\nVeuillez resaisir votre ID.\n", i);
+      printf("Vous avez %d tentatives restantes.\nVeuillez resaisir votre ID.\n", i);
       identifier = scanint(input);
       i--;
     }
