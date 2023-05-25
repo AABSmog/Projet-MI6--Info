@@ -4,7 +4,8 @@
     #include<stdlib.h>
     #include<string.h>
     #include<errno.h>
-    void modifystock1(char *fichier, int reference, int quant);
+    int getref(int ref);
+    void modifystock(char *fichier, int reference, int quant);
     void display_stock(char * fichier);
     float buy(int ref, int quantite, char id[]);
     void shopping_area(char id[]);
