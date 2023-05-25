@@ -251,7 +251,7 @@ int buying(int n) {
      }
       else{
        printf("Erreur veuillez rentrer un nombre entre 1; 2; 3 et 4.\n");
-       return 0;
+       break;
      }
   }while(choice!=4);
   exit(0);
