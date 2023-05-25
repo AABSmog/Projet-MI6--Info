@@ -51,7 +51,7 @@ void main_menu()
     if (try == 0)
     {
         printf("Choix invalide. \n");
-        main_menu();
+        exit(0);
     }
 }
 
