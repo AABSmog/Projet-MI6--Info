@@ -247,7 +247,7 @@ void outofstock(char *file)
     if (prod.quantity == 0) // si la quantité du produit est égale à 0
     {
       // afficher toutes les informations du produit avec le stock à 0
-      printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
+      printf("Nom: %s Reference: %d Stock: %d Prix: %.02f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
       nostock = 1;
     }
   }
@@ -281,7 +281,7 @@ int searchrefproduct(char *file, int number)
     {
       // afficher toutes les informations du produit
       printf("Le produit avec la reference '%d' a ete trouve en stock.\nVoici ses informations :\n", number);
-      printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
+      printf("Nom: %s Reference: %d Stock: %d Prix: %.02f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
       printf("\n");
       found = 1;
       fclose(fp);
@@ -331,7 +331,7 @@ void searchnameproduct(char *file, char *word)
         if (*ptr_word == '\0' && *ptr_line == ' ') // si c'est la fin du nom de produit et le caractére suivant dans la ligne est un espace
         {
           printf("Le produit '%s' a ete trouve en stock.\nVoici ses informations : \n", word);
-          printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
+          printf("Nom: %s Reference: %d Stock: %d Prix: %.02f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
           printf("\n");
           found = 1;
           break;
@@ -396,7 +396,7 @@ void lowstock(char *file)
     {
       Product prod;
       sscanf(products[i], "%s %d %d %f %d ", prod.name, &prod.reference, &prod.quantity, &prod.price, &prod.size);
-      printf("Nom: %s Reference: %d Stock: %d Prix: %f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
+      printf("Nom: %s Reference: %d Stock: %d Prix: %.02f Taille: %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
     }
   }
   printf("\n");
@@ -416,7 +416,7 @@ void displaystock(char *file)
   {
     Product prod;
     sscanf(line, "%s %d %d %f %d ", prod.name, &prod.reference, &prod.quantity, &prod.price, &prod.size);
-    printf("Nom:%s Reference:%d Quantite:%d Prix:%f Taille : %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
+    printf("Nom:%s Reference:%d Quantite:%d Prix:%.02f Taille : %d \n", prod.name, prod.reference, prod.quantity, prod.price, prod.size);
   }
   printf("\n");
   fclose(fp);
