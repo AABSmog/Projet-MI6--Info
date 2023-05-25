@@ -3,6 +3,7 @@
 #include<string.h>
 #include<errno.h>
 #include"Clients.h"
+#include"gestion.h"
 
 #define MAX 1000
 
@@ -39,13 +40,8 @@ void rageQuit(char* msg, int errorCode){
   }
   exit(errorCode);
 }// fonction pour afficher le message d'erreur.
-
-
-
-
 void modifystock1(char *file, int reference, int quant)
 {
-
   char prod[50];
   int ref, quantity, size;
   float price;
@@ -110,7 +106,7 @@ void display_stock(char *file1){
   sscanf(line,"%s %d %d %f %d ",name, &reference, &quantity, &price,&size);//verif si la fonction retourne le bon num
   while( fscanf(file, "%s %d %d %f %d", name, &reference, &quantity, &price, &size)==5){ 
     if(quantity!=0){ 
-    printf("Nom:%s Reference:%d quantite:%d prix:%f taille : %d \n",name, reference, quantity, price,size);
+    printf("Nom : %s Reference : %d Quantite : %d Prix:%.02f Taille : %d \n",name, reference, quantity, price,size);
   }
   else if(quantity==0){}
   }
@@ -151,6 +147,7 @@ void shopping_area(char id[]){
   int choice, ref, quant;
   float spent=0.0;
   char name[50], firstname[50];
+  char input[MAX];
   do{
   printf("\nVous voila dans la zone achat!\n");
   printf("Vous voulez:\n");
@@ -159,7 +156,7 @@ void shopping_area(char id[]){
   printf("3.Acceder a l'historique d'achat.\n");
   printf("4.Quitter et ayez la possibilite de supprimer votre compte.\n");
   printf("\nVotre choix:");
-  scanf("%d", &choice);
+  choice=scanint(input);
   printf("\n");
    if(choice==1){    
      display_stock("produit.txt");
@@ -167,12 +164,12 @@ void shopping_area(char id[]){
     }
     else if(choice==2){
       printf("Donnez la reference du produit que vous souhaitez acheter:");
-      scanf("%d", &ref);
+      ref=scanint(input);
       getref(ref);
       printf("Donnez la quantite que vous souhaitez acheter de ce produit:");
-      scanf("%d", &quant);
+      quant=scanint(input);
       spent=buy(ref, quant, id) + spent;
-      printf("Vous venez de depenser: %f\n",spent);
+      printf("Vous avez de depenser: %f \n",spent);
     }
     else if(choice==3){
       history(id);
@@ -219,6 +216,7 @@ void shopping_area(char id[]){
 int buying(int n) {
    int choice=0;
   char name[50], firstname[50], id[100];
+  char input[MAX];
   do{
     printf("\nMode achat:\n");
     printf("Vous voulez:\n");
@@ -227,7 +225,7 @@ int buying(int n) {
     printf("3.Supprimer votre compte.\n");
     printf("4.Quitter le programme .\n\n");
     printf("Votre choix:");
-    scanf(" %d", &choice);
+    choice=scanint(input);
     if(choice==1){
        printf("Quel est votre nom? si vous en avez 2 reliez les par un underscore:\n");
        scanf("%s", name);

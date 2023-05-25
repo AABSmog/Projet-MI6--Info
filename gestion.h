@@ -15,4 +15,6 @@
     void lowstock(char *file);
     int management(int n);
     void displaystock(char *file);
+    int scanint(char*input);
+    float scanfloat(char * input);
 #endif
