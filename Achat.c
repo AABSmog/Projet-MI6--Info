@@ -83,8 +83,8 @@ float buy(int ref, int quantity, char id[])
   FILE *file;
   FILE *fk;
   char line[100], name[100], file_name[100], filenameb[60], bal[30], *refh;
-  int reference, stock, size, c = 0, i = 0;
-  float price , x;
+  int reference, stock, size,c = 0, i = 0;
+  float price , x, y;
    // ouverture du fichier produit.txt
   file = fopen("produit.txt", "r");
   sprintf(filenameb, "history_clients/%s.txt", id); // création d'un fichier historique
@@ -94,7 +94,8 @@ float buy(int ref, int quantity, char id[])
   while (fgets(line, sizeof(line), file) != NULL)
   {
     sscanf(line, "%s %d %d %f %d", name, &reference, &stock, &price, &size);
-    if (reference == ref && stock - quantity >= 0 && (quantity * price) < x)
+    y = quantity * price ;
+    if (reference == ref && stock - quantity >= 0 && y < x)
     {
       // diminue le stock quand on fait un acaht 
       fclose(file);
