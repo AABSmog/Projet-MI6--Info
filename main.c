@@ -5,13 +5,14 @@
 void main_menu()
 {
     int n;
+    char input[MAX];
     printf("Bienvenue dans votre magasin des boissons XYZ.\n");
     printf("Voulez vous: \n");
     printf("1.Acceder au mode gestion ?\n");
     printf("2.Acceder au mode d'achat ?\n");
     printf("3.Quitter le magasin ?\n");
     printf("Votre choix:");
-    scanf("%d", &n);
+    n=scanint(input);
     if (n == 1)
     {
         management(n);
@@ -32,7 +33,7 @@ void main_menu()
         printf("1.Acceder au mode gestion ?\n");
         printf("2.Acceder au mode d'achat ?\n");
         printf("3.Quitter le magasin ?\n");
-        scanf("%d", &n);
+        n=scanint(input);
         try--;
         if (n == 1)
         {
@@ -51,7 +52,7 @@ void main_menu()
     if (try == 0)
     {
         printf("Choix invalide. \n");
-        main_menu();
+        exit(0);
     }
 }
 
