@@ -104,12 +104,11 @@ float buy(int ref, int quantity, char id[])
       modifystock("produit.txt", ref, -quantity);
       // calcul des depenses
       spent = spent + price * quantity;
-
-      for (i = 0; i < quantity; i++)
+        for (i = 0; i < quantity; i++)
       {
         change_last(ref, id);
-        modify_balance(y * -1, id);
       }
+      modify_balance(y * -1, id);
       c = 1; // montrer qu'on a trouvé le produit
       break; // sort de la boucle la plus proche
     }
