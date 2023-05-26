@@ -107,7 +107,7 @@ float buy(int ref, int quantity, char id[])
       for (i = 0; i < quantity; i++)
       {
         change_last(ref, id);
-        modify_balance(-spent,id);
+        modify_balance(y*-1,id);
         
       }
       c = 1;// montrer qu'on a trouvé le produit
