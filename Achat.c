@@ -60,6 +60,11 @@ void display_stock(char *file1)
   char line[100];
   // Ouverture du fichier "produit.txt" en mode lecture
   file = fopen(file1, "r");
+  if (file == NULL)
+  {
+    printf("Erreur en ouvrant fichier %s \n", file);
+    exit(1);
+  }
   // scan les infos de la premiere ligne
   sscanf(line, "%s %d %d %f %d ", name, &reference, &quantity, &price, &size); // verif si la fonction retourne le bon num
   // parcours du fichier ligen par ligne
