@@ -66,7 +66,7 @@ void client_creation(char name[50], char surname[50])
     sprintf(filename, "history_clients/%s.txt", id); // création d'un fichier historique
     sprintf(filenamep, "Acc_balance/%s.txt", id); // création d'un fichier budget
     fh = fopen(filename, "w");
-    fg = fopen(filenamep,"w");
+    fg = fopen(filenamep,"w+");
     fprintf(fh, "0\n0\n0\n");
     fprintf(fg,"0");
     printf("Votre identifiant est :%s.\n Retenez le bien!\n", id);
