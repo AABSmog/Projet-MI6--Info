@@ -89,7 +89,8 @@ float buy(int ref, int quantity, char id[])
   file = fopen("produit.txt", "r");
   sprintf(filenameb, "history_clients/%s.txt", id); // création d'un fichier historique
   fk = fopen(filenameb,"r+");
-  x = atof(fgets(bal, sizeof(bal), fk));
+  fgets(bal, sizeof(bal), fk);
+  x = atof(bal);
    //parcours du fichier ligne par ligne jusquà la fin ou jusqu'à ce qu'on trouve la reference correspondante
   while (fgets(line, sizeof(line), file) != NULL)
   {
