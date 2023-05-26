@@ -207,12 +207,12 @@ void history(char id[18])
 
 void modify_balance(int mod, char id[18]){
     FILE *fj;
-    int x;
+    float x;
     char filename[60], bal[60];
     sprintf(filename, "Acc_balance/%s.txt", id);
     fj = fopen(filename,"r+");
     fgets(bal, sizeof(bal), fj);
-    x = atoi(bal);
+    x = atof(bal);
     x = x + mod;
     sprintf(bal, "%d", x);
     freopen(filename,"w+",fj);
