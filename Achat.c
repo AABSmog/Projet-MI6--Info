@@ -83,7 +83,7 @@ float buy(int ref, int quantity, char id[])
   FILE *file;
   FILE *fk;
   char line[100], name[100], file_name[100], filenameb[60], bal[30], *refh;
-  int reference, stock, size, c = 0, , i = 0;
+  int reference, stock, size, c = 0, i = 0;
   float price , x;
    // ouverture du fichier produit.txt
   file = fopen("produit.txt", "r");
