@@ -133,7 +133,7 @@ float buy(int ref, int quantity, char id[])
 void shopping_area(char id[])
 {
   //declaration de variable
-  int choice, ref, quant;
+  int choice, ref, quant, balr;
   float spent = 0.0;
   char name[50], firstname[50];
   char input[MAX];
@@ -145,7 +145,9 @@ void shopping_area(char id[])
     printf("1.Afficher les produits disponibles.\n");
     printf("2.Acheter un article.\n");
     printf("3.Acceder a l'historique d'achat.\n");
-    printf("4.Quitter et ayez la possibilite de supprimer votre compte.\n");
+    printf("4.Rajouter de l'argent sur votre compte\n");
+    printf("5.Quitter et ayez la possibilite de supprimer votre compte.\n");
+  
     printf("\nVotre choix:");
     choice = scanint(input);
     printf("\n");
@@ -178,6 +180,11 @@ void shopping_area(char id[])
     }
     else if (choice == 4)
     {
+      printf("Veuillez rentrer un montant à recharger.\n");
+      balr=scanint(input);
+      modify_balance(balr, id);
+    }
+    else if (choice == 5) {
       printf("A la prochaine!\n");
     }
     else
@@ -185,7 +192,7 @@ void shopping_area(char id[])
       printf("Erreur veuillez rentrer un nombre entre 1; 2; 3 et 4.\n");
       break;
     }
-  } while (choice != 4);
+  } while (choice != 5);
 }
 void connect_by_id(char *id)
 {
