@@ -133,8 +133,8 @@ float buy(int ref, int quantity, char id[])
 void shopping_area(char id[])
 {
   //declaration de variable
-  int choice, ref, quant, balr;
-  float spent = 0.0;
+  int choice, ref, quant;
+  float spent = 0.0, balr = 0.0;
   char name[50], firstname[50];
   char input[MAX];
   //ouverture d'un menu doté de la capacité de se reouvrir automatiquement quand l'utilisateur rentre un mauvais choix
@@ -181,7 +181,7 @@ void shopping_area(char id[])
     else if (choice == 4)
     {
       printf("Veuillez rentrer un montant à recharger.\n");
-      balr=scanint(input);
+      balr=scanfloat(input);
       modify_balance(balr, id);
     }
     else if (choice == 5) {
