@@ -136,7 +136,7 @@ void shopping_area(char id[])
 {
   //declaration de variable
   int choice, ref, quant;
-  float spent = 0.0, balr = 0.0;
+  float spent = 0.0, balr;
   char name[50], firstname[50];
   char input[MAX];
   //ouverture d'un menu doté de la capacité de se reouvrir automatiquement quand l'utilisateur rentre un mauvais choix
