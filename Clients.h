@@ -12,5 +12,5 @@
     void suppression_id(char id[18]);
     void change_last(int pc, char id[18]);
     void history(char id[18]);
-    void modify_balance(int mod, char id[18]);
+    void modify_balance(float mod, char id[18]);
 #endif

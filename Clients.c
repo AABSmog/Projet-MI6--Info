@@ -205,7 +205,7 @@ void history(char id[18])
     fclose(fp);
 }
 
-void modify_balance(int mod, char id[18]){
+void modify_balance(float mod, char id[18]){
     FILE *fj;
     float x ;
     char filename[60], bal[60];
