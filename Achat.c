@@ -83,18 +83,20 @@ float buy(int ref, int quantity, char id[])
   FILE *file;
   FILE *fk;
   char line[100], name[100], file_name[100], filenameb[60], bal[30], *refh;
-  int reference, stock, size, c = 0, i = 0;
-  float price , x;
+  int reference, stock, size,c = 0, i = 0;
+  float price , x, y;
    // ouverture du fichier produit.txt
   file = fopen("produit.txt", "r");
-  sprintf(filenameb, "history_clients/%s.txt", id); // création d'un fichier historique
+  sprintf(filenameb, "Acc_balance/%s.txt", id); // création d'un fichier historique
   fk = fopen(filenameb,"r+");
-  x = atof(fgets(bal, sizeof(bal), fk));
+  fgets(bal, sizeof(bal), fk);
+  x = atof(bal);
    //parcours du fichier ligne par ligne jusquà la fin ou jusqu'à ce qu'on trouve la reference correspondante
   while (fgets(line, sizeof(line), file) != NULL)
   {
     sscanf(line, "%s %d %d %f %d", name, &reference, &stock, &price, &size);
-    if (reference == ref && stock - quantity >= 0 && (quantity * price) < x)
+    y = quantity * price ;
+    if (reference == ref && stock - quantity >= 0 && y < x)
     {
       // diminue le stock quand on fait un acaht 
       fclose(file);
@@ -105,7 +107,7 @@ float buy(int ref, int quantity, char id[])
       for (i = 0; i < quantity; i++)
       {
         change_last(ref, id);
-        modify_balance(-spent,id);
+        modify_balance(y*-1,id);
         
       }
       c = 1;// montrer qu'on a trouvé le produit
@@ -133,8 +135,8 @@ float buy(int ref, int quantity, char id[])
 void shopping_area(char id[])
 {
   //declaration de variable
-  int choice, ref, quant, balr;
-  float spent = 0.0;
+  int choice, ref, quant;
+  float spent = 0.0, balr;
   char name[50], firstname[50];
   char input[MAX];
   //ouverture d'un menu doté de la capacité de se reouvrir automatiquement quand l'utilisateur rentre un mauvais choix
@@ -181,7 +183,7 @@ void shopping_area(char id[])
     else if (choice == 4)
     {
       printf("Veuillez rentrer un montant à recharger.\n");
-      balr=scanint(input);
+      balr=scanfloat(input);
       modify_balance(balr, id);
     }
     else if (choice == 5) {

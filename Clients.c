@@ -66,7 +66,7 @@ void client_creation(char name[50], char surname[50])
     sprintf(filename, "history_clients/%s.txt", id); // création d'un fichier historique
     sprintf(filenamep, "Acc_balance/%s.txt", id); // création d'un fichier budget
     fh = fopen(filename, "w");
-    fg = fopen(filenamep,"w");
+    fg = fopen(filenamep,"w+");
     fprintf(fh, "0\n0\n0\n");
     fprintf(fg,"0");
     printf("Votre identifiant est :%s.\n Retenez le bien!\n", id);
@@ -205,16 +205,16 @@ void history(char id[18])
     fclose(fp);
 }
 
-void modify_balance(int mod, char id[18]){
+void modify_balance(float mod, char id[18]){
     FILE *fj;
-    float x;
+    float x ;
     char filename[60], bal[60];
     sprintf(filename, "Acc_balance/%s.txt", id);
     fj = fopen(filename,"r+");
     fgets(bal, sizeof(bal), fj);
     x = atof(bal);
     x = x + mod;
-    sprintf(bal, "%d", x);
+    sprintf(bal, "%f", x);
     freopen(filename,"w+",fj);
     fprintf(fj, "%s", bal);
     fclose(fj);
