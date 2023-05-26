@@ -81,25 +81,32 @@ float buy(int ref, int quantity, char id[])
   float spent = 0;
   //decaration d'un pointeur vers un fichier
   FILE *file;
-  char line[100], name[100], file_name[100], *refh;
-  int reference, stock, size, c = 0, i = 0;
-  float price;
+  FILE *fk;
+  char line[100], name[100], file_name[100], filenameb[60], bal[30], *refh;
+  int reference, stock, size, c = 0, , i = 0;
+  float price , x;
    // ouverture du fichier produit.txt
   file = fopen("produit.txt", "r");
+  sprintf(filenameb, "history_clients/%s.txt", id); // création d'un fichier historique
+  fk = fopen(filenameb,"r+");
+  x = atof(fgets(bal, sizeof(bal), fk));
    //parcours du fichier ligne par ligne jusquà la fin ou jusqu'à ce qu'on trouve la reference correspondante
   while (fgets(line, sizeof(line), file) != NULL)
   {
     sscanf(line, "%s %d %d %f %d", name, &reference, &stock, &price, &size);
-    if (reference == ref && stock - quantity >= 0)
+    if (reference == ref && stock - quantity >= 0 && (quantity * price) < x)
     {
       // diminue le stock quand on fait un acaht 
       fclose(file);
       modifystock("produit.txt", ref, -quantity);
        // calcul des depenses
       spent = spent + price * quantity;
+
       for (i = 0; i < quantity; i++)
       {
         change_last(ref, id);
+        modify_balance(-spent,id);
+        
       }
       c = 1;// montrer qu'on a trouvé le produit
       break;// sort de la boucle la plus proche
