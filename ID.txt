@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 accordeur hamza elka
 flairinertie hamza elka
 pilulesbosser elka hamza
@@ -56,3 +57,6 @@ triompheshopping YESSIR NOSIR
 annoncent AZERTY QWERTY
 
 amoindrir AZERTY QWERTY
+=======
+banquiers azerty qwerty
+>>>>>>> 5c2b115d4e42f346393e9de3d67d6c9a3696b68a
