@@ -66,14 +66,14 @@ void client_creation(char name[50], char surname[50])
     sprintf(filename, "history_clients/%s.txt", id); // création d'un fichier historique
     sprintf(filenamep, "Acc_balance/%s.txt", id); // création d'un fichier budget
     fh = fopen(filename, "w");
-    fg = fopen(filenamep,"w+");
+    fg = fopen(filenamep,"w+"); // ouverture des fichiers historiques et budget
     fprintf(fh, "0\n0\n0\n");
     fprintf(fg,"0");
     printf("Votre identifiant est :%s.\n Retenez le bien!\n", id);
     fprintf(fp, "\n%s %s %s\n", id, name, surname);
     fclose(fp);
     fclose(fh);
-    fclose(fg);
+    fclose(fg); // fermeture de tous les fichiers
 }
 int line_id(char id[18])
 {
@@ -101,30 +101,33 @@ int line_id(char id[18])
 void suppression_id(char id[18])
 {
     FILE *fp;
-    FILE *fb;
+    FILE *fb; 
     char line[1000];
     char lineb[1000];
     int ln = 0;
     fp = fopen("ID.txt", "r");
-    fb = fopen("Temp.txt", "w+");
+    fb = fopen("Temp.txt", "w+"); // ouverture du fichier d'ids et du fichier temporaire
     while (fgets(line, sizeof(line), fp))
     {
         ln++;
         if (ln != line_id(id))
         {
-            fputs(line, fb);
+            fputs(line, fb); // copie-collage des elements de ID.txt sauf celle avec la ligne sélectionnée vers Temp.txt
         }
     }
     freopen("ID.txt", "w+", fp);
-    freopen("Temp.txt", "r", fb);
+    freopen("Temp.txt", "r", fb); // réouverture avec des permissions différentes
     while (fgets(lineb, sizeof(lineb), fb))
     {
         ln++;
-        fputs(lineb, fp);
+        fputs(lineb, fp); // copie-collage des elements de Temp.txt vers ID.txt
     }
-    char filename[60];
-    sprintf(filename, "history_clients/%s.txt", id); // création d'un fichier historique
-    remove(filename);
+    char filename[60], filenameb[60];
+    sprintf(filename, "history_clients/%s.txt", id); 
+    remove(filename); // suppression du fichier historique
+    sprintf(filenameb,"Acc_balance/%s.txt", id);
+    remove(filenameb); // suppression du fichier budget
+
     fclose(fp);
     fclose(fb);
 }
@@ -134,14 +137,14 @@ void change_last(int pc, char id[18])
     FILE *fo;
     int ln = 0;
     char a[10], b[10], c[10], line[5], filename[30], add[5];
-    sprintf(filename, "history_clients/%s.txt", id);
-    fm = fopen(filename, "r+");
-    fo = fopen("history_clients/temph.txt", "w+");
-    fscanf(fm, "%s\n%s\n%s", a, b, c);
+    sprintf(filename, "history_clients/%s.txt", id); 
+    fm = fopen(filename, "r+"); // ouvre l'historique
+    fo = fopen("history_clients/temph.txt", "w+"); //ouvre un ficher temporaire
+    fscanf(fm, "%s\n%s\n%s", a, b, c); //récupère les refs des produits
     sprintf(add, "%d", pc);
-    fprintf(fo, "%s\n%s\n%s ", &b, &c, add);
+    fprintf(fo, "%s\n%s\n%s ", &b, &c, add);  
     freopen(filename, "w+", fm);
-    freopen("history_clients/temph.txt", "r", fo);
+    freopen("history_clients/temph.txt", "r", fo); // réouvre les fichiers avec des perms différentes
     while (fgets(line, sizeof(line), fo))
     {
         ln++;
@@ -158,21 +161,21 @@ char *product_name(char *id)
     char *name = NULL;
     int line_number = 0;
     FILE *fp;
-    fp = fopen("produit.txt", "r+");
+    fp = fopen("produit.txt", "r+"); // ouverture du fichier produits
     if (fp == NULL)
     {
         printf("Fichier Non-existant\n");
     }
     while (fgets(line, sizeof(line), fp) != NULL)
     {
-        token = strtok(line, " ");
+        token = strtok(line, " "); // selectionne le premier mot de la ligne
         if (token != NULL)
         {
             token = line;
-            name = strtok(NULL, " ");
+            name = strtok(NULL, " "); // selectionne le second mot
             if (token != NULL)
             {
-                if (strcmp(name, id) == 0)
+                if (strcmp(name, id) == 0) // compare l'id
                 {
                     fclose(fp);
                     return token;
@@ -180,7 +183,7 @@ char *product_name(char *id)
             }
         }
     }
-    printf("Produit non trouve a cet ID, veuillez re-entrer un identifiant valide :\n");
+    printf("Produit non trouve a cet ID, veuillez re-entrer un identifiant valide :\n"); 
     scanf("%s", id);
     product_name(id);
     fclose(fp);
@@ -190,7 +193,7 @@ void history(char id[18])
     FILE *fc;
     FILE *fp;
     char a[10], b[10], c[10], line[5], filename[30], *anom, *bnom, *cnom;
-    sprintf(filename, "history_clients/%s.txt", id);
+    sprintf(filename, "history_clients/%s.txt", id); // ouvre l'historique du client
     fc = fopen(filename, "r+");
     fp = fopen("produit.txt", "r+");
     fscanf(fc, "%s\n%s\n%s\n", &a, &b, &c);
@@ -199,7 +202,7 @@ void history(char id[18])
     bnom = product_name(b);
     printf("Deuxieme produit : %s \n", bnom);
     anom = product_name(a);
-    printf("Troisieme produit : %s \n ", anom);
+    printf("Troisieme produit : %s \n ", anom); // récupère le nom et print le nom de tous les objets
     fclose(fc);
     fclose(fp);
 }
@@ -208,13 +211,13 @@ void modify_balance(float mod, char id[18]){
     FILE *fj;
     float x ;
     char filename[60], bal[60];
-    sprintf(filename, "Acc_balance/%s.txt", id);
+    sprintf(filename, "Acc_balance/%s.txt", id) ; // ouvre le budget du client
     fj = fopen(filename,"r+");
     fgets(bal, sizeof(bal), fj);
     x = atof(bal);
-    x = x + mod;
+    x = x + mod; // change la valeur par le modifieur
     sprintf(bal, "%f", x);
     freopen(filename,"w+",fj);
-    fprintf(fj, "%s", bal);
+    fprintf(fj, "%s", bal); //le replace dans le fichier
     fclose(fj);
 }
