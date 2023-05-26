@@ -96,8 +96,6 @@ float buy(int ref, int quantity, char id[])
   {
     sscanf(line, "%s %d %d %f %d", name, &reference, &stock, &price, &size);
     y = quantity * price ;
-    printf("%f",y);
-    printf("%f",x);
     if (reference == ref && stock - quantity >= 0 && y < x)
     {
       // diminue le stock quand on fait un acaht 
