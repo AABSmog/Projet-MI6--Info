@@ -116,6 +116,9 @@ void suppression_id(char id[18])
         ln++;
         fputs(lineb, fp);
     }
+    char filename[30];
+    sprintf(filename, "history_clients/%s.txt", id); // création d'un fichier historique
+    remove(filename);
     fclose(fp);
     fclose(fb);
 }
