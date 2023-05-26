@@ -87,7 +87,7 @@ float buy(int ref, int quantity, char id[])
   float price , x, y;
    // ouverture du fichier produit.txt
   file = fopen("produit.txt", "r");
-  sprintf(filenameb, "history_clients/%s.txt", id); // création d'un fichier historique
+  sprintf(filenameb, "Acc_balance/%s.txt", id); // création d'un fichier historique
   fk = fopen(filenameb,"r+");
   fgets(bal, sizeof(bal), fk);
   x = atof(bal);
