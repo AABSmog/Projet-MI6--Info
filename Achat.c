@@ -183,7 +183,7 @@ void shopping_area(char id[])
     }
     else if (choice == 4)
     {
-      printf("Veuillez rentrer un montant à recharger.\n");
+      printf("Veuillez rentrer un montant a recharger.\n");
       balr = scanfloat(input);
       modify_balance(balr, id);
     }
@@ -264,9 +264,8 @@ int buying(int n)
     printf("1.Creer un compte.\n");
     printf("2.Vous connecter.\n");
     printf("3.Supprimer votre compte.\n");
-    printf("4.Rajouter de l'argent sur votre compte\n");
-    printf("5.Quitter le programme .\n\n");
-    printf("6.Revenir au menu principal.");
+    printf("4.Quitter le programme .\n");
+    printf("5.Revenir au menu principal.\n\n");
     printf("Votre choix:");
     choice = scanint(input);
     if (choice == 1)
@@ -294,29 +293,22 @@ int buying(int n)
       suppression_id(id);
     }
 
-    else if (choice == 5)
+    else if (choice == 4)
     {
       // message d' au revoir
       printf("Merci pour votre visite !");
       exit(0);
     }
-    else if (choice == 6)
+    else if (choice == 5)
     {
       main_menu();
     }
-    else if (choice == 4)
-    {
-      printf("Veuillez rentrer un montant à recharger.\n");
-      balr = scanfloat(input);
-      modify_balance(balr, id);
-    }
-
     else
     {
       // message indiquant quel type de coordonnées on doit rentrer
       printf("Erreur veuillez rentrer un nombre entre 1 et 6.\n");
       break;
     }
-  } while (choice != 5);
+  } while (choice != 4);
   exit(0);
 }
