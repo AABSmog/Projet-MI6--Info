@@ -45,18 +45,7 @@ int getref(int ref)
   }
   fclose(file);
 }
-void rageQuit(char *msg, int errorCode)
-{
-  if (msg != NULL)
-  {
-    printf("%s\n", msg);
-  }
-  if (errorCode == 0)
-  {
-    errorCode = 99;
-  }
-  exit(errorCode);
-} // fonction pour afficher le message d'erreur.
+// fonction pour afficher le message d'erreur.
 void display_stock(char *file1)
 {
   // Déclaration d'un pointeur vers un fichier
@@ -166,14 +155,12 @@ void shopping_area(char id[])
       ref = scanint(input);
        // verifie si la ref est bonne ou pas
       int i = getref(ref);
-      if (i == 0)
-      {
-        break;
-      }
+      if(i==1){
       printf("Donnez la quantite que vous souhaitez acheter de ce produit:");
       quant = scanint(input);
       // recuperation de la depense totale
       spent = buy(ref, quant, id) + spent;
+      }
        // affichage de la depense totale
       printf("Vous avez de depenser: %.02f \n", spent);
     }
