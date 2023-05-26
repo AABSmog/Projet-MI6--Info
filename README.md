@@ -10,6 +10,10 @@ Bienvenue dans votre magasin de boissons XYZ, le projet se compose d'un mode ges
    -    Pour la quantité et le prix, ils doivent être strictement positifs.
    -    Pour la taille, elle doit être soi 1 (petit), soi 2 (moyen) ou soi 3 (grand).
 -   L'ID gestionnaire est 123321 ou 987789 !!
+-  Chaque client a :
+   -  Un fichier pour son historique d'achat.
+   -  Un fichier pour son compte.
+   -  Un identifiant stocké dans un fichier des identifiants de tous les clients.
 ### Utilisation
 Pour obtenir une copie de ce projet, vous pouvez utiliser soi le git clone ou le télécharger au format ZIP.
 -  git clone (Vous devrez avoir Git installé sur votre machine pour pouvoir utiliser la commande git clone):
