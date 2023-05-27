@@ -487,7 +487,7 @@ void displaystock(char *file)
   printf("\n");
   fclose(fp);
 }
-int management(int n)
+int management(int n) 
 {
   // declaration des variables qu'on va utiliser
   int identifier;
