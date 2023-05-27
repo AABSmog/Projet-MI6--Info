@@ -114,12 +114,12 @@ float buy(int ref, int quantity, char id[])
         change_last(ref, id);
       }
       modify_balance(y * -1, id);
+      fclose(file);
       c = 1; // montrer qu'on a trouvé le produit
       break; // sort de la boucle la plus proche
     }
     else
     {
-      fclose(file);
     }
   }
   if (c == 1)
