@@ -7,6 +7,7 @@
 #include "main.h"
 
 #define MAX 1000
+int buying();
 
 int getref(int ref)
 {
@@ -193,6 +194,8 @@ void shopping_area(char id[])
     else if (choice == 5)
     {
       printf("A la prochaine!\n");
+      int n=0;
+      buying(n);
     }
     else if (choice == 6)
     {
@@ -259,10 +262,10 @@ int buying(int n)
   float balr;
   char name[50], firstname[50], id[100];
   char input[MAX];
+  printf("\nMODE ACHAT:\n");
   // ouverture d'un menu qui a la capacité de se reouvrir dès que l'utilisateur se trompe de totalement de choix
   do
   {
-    printf("\nMode achat:\n");
     printf("Vous voulez:\n");
     printf("1.Creer un compte.\n");
     printf("2.Vous connecter.\n");
@@ -290,8 +293,7 @@ int buying(int n)
     else if (choice == 3)
     {
       // demander à l'utilisateur son ID pour le supprimer
-      printf("Entrez vos ID:\n");
-      printf("Entrez vos ID:\n");
+      printf("Entrez votre ID:\n");
       scanf("%s", id);
       suppression_id(id);
     }
