@@ -108,7 +108,7 @@ float buy(int ref, int quantity, char id[])
       modifystock("produit.txt", ref, -quantity);
       // calcul des depenses
       spent = spent + price * quantity;
-        for (i = 0; i < quantity; i++)
+      for (i = 0; i < quantity; i++)
       {
         change_last(ref, id);
       }
@@ -194,7 +194,7 @@ void shopping_area(char id[])
     else if (choice == 5)
     {
       printf("A la prochaine!\n");
-      int n=0;
+      int n = 0;
       buying(n);
     }
     else if (choice == 6)
