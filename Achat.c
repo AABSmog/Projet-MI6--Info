@@ -44,7 +44,6 @@ int getref(int ref)
     fclose(file);
     return 0;
   }
-  fclose(file);
 }
 // fonction pour afficher le message d'erreur.
 void display_stock(char *file1)
@@ -105,7 +104,6 @@ float buy(int ref, int quantity, char id[])
     if (reference == ref && stock - quantity >= 0 && y <= x)
     {
       // diminue le stock quand on fait un acaht
-      fclose(file);
       modifystock("produit.txt", ref, -quantity);
       // calcul des depenses
       spent = spent + price * quantity;
